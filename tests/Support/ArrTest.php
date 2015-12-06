@@ -1,5 +1,5 @@
 <?php
-namespace Tests\Support;
+namespace Fresco\Tests\Support;
 
 use Fresco\Support\Arr;
 use PHPUnit_Framework_TestCase;

@@ -1,5 +1,5 @@
 <?php
-namespace Tests\Http\Adapters\Psr7;
+namespace Fresco\Tests\Http\Adapters\Psr7;
 
 use Fresco\Contracts\Http\Request;
 use Fresco\Http\Adapters\Psr7\Psr7Request;
