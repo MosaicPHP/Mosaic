@@ -26,6 +26,136 @@ class Psr7Request implements Request, RequestInterface
     /**
      * {@inheritdoc}
      */
+    public function header($key = null, $default = null)
+    {
+        $header = $this->wrapped->getHeader($key);
+
+        switch (count($header))
+        {
+            case 1:
+                return current($header);
+            case 0:
+                return $default;
+        }
+
+        return $header;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function method()
+    {
+        // TODO: Implement method() method.
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function get($key)
+    {
+        // TODO: Implement get() method.
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function all()
+    {
+        // TODO: Implement all() method.
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function only($keys)
+    {
+        // TODO: Implement only() method.
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function except($keys)
+    {
+        // TODO: Implement except() method.
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function exists($key)
+    {
+        // TODO: Implement exists() method.
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function has($key)
+    {
+        // TODO: Implement has() method.
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function server($key = null, $default = null)
+    {
+        // TODO: Implement server() method.
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function segments()
+    {
+        // TODO: Implement segments() method.
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function segment($index, $default = null)
+    {
+        // TODO: Implement segment() method.
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function file($key = null, $default = null)
+    {
+        // TODO: Implement file() method.
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasFile($key)
+    {
+        // TODO: Implement hasFile() method.
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function cookies()
+    {
+        // TODO: Implement cookies() method.
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function cookie($key = null, $default = null)
+    {
+        // TODO: Implement cookie() method.
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getRequestTarget()
     {
         return $this->wrapped->getRequestTarget();
@@ -157,125 +287,5 @@ class Psr7Request implements Request, RequestInterface
     public function withBody(StreamInterface $body)
     {
         return new static($this->wrapped->withBody($body));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function header($key = null, $default = null)
-    {
-        // TODO: Implement header() method.
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function method()
-    {
-        // TODO: Implement method() method.
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function get($key)
-    {
-        // TODO: Implement get() method.
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function all()
-    {
-        // TODO: Implement all() method.
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function only($keys)
-    {
-        // TODO: Implement only() method.
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function except($keys)
-    {
-        // TODO: Implement except() method.
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function exists($key)
-    {
-        // TODO: Implement exists() method.
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function has($key)
-    {
-        // TODO: Implement has() method.
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function server($key = null, $default = null)
-    {
-        // TODO: Implement server() method.
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function segments()
-    {
-        // TODO: Implement segments() method.
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function segment($index, $default = null)
-    {
-        // TODO: Implement segment() method.
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function file($key = null, $default = null)
-    {
-        // TODO: Implement file() method.
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasFile($key)
-    {
-        // TODO: Implement hasFile() method.
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function cookies()
-    {
-        // TODO: Implement cookies() method.
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function cookie($key = null, $default = null)
-    {
-        // TODO: Implement cookie() method.
     }
 }
