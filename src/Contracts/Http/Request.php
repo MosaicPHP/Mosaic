@@ -25,10 +25,11 @@ interface Request
      * Gets a "parameter" value.
      *
      * @param string $key
+     * @param mixed  $default
      *
      * @return mixed
      */
-    public function get($key);
+    public function get($key, $default = null);
 
     /**
      * Get all of the input and files for the request.

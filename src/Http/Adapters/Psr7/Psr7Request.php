@@ -52,7 +52,7 @@ class Psr7Request implements Request, RequestInterface
     /**
      * {@inheritdoc}
      */
-    public function get($key)
+    public function get($key, $default = null)
     {
         // TODO: Implement get() method.
     }
