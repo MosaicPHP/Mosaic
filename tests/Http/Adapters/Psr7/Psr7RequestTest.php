@@ -59,4 +59,11 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('text/css', $this->request->header('accept', 'text/css'));
     }
+
+    function test_can_get_the_request_method_from_it()
+    {
+        $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn($method = uniqid());
+
+        $this->assertEquals($method, $this->request->method());
+    }
 }

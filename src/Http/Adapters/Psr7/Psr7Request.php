@@ -46,7 +46,7 @@ class Psr7Request implements Request, RequestInterface
      */
     public function method()
     {
-        // TODO: Implement method() method.
+        return $this->wrapped->getMethod();
     }
 
     /**
