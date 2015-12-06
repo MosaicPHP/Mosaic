@@ -327,7 +327,7 @@ class Psr7Request implements Request, ServerRequestInterface
      */
     public function withQueryParams(array $query)
     {
-        return new static($this->withQueryParams($query));
+        return new static($this->wrapped->withQueryParams($query));
     }
 
     /**

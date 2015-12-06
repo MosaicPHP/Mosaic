@@ -4,11 +4,13 @@ namespace Tests\Http\Adapters\Psr7;
 use Fresco\Contracts\Http\Request;
 use Fresco\Http\Adapters\Psr7\Psr7Request;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\UriInterface;
 
 class Psr7RequestTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Request
+     * @var Psr7Request
      */
     private $request;
 
@@ -65,5 +67,103 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
         $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn($method = uniqid());
 
         $this->assertEquals($method, $this->request->method());
+    }
+
+    function test_immutability_on_request_target()
+    {
+        $this->wrappedMock->shouldReceive('withRequestTarget')->andReturn(\Mockery::mock(ServerRequestInterface::class));
+
+        $this->assertNotEquals($this->request, $this->request->withRequestTarget('foo'));
+    }
+
+    function test_immutability_on_method()
+    {
+        $this->wrappedMock->shouldReceive('withMethod')->andReturn(\Mockery::mock(ServerRequestInterface::class));
+
+        $this->assertNotEquals($this->request, $this->request->withMethod('POST'));
+    }
+
+    function test_immutability_on_uri()
+    {
+        $this->wrappedMock->shouldReceive('withUri')->andReturn(\Mockery::mock(ServerRequestInterface::class));
+
+        $this->assertNotEquals($this->request, $this->request->withUri(\Mockery::mock(UriInterface::class)));
+    }
+
+    function test_immutability_on_protocol_version()
+    {
+        $this->wrappedMock->shouldReceive('withProtocolVersion')->andReturn(\Mockery::mock(ServerRequestInterface::class));
+
+        $this->assertNotEquals($this->request, $this->request->withProtocolVersion('2.0'));
+    }
+
+    function test_immutability_on_header()
+    {
+        $this->wrappedMock->shouldReceive('withHeader')->andReturn(\Mockery::mock(ServerRequestInterface::class));
+
+        $this->assertNotEquals($this->request, $this->request->withHeader('cache-control', 'max-age:0'));
+    }
+
+    function test_immutability_on_added_header()
+    {
+        $this->wrappedMock->shouldReceive('withAddedHeader')->andReturn(\Mockery::mock(ServerRequestInterface::class));
+
+        $this->assertNotEquals($this->request, $this->request->withAddedHeader('cache-control', 'max-age:0'));
+    }
+
+    function test_immutability_on_without_header()
+    {
+        $this->wrappedMock->shouldReceive('withoutHeader')->andReturn(\Mockery::mock(ServerRequestInterface::class));
+
+        $this->assertNotEquals($this->request, $this->request->withoutHeader('cache-control'));
+    }
+
+    function test_immutability_on_body()
+    {
+        $this->wrappedMock->shouldReceive('withBody')->andReturn(\Mockery::mock(ServerRequestInterface::class));
+
+        $this->assertNotEquals($this->request, $this->request->withBody(\Mockery::mock(StreamInterface::class)));
+    }
+
+    function test_immutability_on_cookie_params()
+    {
+        $this->wrappedMock->shouldReceive('withCookieParams')->andReturn(\Mockery::mock(ServerRequestInterface::class));
+
+        $this->assertNotEquals($this->request, $this->request->withCookieParams(['cookie' => 'monster']));
+    }
+
+    function test_immutability_on_query_params()
+    {
+        $this->wrappedMock->shouldReceive('withQueryParams')->andReturn(\Mockery::mock(ServerRequestInterface::class));
+
+        $this->assertNotEquals($this->request, $this->request->withQueryParams(['q' => 'Fresco is awesome!']));
+    }
+
+    function test_immutability_on_uploaded_files()
+    {
+        $this->wrappedMock->shouldReceive('withUploadedFiles')->andReturn(\Mockery::mock(ServerRequestInterface::class));
+
+        $this->assertNotEquals($this->request, $this->request->withUploadedFiles(['logo.png' => 'FrescoLogo']));
+    }
+
+    function test_immutability_on_parsed_body()
+    {
+        $this->wrappedMock->shouldReceive('withParsedBody')->andReturn(\Mockery::mock(ServerRequestInterface::class));
+
+        $this->assertNotEquals($this->request, $this->request->withParsedBody(['some' => 'parsed data']));
+    }
+
+    function test_immutability_on_attribute()
+    {
+        $this->wrappedMock->shouldReceive('withAttribute')->andReturn(\Mockery::mock(ServerRequestInterface::class));
+
+        $this->assertNotEquals($this->request, $this->request->withAttribute('some', 'attribute'));
+    }
+
+    function test_immutability_on_without_attribute()
+    {
+        $this->wrappedMock->shouldReceive('withoutAttribute')->andReturn(\Mockery::mock(ServerRequestInterface::class));
+
+        $this->assertNotEquals($this->request, $this->request->withoutAttribute('some'));
     }
 }
