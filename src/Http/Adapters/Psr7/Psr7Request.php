@@ -56,7 +56,7 @@ class Psr7Request implements Request, ServerRequestInterface
      */
     public function get($key, $default = null)
     {
-        return Arr::get($this->getQueryParams(), $key, $default);
+        return Arr::get($this->getParameters(), $key, $default);
     }
 
     /**
@@ -393,5 +393,23 @@ class Psr7Request implements Request, ServerRequestInterface
     public function withoutAttribute($name)
     {
         return new static($this->wrapped->withoutAttribute($name));
+    }
+
+    /**
+     * @return array
+     */
+    private function getParameters()
+    {
+        if ($this->isMethod('GET'))
+        {
+            return $this->getQueryParams();
+        }
+
+        return $this->getParsedBody();
+    }
+
+    private function isMethod($method)
+    {
+        return strcasecmp($method, $this->method()) === 0;
     }
 }
