@@ -55,7 +55,13 @@ class Psr7Request implements Request, ServerRequestInterface
      */
     public function get($key, $default = null)
     {
-        // TODO: Implement get() method.
+        $input = $this->getQueryParams();
+
+        if (array_key_exists($key, $input)) {
+            return $input[$key];
+        }
+
+        return $default;
     }
 
     /**

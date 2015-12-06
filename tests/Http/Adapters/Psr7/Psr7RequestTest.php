@@ -166,4 +166,25 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
 
         $this->assertNotEquals($this->request, $this->request->withoutAttribute('some'));
     }
+
+    function test_can_get_request_parameters_out_of_a_get_request()
+    {
+        $this->wrappedMock->shouldReceive('getQueryParams')->andReturn(['foo' => 'bar']);
+
+        $this->assertEquals('bar', $this->request->get('foo'));
+    }
+
+    function test_can_get_a_default_null_value_from_a_non_existing_request_parameter_out_of_a_get_request()
+    {
+        $this->wrappedMock->shouldReceive('getQueryParams')->andReturn(['foo' => 'bar']);
+
+        $this->assertNull($this->request->get('baz'));
+    }
+
+    function test_can_get_a_given_default_value_from_a_non_existing_request_parameter_out_of_a_get_request()
+    {
+        $this->wrappedMock->shouldReceive('getQueryParams')->andReturn(['foo' => 'bar']);
+
+        $this->assertEquals($default = uniqid(), $this->request->get('baz', $default));
+    }
 }
