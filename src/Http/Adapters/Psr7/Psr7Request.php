@@ -405,9 +405,14 @@ class Psr7Request implements Request, ServerRequestInterface
             return $this->getQueryParams();
         }
 
-        return $this->getParsedBody();
+        return array_merge($this->getParsedBody(), $this->getQueryParams());
     }
 
+    /**
+     * @param string $method
+     *
+     * @return bool
+     */
     private function isMethod($method)
     {
         return strcasecmp($method, $this->method()) === 0;

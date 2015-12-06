@@ -197,7 +197,7 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
     function test_can_get_request_parameters_out_of_a_non_get_request()
     {
         $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn('POST');
-        $this->wrappedMock->shouldReceive('getQueryParams')->never();
+        $this->wrappedMock->shouldReceive('getQueryParams')->once()->andReturn([]);
         $this->wrappedMock->shouldReceive('getParsedBody')->once()->andReturn([
             'foo' => 'bar'
         ]);
@@ -208,7 +208,7 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
     function test_can_get_a_default_null_value_from_a_non_existing_request_parameter_out_of_a_non_get_request()
     {
         $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn('POST');
-        $this->wrappedMock->shouldReceive('getQueryParams')->never();
+        $this->wrappedMock->shouldReceive('getQueryParams')->once()->andReturn([]);
         $this->wrappedMock->shouldReceive('getParsedBody')->once()->andReturn([
             'foo' => 'bar'
         ]);
@@ -219,11 +219,24 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
     function test_can_get_a_given_default_value_from_a_non_existing_request_parameter_out_of_a_non_get_request()
     {
         $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn('POST');
-        $this->wrappedMock->shouldReceive('getQueryParams')->never();
+        $this->wrappedMock->shouldReceive('getQueryParams')->once()->andReturn([]);
         $this->wrappedMock->shouldReceive('getParsedBody')->once()->andReturn([
             'foo' => 'bar'
         ]);
 
         $this->assertEquals($default = uniqid(), $this->request->get('baz', $default));
+    }
+
+    function test_on_non_get_requests_query_parameters_have_precedence_over_body_parameters()
+    {
+        $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn('POST');
+        $this->wrappedMock->shouldReceive('getQueryParams')->once()->andReturn([
+            'foo' => 'baz'
+        ]);
+        $this->wrappedMock->shouldReceive('getParsedBody')->once()->andReturn([
+            'foo' => 'bar'
+        ]);
+
+        $this->assertEquals('baz', $this->request->get('foo'));
     }
 }
