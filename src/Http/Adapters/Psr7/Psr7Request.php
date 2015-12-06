@@ -2,6 +2,7 @@
 namespace Fresco\Http\Adapters\Psr7;
 
 use Fresco\Contracts\Http\Request;
+use Fresco\Support\Arr;
 use Psr\Http\Message\An;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
@@ -55,13 +56,7 @@ class Psr7Request implements Request, ServerRequestInterface
      */
     public function get($key, $default = null)
     {
-        $input = $this->getQueryParams();
-
-        if (array_key_exists($key, $input)) {
-            return $input[$key];
-        }
-
-        return $default;
+        return Arr::get($this->getQueryParams(), $key, $default);
     }
 
     /**
