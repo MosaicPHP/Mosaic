@@ -3,7 +3,7 @@ namespace Tests\Http\Adapters\Psr7;
 
 use Fresco\Contracts\Http\Request;
 use Fresco\Http\Adapters\Psr7\Psr7Request;
-use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 class Psr7RequestTest extends \PHPUnit_Framework_TestCase
 {
@@ -13,13 +13,13 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
     private $request;
 
     /**
-     * @var RequestInterface|\Mockery\MockInterface
+     * @var ServerRequestInterface|\Mockery\MockInterface
      */
     private $wrappedMock;
 
     protected function setUp()
     {
-        $this->request = new Psr7Request($this->wrappedMock = \Mockery::mock(RequestInterface::class));
+        $this->request = new Psr7Request($this->wrappedMock = \Mockery::mock(ServerRequestInterface::class));
     }
 
     function test_it_implements_the_fresco_request_interface()
@@ -27,9 +27,9 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(Request::class, $this->request);
     }
 
-    function test_it_implements_the_psr7_request_interface_for_internal_usage()
+    function test_it_implements_the_psr7_server_request_interface_for_internal_usage()
     {
-        $this->assertInstanceOf(RequestInterface::class, $this->request);
+        $this->assertInstanceOf(ServerRequestInterface::class, $this->request);
     }
 
     function test_extract_an_existing_and_single_item_header_from_a_request_returns_the_item()

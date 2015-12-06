@@ -2,23 +2,24 @@
 namespace Fresco\Http\Adapters\Psr7;
 
 use Fresco\Contracts\Http\Request;
-use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\An;
+use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
 
-class Psr7Request implements Request, RequestInterface
+class Psr7Request implements Request, ServerRequestInterface
 {
     /**
-     * @var RequestInterface
+     * @var ServerRequestInterface
      */
     private $wrapped;
 
     /**
      * Psr7Request constructor.
      *
-     * @param RequestInterface $psr7Request
+     * @param ServerRequestInterface $psr7Request
      */
-    public function __construct(RequestInterface $psr7Request)
+    public function __construct(ServerRequestInterface $psr7Request)
     {
         $this->wrapped = $psr7Request;
     }
@@ -287,5 +288,109 @@ class Psr7Request implements Request, RequestInterface
     public function withBody(StreamInterface $body)
     {
         return new static($this->wrapped->withBody($body));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getServerParams()
+    {
+        return $this->wrapped->getServerParams();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCookieParams()
+    {
+        return $this->wrapped->getCookieParams();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withCookieParams(array $cookies)
+    {
+        return new static($this->wrapped->withCookieParams($cookies));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getQueryParams()
+    {
+        return $this->wrapped->getQueryParams();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withQueryParams(array $query)
+    {
+        return new static($this->withQueryParams($query));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUploadedFiles()
+    {
+        return $this->wrapped->getUploadedFiles();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withUploadedFiles(array $uploadedFiles)
+    {
+        return new static($this->wrapped->withUploadedFiles($uploadedFiles));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getParsedBody()
+    {
+        return $this->wrapped->getParsedBody();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withParsedBody($data)
+    {
+        return new static($this->wrapped->withParsedBody($data));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAttributes()
+    {
+        return $this->wrapped->getAttributes();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAttribute($name, $default = null)
+    {
+        return $this->wrapped->getAttribute($name, $default);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withAttribute($name, $value)
+    {
+        return new static($this->wrapped->withAttribute($name, $value));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function withoutAttribute($name)
+    {
+        return new static($this->wrapped->withoutAttribute($name));
     }
 }
