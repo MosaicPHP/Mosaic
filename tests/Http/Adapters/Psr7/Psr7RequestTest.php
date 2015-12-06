@@ -239,4 +239,49 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('baz', $this->request->get('foo'));
     }
+
+    function test_can_obtain_all_get_parameters()
+    {
+        $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn('GET');
+        $this->wrappedMock->shouldReceive('getQueryParams')->once()->andReturn([
+            'foo' => 'baz'
+        ]);
+        $this->wrappedMock->shouldReceive('getParsedBody')->never();
+
+        $this->assertEquals([
+            'foo' => 'baz'
+        ], $this->request->all());
+    }
+
+    function test_can_obtain_all_post_parameters()
+    {
+        $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn('POST');
+        $this->wrappedMock->shouldReceive('getQueryParams')->once()->andReturn([]);
+        $this->wrappedMock->shouldReceive('getParsedBody')->once()->andReturn([
+            'foo' => 'baz'
+        ]);
+
+        $this->assertEquals([
+            'foo' => 'baz'
+        ], $this->request->all());
+    }
+
+    function test_can_obtain_all_post_parameters_with_merged_ones_from_query()
+    {
+        $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn('POST');
+        $this->wrappedMock->shouldReceive('getQueryParams')->once()->andReturn([
+            'foo' => 'baz',
+            'bar' => 'foo',
+        ]);
+        $this->wrappedMock->shouldReceive('getParsedBody')->once()->andReturn([
+            'foo' => 'baz',
+            'barbaz' => 'foobar'
+        ]);
+
+        $this->assertEquals([
+            'foo' => 'baz',
+            'bar' => 'foo',
+            'barbaz' => 'foobar'
+        ], $this->request->all());
+    }
 }
