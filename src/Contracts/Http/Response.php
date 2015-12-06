@@ -2,9 +2,7 @@
 
 namespace Fresco\Contracts\Http;
 
-use Psr\Http\Message\ResponseInterface;
-
-interface Response extends ResponseInterface
+interface Response
 {
     /**
      * Gets the response status code.
@@ -18,7 +16,7 @@ interface Response extends ResponseInterface
     /**
      * Gets the body of the message.
      *
-     * @return \Psr\Http\Message\StreamInterface Returns the body as a stream.
+     * @return string Returns the body as string.
      */
     public function body();
 }

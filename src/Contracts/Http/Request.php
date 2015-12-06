@@ -2,9 +2,7 @@
 
 namespace Fresco\Contracts\Http;
 
-use Psr\Http\Message\RequestInterface;
-
-interface Request extends RequestInterface
+interface Request
 {
     /**
      * Retrieve a header from the request.
