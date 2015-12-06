@@ -77,7 +77,13 @@ class Psr7Request implements Request, ServerRequestInterface
      */
     public function only($keys)
     {
-        // TODO: Implement only() method.
+        $params = [];
+
+        foreach ($keys as $key) {
+            $params[$key] = $this->get($key);
+        }
+
+        return $params;
     }
 
     /**

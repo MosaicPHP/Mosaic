@@ -284,4 +284,37 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
             'barbaz' => 'foobar'
         ], $this->request->all());
     }
+
+    function test_can_obtain_only_some_parameters_from_the_request()
+    {
+        $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn('GET');
+        $this->wrappedMock->shouldReceive('getQueryParams')->once()->andReturn([
+            'foo' => 'bar',
+            'bar' => 'foo',
+            'baz' => 'fo',
+            'bez' => 'fe'
+        ]);
+
+        $this->assertEquals(['foo' => 'bar', 'baz' => 'fo'], $this->request->only(['foo', 'baz']));
+    }
+
+    function test_when_obtaining_only_some_parameters_from_the_request_they_are_returned_back_as_null_if_they_dont_exist()
+    {
+        $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn('GET');
+        $this->wrappedMock->shouldReceive('getQueryParams')->once()->andReturn([
+            'foo' => 'bar',
+            'bar' => 'foo',
+            'baz' => 'fo',
+            'bez' => 'fe'
+        ]);
+
+        $this->assertEquals(
+            [
+                'foo' => 'bar',
+                'baz' => 'fo',
+                'idontexist' => null
+            ],
+            $this->request->only(['foo', 'baz', 'idontexist'])
+        );
+    }
 }
