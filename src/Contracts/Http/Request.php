@@ -41,7 +41,7 @@ interface Request
     /**
      * Get a subset of the items from the input data.
      *
-     * @param array $keys
+     * @param string[]|string $keys
      *
      * @return array
      */
@@ -50,7 +50,7 @@ interface Request
     /**
      * Get all of the input except for a specified array of items.
      *
-     * @param array|mixed $keys
+     * @param string[]|string $keys
      *
      * @return array
      */
@@ -59,7 +59,7 @@ interface Request
     /**
      * Determine if the request contains a given input item key.
      *
-     * @param string|array $key
+     * @param string[]|string $key
      *
      * @return bool
      */
@@ -68,7 +68,7 @@ interface Request
     /**
      * Determine if the request contains a non-empty value for an input item.
      *
-     * @param string|array $key
+     * @param string[]|string $key
      *
      * @return bool
      */

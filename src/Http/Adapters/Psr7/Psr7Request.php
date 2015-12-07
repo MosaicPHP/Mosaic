@@ -79,7 +79,7 @@ class Psr7Request implements Request, ServerRequestInterface
     {
         $params = [];
 
-        foreach ($keys as $key) {
+        foreach ((array) $keys as $key) {
             $params[$key] = $this->get($key);
         }
 
@@ -91,7 +91,9 @@ class Psr7Request implements Request, ServerRequestInterface
      */
     public function except($keys)
     {
-        // TODO: Implement except() method.
+        $allKeys = array_keys($this->all());
+
+        return $this->only(array_diff($allKeys, (array) $keys));
     }
 
     /**
