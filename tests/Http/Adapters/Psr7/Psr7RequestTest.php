@@ -538,5 +538,69 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Awesome!', $this->request->server('WHAT_IS_FRESCO', 'Awesome!'));
     }
 
+    function test_can_get_the_segments_of_the_current_request_path()
+    {
+        /** @var UriInterface|\Mockery\MockInterface $uri */
+        $uri = \Mockery::mock(UriInterface::class);
 
+        $this->wrappedMock->shouldReceive('getUri')->once()->andReturn($uri);
+        $uri->shouldReceive('getPath')->once()->andReturn('/a/url/path');
+
+        $this->assertEquals(['a', 'url', 'path'], $this->request->segments());
+    }
+
+    function test_can_get_the_segments_of_the_current_request_path_without_leading_slash()
+    {
+        /** @var UriInterface|\Mockery\MockInterface $uri */
+        $uri = \Mockery::mock(UriInterface::class);
+
+        $this->wrappedMock->shouldReceive('getUri')->once()->andReturn($uri);
+        $uri->shouldReceive('getPath')->once()->andReturn('a/url/path');
+
+        $this->assertEquals(['a', 'url', 'path'], $this->request->segments());
+    }
+
+    function test_can_get_the_segments_of_the_current_request_path_with_trailing_slash()
+    {
+        /** @var UriInterface|\Mockery\MockInterface $uri */
+        $uri = \Mockery::mock(UriInterface::class);
+
+        $this->wrappedMock->shouldReceive('getUri')->once()->andReturn($uri);
+        $uri->shouldReceive('getPath')->once()->andReturn('a/url/path/');
+
+        $this->assertEquals(['a', 'url', 'path'], $this->request->segments());
+    }
+
+    function test_can_get_the_segments_of_the_current_request_path_with_zeroes_on_it()
+    {
+        /** @var UriInterface|\Mockery\MockInterface $uri */
+        $uri = \Mockery::mock(UriInterface::class);
+
+        $this->wrappedMock->shouldReceive('getUri')->once()->andReturn($uri);
+        $uri->shouldReceive('getPath')->once()->andReturn('a/url/0/path');
+
+        $this->assertEquals(['a', 'url', '0', 'path'], $this->request->segments());
+    }
+
+    function test_can_get_the_segments_of_the_current_request_path_with_multiple_slashes()
+    {
+        /** @var UriInterface|\Mockery\MockInterface $uri */
+        $uri = \Mockery::mock(UriInterface::class);
+
+        $this->wrappedMock->shouldReceive('getUri')->once()->andReturn($uri);
+        $uri->shouldReceive('getPath')->once()->andReturn('a/url//path');
+
+        $this->assertEquals(['a', 'url', 'path'], $this->request->segments());
+    }
+
+    function test_will_get_an_empty_array_for_the_root_url()
+    {
+        /** @var UriInterface|\Mockery\MockInterface $uri */
+        $uri = \Mockery::mock(UriInterface::class);
+
+        $this->wrappedMock->shouldReceive('getUri')->once()->andReturn($uri);
+        $uri->shouldReceive('getPath')->once()->andReturn('/');
+
+        $this->assertEquals([], $this->request->segments());
+    }
 }

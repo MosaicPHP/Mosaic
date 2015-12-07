@@ -132,7 +132,11 @@ class Psr7Request implements Request, ServerRequestInterface
      */
     public function segments()
     {
-        // TODO: Implement segments() method.
+        $segments = explode('/', trim($this->getUri()->getPath(), '/'));
+
+        return array_values(array_filter($segments, function($segment){
+            return trim($segment) !== '';
+        }));
     }
 
     /**
