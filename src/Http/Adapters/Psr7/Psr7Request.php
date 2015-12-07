@@ -152,7 +152,7 @@ class Psr7Request implements Request, ServerRequestInterface
      */
     public function file($key = null, $default = null)
     {
-        // TODO: Implement file() method.
+        return Arr::get($this->getUploadedFiles(), $key, $default);
     }
 
     /**

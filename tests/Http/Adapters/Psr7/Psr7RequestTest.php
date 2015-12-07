@@ -639,4 +639,37 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($segment = uniqid(), $this->request->segment(6, $segment));
     }
+
+    function test_can_get_a_file_descriptor_out_of_the_request()
+    {
+        $avatar = ['file' => 'avatar.jpg', 'path' => '/some/path'];
+
+        $this->wrappedMock->shouldReceive('getUploadedFiles')->once()->andReturn([
+            'avatar' => $avatar
+        ]);
+
+        $this->assertEquals($avatar, $this->request->file('avatar'));
+    }
+
+    function test_will_get_a_default_null_value_if_a_file_is_not_on_the_request()
+    {
+        $avatar = ['file' => 'avatar.jpg', 'path' => '/some/path'];
+
+        $this->wrappedMock->shouldReceive('getUploadedFiles')->once()->andReturn([
+            'avatar' => $avatar
+        ]);
+
+        $this->assertNull($this->request->file('profile_picture'));
+    }
+
+    function test_can_get_a_given_default_value_if_a_file_descriptor_is_not_on_the_request()
+    {
+        $avatar = ['file' => 'avatar.jpg', 'path' => '/some/path'];
+
+        $this->wrappedMock->shouldReceive('getUploadedFiles')->once()->andReturn([
+            'avatar' => $avatar
+        ]);
+
+        $this->assertEquals('Default stuff', $this->request->file('noop', 'Default stuff'));
+    }
 }
