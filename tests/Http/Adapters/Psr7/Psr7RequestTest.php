@@ -408,4 +408,69 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($this->request->exists(['foo', 'bar', 'bag']));
     }
+
+    function test_can_check_if_it_has_a_non_empty_parameter()
+    {
+        $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn('GET');
+        $this->wrappedMock->shouldReceive('getQueryParams')->once()->andReturn([
+            'foo' => 'bar',
+            'bar' => 'foo',
+            'baz' => 'fo',
+            'bez' => 'fe'
+        ]);
+
+        $this->assertTrue($this->request->has('foo'));
+    }
+
+    function test_can_check_if_it_doesnt_have_a_non_empty_parameter()
+    {
+        $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn('GET');
+        $this->wrappedMock->shouldReceive('getQueryParams')->once()->andReturn([
+            'foo' => '',
+            'bar' => 'foo',
+            'baz' => 'fo',
+            'bez' => 'fe'
+        ]);
+
+        $this->assertFalse($this->request->has('foo'));
+    }
+
+    function test_can_check_if_it_has_a_non_empty_set_of_parameters()
+    {
+        $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn('GET');
+        $this->wrappedMock->shouldReceive('getQueryParams')->once()->andReturn([
+            'foo' => 'bar',
+            'bar' => 'foo',
+            'baz' => 'fo',
+            'bez' => 'fe'
+        ]);
+
+        $this->assertTrue($this->request->has(['foo', 'bar', 'baz']));
+    }
+
+    function test_can_check_if_it_doesnt_have_a_non_empty_set_of_parameters()
+    {
+        $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn('GET');
+        $this->wrappedMock->shouldReceive('getQueryParams')->once()->andReturn([
+            'foo' => 'bar',
+            'bar' => 'foo',
+            'baz' => '',
+            'bez' => 'fe'
+        ]);
+
+        $this->assertFalse($this->request->has(['foo', 'bar', 'baz']));
+    }
+
+    function test_can_check_if_it_doesnt_have_a_non_empty_set_of_parameters_including_a_possible_zero_parameter()
+    {
+        $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn('GET');
+        $this->wrappedMock->shouldReceive('getQueryParams')->once()->andReturn([
+            'foo' => 'bar',
+            'bar' => 'foo',
+            'baz' => '0',
+            'bez' => 'fe'
+        ]);
+
+        $this->assertTrue($this->request->has(['foo', 'bar', 'baz']));
+    }
 }

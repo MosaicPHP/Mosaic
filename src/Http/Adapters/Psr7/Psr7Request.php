@@ -3,7 +3,6 @@ namespace Fresco\Http\Adapters\Psr7;
 
 use Fresco\Contracts\Http\Request;
 use Fresco\Support\Arr;
-use Psr\Http\Message\An;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
@@ -111,7 +110,9 @@ class Psr7Request implements Request, ServerRequestInterface
      */
     public function has($key)
     {
-        // TODO: Implement has() method.
+        return array_reduce((array) $key, function($carry, $item) use ($key){
+            return $carry && trim($this->get($item)) !== '';
+        }, true);
     }
 
     /**
