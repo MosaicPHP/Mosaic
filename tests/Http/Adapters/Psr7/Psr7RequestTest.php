@@ -499,4 +499,44 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($this->request->has(['foo', 'bar', 'baz']));
     }
+
+    function test_can_get_server_params()
+    {
+        $this->wrappedMock->shouldReceive('getServerParams')->once()->andReturn([
+            'DOCUMENT_ROOT' => '/i/am/g/root'
+        ]);
+
+        $this->assertEquals([
+            'DOCUMENT_ROOT' => '/i/am/g/root'
+        ], $this->request->server());
+    }
+
+    function test_can_get_a_specific_server_param()
+    {
+        $this->wrappedMock->shouldReceive('getServerParams')->once()->andReturn([
+            'DOCUMENT_ROOT' => '/i/am/g/root'
+        ]);
+
+        $this->assertEquals('/i/am/g/root', $this->request->server('DOCUMENT_ROOT'));
+    }
+
+    function test_will_get_null_as_default_if_a_specific_server_param_does_not_exist()
+    {
+        $this->wrappedMock->shouldReceive('getServerParams')->once()->andReturn([
+            'DOCUMENT_ROOT' => '/i/am/g/root'
+        ]);
+
+        $this->assertNull($this->request->server('APP_ENGINE'));
+    }
+
+    function test_can_use_a_default_value_if_a_specific_server_param_does_not_exist()
+    {
+        $this->wrappedMock->shouldReceive('getServerParams')->once()->andReturn([
+            'DOCUMENT_ROOT' => '/i/am/g/root'
+        ]);
+
+        $this->assertEquals('Awesome!', $this->request->server('WHAT_IS_FRESCO', 'Awesome!'));
+    }
+
+
 }

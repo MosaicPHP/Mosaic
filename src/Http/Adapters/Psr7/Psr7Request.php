@@ -120,7 +120,11 @@ class Psr7Request implements Request, ServerRequestInterface
      */
     public function server($key = null, $default = null)
     {
-        // TODO: Implement server() method.
+        if ($key === null) {
+            return $this->wrapped->getServerParams();
+        }
+
+        return Arr::get($this->wrapped->getServerParams(), $key, $default);
     }
 
     /**
