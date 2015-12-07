@@ -111,7 +111,7 @@ class Psr7Request implements Request, ServerRequestInterface
     public function has($key)
     {
         return array_reduce((array) $key, function($carry, $item) use ($key){
-            return $carry && trim($this->get($item)) !== '';
+            return $carry && !$this->isEmptyString($item);
         }, true);
     }
 
@@ -419,5 +419,16 @@ class Psr7Request implements Request, ServerRequestInterface
     private function isMethod($method)
     {
         return strcasecmp($method, $this->method()) === 0;
+    }
+
+    private function isEmptyString($key)
+    {
+        $item = $this->get($key);
+
+        if (is_array($item)) {
+            return empty($item);
+        }
+
+        return trim($item) === '';
     }
 }
