@@ -356,4 +356,56 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(['foo' => 'bar', 'bar' => 'foo', 'bez' => 'fe'], $this->request->except('baz'));
     }
+
+    function test_can_check_if_a_parameter_exists()
+    {
+        $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn('GET');
+        $this->wrappedMock->shouldReceive('getQueryParams')->once()->andReturn([
+            'foo' => 'bar',
+            'bar' => 'foo',
+            'baz' => 'fo',
+            'bez' => 'fe'
+        ]);
+
+        $this->assertTrue($this->request->exists('foo'));
+    }
+
+    function test_can_check_if_a_parameter_doesnt_exist()
+    {
+        $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn('GET');
+        $this->wrappedMock->shouldReceive('getQueryParams')->once()->andReturn([
+            'foo' => 'bar',
+            'bar' => 'foo',
+            'baz' => 'fo',
+            'bez' => 'fe'
+        ]);
+
+        $this->assertFalse($this->request->exists('goo'));
+    }
+
+    function test_can_check_if_a_set_of_parameters_exist()
+    {
+        $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn('GET');
+        $this->wrappedMock->shouldReceive('getQueryParams')->once()->andReturn([
+            'foo' => 'bar',
+            'bar' => 'foo',
+            'baz' => 'fo',
+            'bez' => 'fe'
+        ]);
+
+        $this->assertTrue($this->request->exists(['foo', 'bar', 'baz']));
+    }
+
+    function test_can_check_if_a_set_of_parameters_dont_exist()
+    {
+        $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn('GET');
+        $this->wrappedMock->shouldReceive('getQueryParams')->once()->andReturn([
+            'foo' => 'bar',
+            'bar' => 'foo',
+            'baz' => 'fo',
+            'bez' => 'fe'
+        ]);
+
+        $this->assertFalse($this->request->exists(['foo', 'bar', 'bag']));
+    }
 }

@@ -101,7 +101,9 @@ class Psr7Request implements Request, ServerRequestInterface
      */
     public function exists($key)
     {
-        // TODO: Implement exists() method.
+        return array_reduce((array) $key, function($carry, $item) use ($key){
+            return $carry && array_key_exists($item, $this->all());
+        }, true);
     }
 
     /**
