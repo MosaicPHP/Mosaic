@@ -144,7 +144,7 @@ class Psr7Request implements Request, ServerRequestInterface
      */
     public function segment($index, $default = null)
     {
-        // TODO: Implement segment() method.
+        return Arr::get($this->segments(), $index, $default);
     }
 
     /**

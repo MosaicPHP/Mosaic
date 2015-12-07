@@ -603,4 +603,40 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals([], $this->request->segments());
     }
+
+    function test_can_get_a_specific_segment_by_index()
+    {
+        /** @var UriInterface|\Mockery\MockInterface $uri */
+        $uri = \Mockery::mock(UriInterface::class);
+
+        $this->wrappedMock->shouldReceive('getUri')->once()->andReturn($uri);
+        $uri->shouldReceive('getPath')->once()->andReturn('a/url/0/path');
+
+        $this->assertEquals('a', $this->request->segment(0));
+        $this->assertEquals('url', $this->request->segment(1));
+        $this->assertEquals('0', $this->request->segment(2));
+        $this->assertEquals('path', $this->request->segment(3));
+    }
+
+    function test_can_get_a_default_null_value_for_an_inexistent_segment()
+    {
+        /** @var UriInterface|\Mockery\MockInterface $uri */
+        $uri = \Mockery::mock(UriInterface::class);
+
+        $this->wrappedMock->shouldReceive('getUri')->once()->andReturn($uri);
+        $uri->shouldReceive('getPath')->once()->andReturn('a/url/0/path');
+
+        $this->assertNull($this->request->segment(6));
+    }
+
+    function test_can_set_a_default_value_to_get_for_an_inexistent_segment()
+    {
+        /** @var UriInterface|\Mockery\MockInterface $uri */
+        $uri = \Mockery::mock(UriInterface::class);
+
+        $this->wrappedMock->shouldReceive('getUri')->once()->andReturn($uri);
+        $uri->shouldReceive('getPath')->once()->andReturn('a/url/0/path');
+
+        $this->assertEquals($segment = uniqid(), $this->request->segment(6, $segment));
+    }
 }
