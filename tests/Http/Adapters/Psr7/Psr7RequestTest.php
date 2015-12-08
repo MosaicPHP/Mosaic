@@ -1,8 +1,8 @@
 <?php
 namespace Fresco\Tests\Http\Adapters\Psr7;
 
-use Fresco\Contracts\Http\Request;
-use Fresco\Http\Adapters\Psr7\Psr7Request;
+use Fresco\Contracts\Http\Request as RequestContract;
+use Fresco\Http\Adapters\Psr7\Request;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
@@ -10,7 +10,7 @@ use Psr\Http\Message\UriInterface;
 class Psr7RequestTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Psr7Request
+     * @var Request
      */
     private $request;
 
@@ -21,12 +21,12 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->request = new Psr7Request($this->wrappedMock = \Mockery::mock(ServerRequestInterface::class));
+        $this->request = new Request($this->wrappedMock = \Mockery::mock(ServerRequestInterface::class));
     }
 
     function test_it_implements_the_fresco_request_interface()
     {
-        $this->assertInstanceOf(Request::class, $this->request);
+        $this->assertInstanceOf(RequestContract::class, $this->request);
     }
 
     function test_it_implements_the_psr7_server_request_interface_for_internal_usage()

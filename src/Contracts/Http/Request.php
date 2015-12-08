@@ -94,8 +94,8 @@ interface Request
     /**
      * Get a segment from the URI.
      *
-     * @param  int         $index
-     * @param  string|null $default
+     * @param int         $index
+     * @param string|null $default
      *
      * @return string|null
      */

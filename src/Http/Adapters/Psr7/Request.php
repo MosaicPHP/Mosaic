@@ -1,13 +1,14 @@
 <?php
+
 namespace Fresco\Http\Adapters\Psr7;
 
-use Fresco\Contracts\Http\Request;
+use Fresco\Contracts\Http\Request as RequestContract;
 use Fresco\Support\Arr;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
 
-class Psr7Request implements Request, ServerRequestInterface
+class Request implements RequestContract, ServerRequestInterface
 {
     /**
      * @var ServerRequestInterface
@@ -17,11 +18,11 @@ class Psr7Request implements Request, ServerRequestInterface
     /**
      * Psr7Request constructor.
      *
-     * @param ServerRequestInterface $psr7Request
+     * @param ServerRequestInterface $wrapper
      */
-    public function __construct(ServerRequestInterface $psr7Request)
+    public function __construct(ServerRequestInterface $wrapper)
     {
-        $this->wrapped = $psr7Request;
+        $this->wrapped = $wrapper;
     }
 
     /**
@@ -31,8 +32,7 @@ class Psr7Request implements Request, ServerRequestInterface
     {
         $header = $this->wrapped->getHeader($key);
 
-        switch (count($header))
-        {
+        switch (count($header)) {
             case 1:
                 return current($header);
             case 0:
@@ -63,8 +63,7 @@ class Psr7Request implements Request, ServerRequestInterface
      */
     public function all()
     {
-        if ($this->isMethod('GET'))
-        {
+        if ($this->isMethod('GET')) {
             return $this->getQueryParams();
         }
 
@@ -78,7 +77,7 @@ class Psr7Request implements Request, ServerRequestInterface
     {
         $params = [];
 
-        foreach ((array) $keys as $key) {
+        foreach ((array)$keys as $key) {
             $params[$key] = $this->get($key);
         }
 
@@ -92,7 +91,7 @@ class Psr7Request implements Request, ServerRequestInterface
     {
         $allKeys = array_keys($this->all());
 
-        return $this->only(array_diff($allKeys, (array) $keys));
+        return $this->only(array_diff($allKeys, (array)$keys));
     }
 
     /**
@@ -100,7 +99,7 @@ class Psr7Request implements Request, ServerRequestInterface
      */
     public function exists($key)
     {
-        return array_reduce((array) $key, function($carry, $item) use ($key){
+        return array_reduce((array)$key, function ($carry, $item) use ($key) {
             return $carry && array_key_exists($item, $this->all());
         }, true);
     }
@@ -110,7 +109,7 @@ class Psr7Request implements Request, ServerRequestInterface
      */
     public function has($key)
     {
-        return array_reduce((array) $key, function($carry, $item) use ($key){
+        return array_reduce((array)$key, function ($carry, $item) use ($key) {
             return $carry && !$this->isEmptyString($item);
         }, true);
     }
@@ -134,7 +133,7 @@ class Psr7Request implements Request, ServerRequestInterface
     {
         $segments = explode('/', trim($this->getUri()->getPath(), '/'));
 
-        return array_values(array_filter($segments, function($segment){
+        return array_values(array_filter($segments, function ($segment) {
             return trim($segment) !== '';
         }));
     }
