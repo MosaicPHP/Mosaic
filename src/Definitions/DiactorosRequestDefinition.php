@@ -9,6 +9,7 @@ use Zend\Diactoros\ServerRequestFactory;
 
 class DiactorosRequestDefinition implements Definition
 {
+
     /**
      * @return Adapter
      */
@@ -22,7 +23,7 @@ class DiactorosRequestDefinition implements Definition
     /**
      * @return string
      */
-    public function defineAs()
+    public function defineAs() : string
     {
         return Request::class;
     }

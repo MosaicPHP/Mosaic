@@ -12,14 +12,14 @@ interface Request
      *
      * @return string|array
      */
-    public function header($key = null, $default = null);
+    public function header(string $key = null, $default = null);
 
     /**
      * Get the request method.
      *
      * @return string
      */
-    public function method();
+    public function method() : string;
 
     /**
      * Gets a "parameter" value.
@@ -29,14 +29,14 @@ interface Request
      *
      * @return mixed
      */
-    public function get($key, $default = null);
+    public function get(string $key, $default = null);
 
     /**
      * Get all of the input and files for the request.
      *
      * @return array
      */
-    public function all();
+    public function all() : array;
 
     /**
      * Get a subset of the items from the input data.
@@ -45,7 +45,7 @@ interface Request
      *
      * @return array
      */
-    public function only($keys);
+    public function only($keys) : array;
 
     /**
      * Get all of the input except for a specified array of items.
@@ -54,7 +54,7 @@ interface Request
      *
      * @return array
      */
-    public function except($keys);
+    public function except($keys) : array;
 
     /**
      * Determine if the request contains a given input item key.
@@ -63,7 +63,7 @@ interface Request
      *
      * @return bool
      */
-    public function exists($key);
+    public function exists($key) : bool;
 
     /**
      * Determine if the request contains a non-empty value for an input item.
@@ -72,7 +72,7 @@ interface Request
      *
      * @return bool
      */
-    public function has($key);
+    public function has($key) : bool;
 
     /**
      * Retrieve a server variable from the request.
@@ -82,14 +82,14 @@ interface Request
      *
      * @return string|array
      */
-    public function server($key = null, $default = null);
+    public function server(string $key = null, $default = null);
 
     /**
      * Get all of the segments for the request path.
      *
      * @return string[]
      */
-    public function segments();
+    public function segments() : array;
 
     /**
      * Get a segment from the URI.
@@ -99,7 +99,7 @@ interface Request
      *
      * @return string|null
      */
-    public function segment($index, $default = null);
+    public function segment(int $index, $default = null);
 
     /**
      * Retrieve a file from the request.
@@ -109,7 +109,7 @@ interface Request
      *
      * @return array
      */
-    public function file($key = null, $default = null);
+    public function file(string $key = null, $default = null)  : array;
 
     /**
      * Determine if the uploaded data contains a file.
@@ -118,7 +118,7 @@ interface Request
      *
      * @return bool
      */
-    public function hasFile($key);
+    public function hasFile(string $key) : bool;
 
     /**
      * Retrieve cookies from request
@@ -135,5 +135,5 @@ interface Request
      *
      * @return string|array
      */
-    public function cookie($key = null, $default = null);
+    public function cookie(string $key = null, $default = null);
 }

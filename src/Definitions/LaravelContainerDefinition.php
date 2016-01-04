@@ -19,7 +19,7 @@ class LaravelContainerDefinition implements Definition
     /**
      * @return string
      */
-    public function defineAs()
+    public function defineAs() : string
     {
         return \Fresco\Contracts\Container\Container::class;
     }

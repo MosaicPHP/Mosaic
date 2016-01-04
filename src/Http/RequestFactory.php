@@ -2,6 +2,7 @@
 
 namespace Fresco\Http;
 
+use Fresco\Contracts\Http\Request;
 use Psr\Http\Message\An;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
@@ -12,9 +13,9 @@ class RequestFactory
     /**
      * Capture a request from globals
      *
-     * @return \Fresco\Contracts\Http\Request
+     * @return Request
      */
-    public static function capture()
+    public static function capture() : Request
     {
         return new Adapters\Psr7\Request(
             new RequestStub

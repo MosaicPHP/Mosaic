@@ -5,11 +5,11 @@ namespace Fresco\Support;
 class Arr
 {
     /**
-     * @param      $input
-     * @param      $key
-     * @param null $default
+     * @param mixed       $input
+     * @param mixed       $key
+     * @param string|null $default
      *
-     * @return null
+     * @return mixed
      */
     public static function get($input, $key, $default = null)
     {

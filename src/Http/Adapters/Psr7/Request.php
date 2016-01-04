@@ -28,7 +28,7 @@ class Request implements RequestContract, ServerRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function header($key = null, $default = null)
+    public function header(string $key = null, $default = null)
     {
         $header = $this->wrapped->getHeader($key);
 
@@ -45,7 +45,7 @@ class Request implements RequestContract, ServerRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function method()
+    public function method() : string
     {
         return $this->wrapped->getMethod();
     }
@@ -53,7 +53,7 @@ class Request implements RequestContract, ServerRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function get($key, $default = null)
+    public function get(string $key, $default = null)
     {
         return Arr::get($this->all(), $key, $default);
     }
@@ -61,7 +61,7 @@ class Request implements RequestContract, ServerRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function all()
+    public function all() : array
     {
         if ($this->isMethod('GET')) {
             return $this->getQueryParams();
@@ -73,7 +73,7 @@ class Request implements RequestContract, ServerRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function only($keys)
+    public function only($keys) : array
     {
         $params = [];
 
@@ -87,7 +87,7 @@ class Request implements RequestContract, ServerRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function except($keys)
+    public function except($keys) : array
     {
         $allKeys = array_keys($this->all());
 
@@ -97,7 +97,7 @@ class Request implements RequestContract, ServerRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function exists($key)
+    public function exists($key) : bool
     {
         return array_reduce((array)$key, function ($carry, $item) use ($key) {
             return $carry && array_key_exists($item, $this->all());
@@ -107,7 +107,7 @@ class Request implements RequestContract, ServerRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function has($key)
+    public function has($key) : bool
     {
         return array_reduce((array)$key, function ($carry, $item) use ($key) {
             return $carry && !$this->isEmptyString($item);
@@ -117,7 +117,7 @@ class Request implements RequestContract, ServerRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function server($key = null, $default = null)
+    public function server(string $key = null, $default = null)
     {
         if ($key === null) {
             return $this->wrapped->getServerParams();
@@ -129,7 +129,7 @@ class Request implements RequestContract, ServerRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function segments()
+    public function segments() : array
     {
         $segments = explode('/', trim($this->getUri()->getPath(), '/'));
 
@@ -141,7 +141,7 @@ class Request implements RequestContract, ServerRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function segment($index, $default = null)
+    public function segment(int $index, $default = null)
     {
         return Arr::get($this->segments(), $index, $default);
     }
@@ -149,7 +149,7 @@ class Request implements RequestContract, ServerRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function file($key = null, $default = null)
+    public function file(string $key = null, $default = null) : array
     {
         return Arr::get($this->getUploadedFiles(), $key, $default);
     }
@@ -157,7 +157,7 @@ class Request implements RequestContract, ServerRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function hasFile($key)
+    public function hasFile(string $key) : bool
     {
         // TODO: Implement hasFile() method.
     }
@@ -173,7 +173,7 @@ class Request implements RequestContract, ServerRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function cookie($key = null, $default = null)
+    public function cookie(string $key = null, $default = null)
     {
         // TODO: Implement cookie() method.
     }
@@ -423,12 +423,17 @@ class Request implements RequestContract, ServerRequestInterface
      *
      * @return bool
      */
-    private function isMethod($method)
+    private function isMethod(string $method) : bool
     {
         return strcasecmp($method, $this->method()) === 0;
     }
 
-    private function isEmptyString($key)
+    /**
+     * @param string $key
+     *
+     * @return bool
+     */
+    private function isEmptyString(string $key)
     {
         $item = $this->get($key);
 

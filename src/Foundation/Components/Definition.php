@@ -5,12 +5,12 @@ namespace Fresco\Foundation\Components;
 interface Definition
 {
     /**
-     * @return object
+     * @return mixed
      */
     public function define();
 
     /**
      * @return string
      */
-    public function defineAs();
+    public function defineAs() : string;
 }

@@ -30,10 +30,10 @@ class Application implements ApplicationContract
     /**
      * Application constructor.
      *
-     * @param null   $path
+     * @param string $path
      * @param string $containerDefinition
      */
-    public function __construct($path = null, $containerDefinition = LaravelContainerDefinition::class)
+    public function __construct(string $path, string $containerDefinition = LaravelContainerDefinition::class)
     {
         $this->path = $path;
         $this->registry = new Registry();
@@ -44,7 +44,7 @@ class Application implements ApplicationContract
     /**
      * @return Request
      */
-    public function captureRequest()
+    public function captureRequest() : Request
     {
         return $this->getContainer()->make(Request::class);
     }
@@ -70,7 +70,7 @@ class Application implements ApplicationContract
     /**
      * @return Registry
      */
-    public function getRegistry()
+    public function getRegistry() : Registry
     {
         return $this->registry;
     }
@@ -88,7 +88,7 @@ class Application implements ApplicationContract
     /**
      * @return Container
      */
-    public function getContainer()
+    public function getContainer() : Container
     {
         return $this->container;
     }
@@ -101,7 +101,7 @@ class Application implements ApplicationContract
      * @return Container
      * @throws \Exception
      */
-    public function defineContainer($definition)
+    public function defineContainer(string $definition) : Container
     {
         $this->definitions([
             $definition
