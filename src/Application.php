@@ -6,16 +6,13 @@ use Fresco\Contracts\Application as ApplicationContract;
 use Fresco\Contracts\Container\Container;
 use Fresco\Contracts\Http\Request;
 use Fresco\Definitions\LaravelContainerDefinition;
+use Fresco\Foundation\Bootstrap\HandleExceptions;
+use Fresco\Foundation\Bootstrap\RegisterDefinitions;
 use Fresco\Foundation\Components\Definition;
 use Fresco\Foundation\Components\Registry;
 
 class Application implements ApplicationContract
 {
-
-    /**
-     * @var null
-     */
-    private $path;
 
     /**
      * @var Registry
@@ -26,6 +23,19 @@ class Application implements ApplicationContract
      * @var Container
      */
     private $container;
+
+    /**
+     * @var null
+     */
+    private $path;
+
+    /**
+     * @var array
+     */
+    private $bootstrappers = [
+        HandleExceptions::class,
+        RegisterDefinitions::class,
+    ];
 
     /**
      * Application constructor.
@@ -39,14 +49,6 @@ class Application implements ApplicationContract
         $this->registry = new Registry();
 
         $this->defineContainer($containerDefinition);
-    }
-
-    /**
-     * @return Request
-     */
-    public function captureRequest() : Request
-    {
-        return $this->getContainer()->make(Request::class);
     }
 
     /**
@@ -73,16 +75,6 @@ class Application implements ApplicationContract
     public function getRegistry() : Registry
     {
         return $this->registry;
-    }
-
-    /**
-     * Bootstrap the app
-     */
-    public function bootstrap()
-    {
-        foreach ($this->registry->getDefinitions() as $abstract => $concrete) {
-            $this->container->instance($abstract, $concrete);
-        }
     }
 
     /**
@@ -113,5 +105,15 @@ class Application implements ApplicationContract
         $this->container->instance(ApplicationContract::class, $this);
 
         return $this->container;
+    }
+
+    /**
+     * Bootstrap the Application
+     */
+    public function bootstrap()
+    {
+        foreach ($this->bootstrappers as $bootstrapper) {
+            (new $bootstrapper($this))->bootstrap();
+        }
     }
 }
