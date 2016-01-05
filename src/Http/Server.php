@@ -3,10 +3,13 @@
 namespace Fresco\Http;
 
 use Fresco\Contracts\Application;
+use Fresco\Contracts\Exceptions\ExceptionRunner;
 use Fresco\Contracts\Http\Emitter;
 use Fresco\Contracts\Http\Request;
 use Fresco\Contracts\Http\Server as ServerContract;
 use Fresco\Http\Middleware\DispatchRequest;
+use Throwable;
+use Whoops\Exception\ErrorException;
 
 class Server implements ServerContract
 {
@@ -42,6 +45,20 @@ class Server implements ServerContract
         // Bootstrap the application
         $this->app->bootstrap();
 
+        try {
+            $this->handle($terminate);
+        } catch (Throwable $e) {
+            $this->app->getContainer()->make(ExceptionRunner::class)->handleException($e);
+        }
+    }
+
+    /**
+     * @param callable $terminate
+     *
+     * @throws ErrorException
+     */
+    protected function handle(callable $terminate = null)
+    {
         // Capture the request
         $request = $this->request();
 

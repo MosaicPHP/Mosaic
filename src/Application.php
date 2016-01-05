@@ -32,8 +32,8 @@ class Application implements ApplicationContract
      * @var array
      */
     private $bootstrappers = [
-        HandleExceptions::class,
         RegisterDefinitions::class,
+        HandleExceptions::class,
     ];
 
     /**
@@ -64,7 +64,7 @@ class Application implements ApplicationContract
     public function definitions(array $definitions)
     {
         foreach ($definitions as $definition) {
-            $definition = new $definition;
+            $definition = new $definition($this);
 
             if ($definition instanceof DefinitionGroup) {
                 $this->definitions($definition->getDefinitions());
@@ -117,7 +117,12 @@ class Application implements ApplicationContract
     public function bootstrap()
     {
         foreach ($this->bootstrappers as $bootstrapper) {
-            (new $bootstrapper($this))->bootstrap();
+            $this->getContainer()->make($bootstrapper)->bootstrap();
         }
+    }
+
+    public function isLocal()
+    {
+        return true;
     }
 }
