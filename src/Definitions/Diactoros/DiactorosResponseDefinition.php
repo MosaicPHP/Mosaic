@@ -1,6 +1,6 @@
 <?php
 
-namespace Fresco\Definitions;
+namespace Fresco\Definitions\Diactoros;
 
 use Fresco\Contracts\Http\Response;
 use Fresco\Foundation\Components\Definition;

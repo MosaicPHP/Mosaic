@@ -5,7 +5,7 @@ namespace Fresco\Tests;
 use Fresco\Application;
 use Fresco\Contracts\Container\Container;
 use Fresco\Contracts\Http\Request;
-use Fresco\Definitions\DiactorosPsr7Definition;
+use Fresco\Definitions\DiactorosDefinition;
 use Fresco\Foundation\Components\Definition;
 use Fresco\Foundation\Components\Registry;
 use PHPUnit_Framework_TestCase;
@@ -65,7 +65,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
     {
         $app = new Application(__DIR__);
         $app->definitions([
-            DiactorosPsr7Definition::class
+            DiactorosDefinition::class
         ]);
 
         $this->assertInstanceOf(\Fresco\Http\Adapters\Psr7\Request::class, $app->getRegistry()->getDefinitions()[Request::class]);

@@ -2,7 +2,7 @@
 
 namespace Fresco\Tests\Definitions;
 
-use Fresco\Definitions\DiactorosPsr7Definition;
+use Fresco\Definitions\DiactorosDefinition;
 use Fresco\Definitions\DiactorosRequestDefinition;
 use Fresco\Definitions\DiactorosResponseDefinition;
 use Fresco\Definitions\DiactorosResponseFactoryDefinition;
@@ -20,6 +20,6 @@ class DiactorosPsr7DefinitionTest extends DefinitionGroupTestCase
 
     public function getGroup()
     {
-        return new DiactorosPsr7Definition();
+        return new DiactorosDefinition();
     }
 }

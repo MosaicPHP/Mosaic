@@ -2,10 +2,12 @@
 
 namespace Fresco\Definitions;
 
+use Fresco\Definitions\FastRoute\FastRouteDispatcherDefinition;
+use Fresco\Definitions\Fresco\FrescoRouterDefinition;
 use Fresco\Foundation\Components\Definition;
 use Fresco\Foundation\Components\DefinitionGroup;
 
-class DiactorosPsr7Definition implements DefinitionGroup
+class FastRouteDefinition implements DefinitionGroup
 {
     /**
      * @return array|Definition[]
@@ -13,9 +15,8 @@ class DiactorosPsr7Definition implements DefinitionGroup
     public function getDefinitions() : array
     {
         return [
-            DiactorosRequestDefinition::class,
-            DiactorosResponseDefinition::class,
-            DiactorosResponseFactoryDefinition::class
+            FrescoRouterDefinition::class,
+            FastRouteDispatcherDefinition::class
         ];
     }
 }
