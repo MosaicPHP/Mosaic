@@ -8,7 +8,6 @@ use Fresco\Http\Adapters\Psr7\Response as Adapter;
 
 class DiactorosResponseDefinition implements Definition
 {
-
     /**
      * @return Adapter
      */

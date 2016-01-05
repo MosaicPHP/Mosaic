@@ -4,16 +4,15 @@ namespace Fresco;
 
 use Fresco\Contracts\Application as ApplicationContract;
 use Fresco\Contracts\Container\Container;
-use Fresco\Contracts\Http\Request;
 use Fresco\Definitions\LaravelContainerDefinition;
 use Fresco\Foundation\Bootstrap\HandleExceptions;
 use Fresco\Foundation\Bootstrap\RegisterDefinitions;
 use Fresco\Foundation\Components\Definition;
+use Fresco\Foundation\Components\DefinitionGroup;
 use Fresco\Foundation\Components\Registry;
 
 class Application implements ApplicationContract
 {
-
     /**
      * @var Registry
      */
@@ -45,7 +44,7 @@ class Application implements ApplicationContract
      */
     public function __construct(string $path, string $containerDefinition = LaravelContainerDefinition::class)
     {
-        $this->path = $path;
+        $this->path     = $path;
         $this->registry = new Registry();
 
         $this->defineContainer($containerDefinition);
@@ -65,7 +64,13 @@ class Application implements ApplicationContract
     public function definitions(array $definitions)
     {
         foreach ($definitions as $definition) {
-            $this->define(new $definition);
+            $definition = new $definition;
+
+            if ($definition instanceof DefinitionGroup) {
+                $this->definitions($definition->getDefinitions());
+            } else {
+                $this->define($definition);
+            }
         }
     }
 
@@ -90,8 +95,8 @@ class Application implements ApplicationContract
      *
      * @param string $definition
      *
-     * @return Container
      * @throws \Exception
+     * @return Container
      */
     public function defineContainer(string $definition) : Container
     {
@@ -101,7 +106,6 @@ class Application implements ApplicationContract
 
         $this->container = $this->registry->getContainer();
 
-        $this->container->instance('app', $this);
         $this->container->instance(ApplicationContract::class, $this);
 
         return $this->container;

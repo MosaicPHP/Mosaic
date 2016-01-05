@@ -8,7 +8,6 @@ use Fresco\Contracts\Http\Response;
 
 class Stack
 {
-
     /**
      * @var Request
      */

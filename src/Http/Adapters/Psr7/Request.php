@@ -45,7 +45,7 @@ class Request implements RequestContract, ServerRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function method() : string
+    public function method()
     {
         return $this->wrapped->getMethod();
     }
@@ -61,7 +61,7 @@ class Request implements RequestContract, ServerRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function all() : array
+    public function all()
     {
         if ($this->isMethod('GET')) {
             return $this->getQueryParams();
@@ -73,7 +73,7 @@ class Request implements RequestContract, ServerRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function only($keys) : array
+    public function only($keys)
     {
         $params = [];
 
@@ -87,7 +87,7 @@ class Request implements RequestContract, ServerRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function except($keys) : array
+    public function except($keys)
     {
         $allKeys = array_keys($this->all());
 
@@ -97,7 +97,7 @@ class Request implements RequestContract, ServerRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function exists($key) : bool
+    public function exists($key)
     {
         return array_reduce((array)$key, function ($carry, $item) use ($key) {
             return $carry && array_key_exists($item, $this->all());
@@ -107,7 +107,7 @@ class Request implements RequestContract, ServerRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function has($key) : bool
+    public function has($key)
     {
         return array_reduce((array)$key, function ($carry, $item) use ($key) {
             return $carry && !$this->isEmptyString($item);
@@ -129,7 +129,7 @@ class Request implements RequestContract, ServerRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function segments() : array
+    public function segments()
     {
         $segments = explode('/', trim($this->getUri()->getPath(), '/'));
 
@@ -141,7 +141,7 @@ class Request implements RequestContract, ServerRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function segment(int $index, $default = null)
+    public function segment($index, $default = null)
     {
         return Arr::get($this->segments(), $index, $default);
     }
@@ -149,7 +149,7 @@ class Request implements RequestContract, ServerRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function file(string $key = null, $default = null) : array
+    public function file(string $key = null, $default = null)
     {
         return Arr::get($this->getUploadedFiles(), $key, $default);
     }
@@ -157,7 +157,7 @@ class Request implements RequestContract, ServerRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function hasFile(string $key) : bool
+    public function hasFile(string $key)
     {
         // TODO: Implement hasFile() method.
     }
@@ -423,7 +423,7 @@ class Request implements RequestContract, ServerRequestInterface
      *
      * @return bool
      */
-    private function isMethod(string $method) : bool
+    private function isMethod(string $method)
     {
         return strcasecmp($method, $this->method()) === 0;
     }

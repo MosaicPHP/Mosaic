@@ -3,24 +3,22 @@
 namespace Fresco\Http;
 
 use Fresco\Contracts\Application;
+use Fresco\Contracts\Http\Emitter;
 use Fresco\Contracts\Http\Request;
-use Fresco\Contracts\Http\Response;
 use Fresco\Contracts\Http\Server as ServerContract;
 use Fresco\Http\Middleware\DispatchRequest;
-use Fresco\Http\Middleware\DoSomething;
 
 class Server implements ServerContract
 {
-
     /**
      * @var Application
      */
-    private $app;
+    protected $app;
 
     /**
      * @var array
      */
-    private $middleware = [
+    protected $middleware = [
         DispatchRequest::class,
     ];
 
@@ -61,24 +59,13 @@ class Server implements ServerContract
         }
 
         // Emit the response
-        $this->emit($response, $bufferLevel);
-    }
-
-    /**
-     * @param Response $response
-     * @param null     $bufferLevel
-     *
-     * @throws RuntimeException
-     */
-    private function emit(Response $response, $bufferLevel = null)
-    {
-        (new Emitter)->emit($response, $bufferLevel);
+        $this->getEmitter()->emit($response, $bufferLevel);
     }
 
     /**
      * @return Request
      */
-    private function request() : Request
+    protected function request() : Request
     {
         return $this->app->getContainer()->make(Request::class);
     }
@@ -86,8 +73,16 @@ class Server implements ServerContract
     /**
      * @return array
      */
-    private function middleware() : array
+    protected function middleware() : array
     {
         return $this->middleware;
+    }
+
+    /**
+     * @return Emitter
+     */
+    protected function getEmitter() : Emitter
+    {
+        return new SapiEmitter;
     }
 }

@@ -3,11 +3,26 @@
 namespace Fresco\Http\Middleware;
 
 use Fresco\Contracts\Http\Request;
+use Fresco\Contracts\Http\ResponseFactory;
 use Fresco\Http\Adapters\Psr7\Response;
-use Zend\Diactoros\Response\HtmlResponse;
 
 class DispatchRequest
 {
+    /**
+     * @var ResponseFactory
+     */
+    private $factory;
+
+    /**
+     * DispatchRequest constructor.
+     *
+     * @param ResponseFactory $factory
+     */
+    public function __construct(ResponseFactory $factory)
+    {
+        $this->factory = $factory;
+    }
+
     /**
      * Dispatch the request
      *
@@ -17,8 +32,6 @@ class DispatchRequest
      */
     public function __invoke(Request $request)
     {
-        // TODO: send the request through the router
-
-        return new Response(new HtmlResponse($request->get('name', 'No name given')));
+        return $this->factory->html($request->get('name', 'No name given'));
     }
 }

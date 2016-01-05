@@ -2,9 +2,11 @@
 
 namespace Fresco\Http;
 
+use Fresco\Contracts\Http\Emitter;
 use Fresco\Contracts\Http\Response;
+use RuntimeException;
 
-class Emitter
+class SapiEmitter implements Emitter
 {
     /**
      * @param Response $response

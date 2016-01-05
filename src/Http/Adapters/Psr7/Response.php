@@ -7,7 +7,6 @@ use Psr\Http\Message\ResponseInterface;
 
 class Response implements ResponseContract
 {
-
     /**
      * @var ServerRequestInterface
      */
@@ -63,7 +62,6 @@ class Response implements ResponseContract
     }
 
     /**
-     *
      * @param string $string
      *
      * @return bool

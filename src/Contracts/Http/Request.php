@@ -19,7 +19,7 @@ interface Request
      *
      * @return string
      */
-    public function method() : string;
+    public function method();
 
     /**
      * Gets a "parameter" value.
@@ -36,7 +36,7 @@ interface Request
      *
      * @return array
      */
-    public function all() : array;
+    public function all();
 
     /**
      * Get a subset of the items from the input data.
@@ -45,7 +45,7 @@ interface Request
      *
      * @return array
      */
-    public function only($keys) : array;
+    public function only($keys);
 
     /**
      * Get all of the input except for a specified array of items.
@@ -54,7 +54,7 @@ interface Request
      *
      * @return array
      */
-    public function except($keys) : array;
+    public function except($keys);
 
     /**
      * Determine if the request contains a given input item key.
@@ -63,7 +63,7 @@ interface Request
      *
      * @return bool
      */
-    public function exists($key) : bool;
+    public function exists($key);
 
     /**
      * Determine if the request contains a non-empty value for an input item.
@@ -72,7 +72,7 @@ interface Request
      *
      * @return bool
      */
-    public function has($key) : bool;
+    public function has($key);
 
     /**
      * Retrieve a server variable from the request.
@@ -89,7 +89,7 @@ interface Request
      *
      * @return string[]
      */
-    public function segments() : array;
+    public function segments();
 
     /**
      * Get a segment from the URI.
@@ -99,7 +99,7 @@ interface Request
      *
      * @return string|null
      */
-    public function segment(int $index, $default = null);
+    public function segment($index, $default = null);
 
     /**
      * Retrieve a file from the request.
@@ -107,9 +107,9 @@ interface Request
      * @param string $key
      * @param mixed  $default
      *
-     * @return array
+     * @return mixed
      */
-    public function file(string $key = null, $default = null)  : array;
+    public function file(string $key = null, $default = null);
 
     /**
      * Determine if the uploaded data contains a file.
@@ -118,7 +118,7 @@ interface Request
      *
      * @return bool
      */
-    public function hasFile(string $key) : bool;
+    public function hasFile(string $key);
 
     /**
      * Retrieve cookies from request

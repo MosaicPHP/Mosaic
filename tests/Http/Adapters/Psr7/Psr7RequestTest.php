@@ -63,11 +63,81 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('text/css', $this->request->header('accept', 'text/css'));
     }
 
+    public function test_can_get_the_request_method()
+    {
+        $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn($method = uniqid());
+
+        $this->assertEquals($method, $this->request->getMethod());
+    }
+
     public function test_can_get_the_request_method_from_it()
     {
         $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn($method = uniqid());
 
         $this->assertEquals($method, $this->request->method());
+    }
+
+    public function test_can_get_protocol_version()
+    {
+        $this->wrappedMock->shouldReceive('getProtocolVersion')->once()->andReturn($version = uniqid());
+
+        $this->assertEquals($version, $this->request->getProtocolVersion());
+    }
+
+    public function test_can_get_headers()
+    {
+        $this->wrappedMock->shouldReceive('getHeaders')->once()->andReturn(['test']);
+
+        $this->assertEquals(['test'], $this->request->getHeaders());
+    }
+
+    public function test_can_get_request_target()
+    {
+        $this->wrappedMock->shouldReceive('getRequestTarget')->andReturn($this->request);
+
+        $this->assertEquals($this->request, $this->request->getRequestTarget());
+    }
+
+    public function test_can_check_if_header_exists()
+    {
+        $this->wrappedMock->shouldReceive('hasHeader')->with('header')->andReturn(true);
+
+        $this->assertTrue($this->request->hasHeader('header'));
+    }
+
+    public function test_can_get_header_line()
+    {
+        $this->wrappedMock->shouldReceive('getHeaderLine')->with('header')->andReturn('line');
+
+        $this->assertEquals('line', $this->request->getHeaderLine('header'));
+    }
+
+    public function test_can_get_body()
+    {
+        $this->wrappedMock->shouldReceive('getBody')->andReturn('body');
+
+        $this->assertEquals('body', $this->request->getBody());
+    }
+
+    public function test_can_get_cookie_params()
+    {
+        $this->wrappedMock->shouldReceive('getCookieParams')->andReturn('params');
+
+        $this->assertEquals('params', $this->request->getCookieParams());
+    }
+
+    public function test_can_get_attributes()
+    {
+        $this->wrappedMock->shouldReceive('getAttributes')->andReturn('attributes');
+
+        $this->assertEquals('attributes', $this->request->getAttributes());
+    }
+
+    public function test_can_get_attribute()
+    {
+        $this->wrappedMock->shouldReceive('getAttribute')->with('name', null)->andReturn('attribute');
+
+        $this->assertEquals('attribute', $this->request->getAttribute('name'));
     }
 
     public function test_immutability_on_request_target()
@@ -510,6 +580,10 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals([
             'DOCUMENT_ROOT' => '/i/am/g/root'
         ], $this->request->server());
+
+        $this->assertEquals([
+            'DOCUMENT_ROOT' => '/i/am/g/root'
+        ], $this->request->getServerParams());
     }
 
     public function test_can_get_a_specific_server_param()

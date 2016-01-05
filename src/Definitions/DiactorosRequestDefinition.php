@@ -9,7 +9,6 @@ use Zend\Diactoros\ServerRequestFactory;
 
 class DiactorosRequestDefinition implements Definition
 {
-
     /**
      * @return Adapter
      */

@@ -3,6 +3,7 @@
 namespace Fresco\Foundation\Components;
 
 use Fresco\Contracts\Container\Container;
+use LogicException;
 
 class Registry
 {
@@ -37,15 +38,24 @@ class Registry
     }
 
     /**
-     * @throws \Exception
+     * @throws LogicException
+     *
      * @return Container
      */
     public function getContainer()
     {
         if (!isset(self::$definitions[Container::class])) {
-            throw new \Exception('Container was not defined');
+            throw new LogicException('Container was not defined');
         }
 
         return self::$definitions[Container::class];
+    }
+
+    /**
+     * Flush the registry
+     */
+    public static function flush()
+    {
+        static::$definitions = [];
     }
 }
