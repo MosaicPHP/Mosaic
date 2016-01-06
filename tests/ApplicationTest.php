@@ -71,15 +71,6 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf(\Fresco\Http\Adapters\Psr7\Request::class, $app->getRegistry()->getDefinitions()[Request::class]);
     }
 
-    public function test_can_bootstrap_application()
-    {
-        $app = new Application(__DIR__);
-        $app->bootstrap();
-
-        // Register definitions is executed
-        $this->assertInstanceOf(\Fresco\Container\Adapters\Laravel\Container::class, $app->getContainer()->make(Container::class));
-    }
-
     public function tearDown()
     {
         parent::tearDown();
@@ -196,4 +187,8 @@ class ContainerStub implements Container
     {
         // TODO: Implement instance() method.
     }
+}
+
+class ERunner extends \Fresco\Exceptions\Runner
+{
 }

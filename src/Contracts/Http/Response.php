@@ -2,9 +2,6 @@
 
 namespace Fresco\Contracts\Http;
 
-/**
- * @TODO: Installed version of mockery doesn't seem to allow mocking classes with return type hinting
- */
 interface Response
 {
     /**
@@ -14,14 +11,14 @@ interface Response
      *
      * @return int Status code.
      */
-    public function status();
+    public function status() : int;
 
     /**
      * Gets the body of the message.
      *
      * @return string Returns the body as string.
      */
-    public function body();
+    public function body() : string;
 
     /**
      * @return int|null

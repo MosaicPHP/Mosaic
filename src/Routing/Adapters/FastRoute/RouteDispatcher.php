@@ -8,6 +8,7 @@ use Fresco\Contracts\Http\Request;
 use Fresco\Contracts\Routing\RouteDispatcher as RouteDispatcherContract;
 use Fresco\Exceptions\MethodNotAllowedException;
 use Fresco\Exceptions\NotFoundHttpException;
+use Fresco\Routing\Route;
 use Fresco\Routing\RouteCollection;
 
 class RouteDispatcher implements RouteDispatcherContract
@@ -18,26 +19,30 @@ class RouteDispatcher implements RouteDispatcherContract
      * @param Request         $request
      * @param RouteCollection $collection
      *
-     * @throws \Exception
-     * @return mixed
+     * @throws MethodNotAllowedException
+     * @throws NotFoundHttpException
+     * @return Route
      */
     public function dispatch(Request $request, RouteCollection $collection)
     {
         $method = $request->method();
-        $uri    = '/';
+        $uri    = $request->path();
 
-        $response = $this->createDispatcher($collection)->dispatch($method, $uri);
+        $routeInfo = $this->createDispatcher($collection)->dispatch($method, $uri);
 
-        switch ($response[0]) {
+        switch ($routeInfo[0]) {
             case Dispatcher::NOT_FOUND:
                 throw new NotFoundHttpException;
 
             case Dispatcher::METHOD_NOT_ALLOWED:
-                throw new MethodNotAllowedException($response[1]);
+                throw new MethodNotAllowedException($routeInfo[1]);
 
             case Dispatcher::FOUND:
-                return 'Route was found';
+                $route = $routeInfo[1];
+                $route->bind($routeInfo[2]);
         }
+
+        return $route;
     }
 
     /**

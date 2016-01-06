@@ -2,6 +2,8 @@
 
 namespace Fresco\Routing;
 
+use UnexpectedValueException;
+
 class Route
 {
     /**
@@ -26,37 +28,9 @@ class Route
     protected $action;
 
     /**
-     * The default values for the route.
-     *
-     * @var array
-     */
-    protected $defaults = [];
-
-    /**
-     * The regular expression requirements.
-     *
-     * @var array
-     */
-    protected $wheres = [];
-
-    /**
-     * The array of matched parameters.
-     *
      * @var array
      */
     protected $parameters = [];
-
-    /**
-     * The parameter names for the route.
-     *
-     * @var array|null
-     */
-    protected $parameterNames;
-
-    /**
-     * @var array
-     */
-    private $groupAttributes;
 
     /**
      * Create a new Route instance.
@@ -64,31 +38,58 @@ class Route
      * @param array         $methods
      * @param string        $uri
      * @param Closure|array $action
-     * @param array         $groupAttributes
      *
      * @throws UnexpectedValueException
      */
-    public function __construct($methods, $uri, $action, array $groupAttributes = [])
+    public function __construct($methods, $uri, $action)
     {
-        $this->uri             = $uri;
+        $this->setUri($uri);
         $this->methods         = (array)$methods;
-        $this->groupAttributes = $groupAttributes;
 
-        //$this->action = $this->parseAction($action);
+        $this->action = $this->parseAction($action);
 
         if (in_array('GET', $this->methods) && !in_array('HEAD', $this->methods)) {
             $this->methods[] = 'HEAD';
         }
+    }
 
-        //if (isset($this->action['prefix'])) {
-        //    $this->prefix($this->action['prefix']);
-        //}
+    /**
+     * @param array $parameters
+     */
+    public function bind(array $parameters = [])
+    {
+        $this->parameters = $parameters;
+    }
+
+    /**
+     * Parse the route action into a standard array.
+     *
+     * @param callable|array $action
+     *
+     * @throws UnexpectedValueException
+     * @return array
+     */
+    protected function parseAction($action)
+    {
+        if (is_callable($action)) {
+            $action = ['uses' => $action];
+        } elseif (is_string($action)) {
+            $action = ['uses' => $action];
+        }
+
+        if (is_string($action['uses']) && strpos($action['uses'], '@') == 0) {
+            throw new UnexpectedValueException(sprintf(
+                'Invalid route action: [%s]', $action['uses']
+            ));
+        }
+
+        return $action;
     }
 
     /**
      * @return array
      */
-    public function methods()
+    public function methods() : array
     {
         return $this->methods;
     }
@@ -96,8 +97,52 @@ class Route
     /**
      * @return string
      */
-    public function uri()
+    public function uri() : string
     {
         return $this->uri;
+    }
+
+    /**
+     * @return array
+     */
+    public function action() : array
+    {
+        return $this->action;
+    }
+
+    /**
+     * @return array
+     */
+    public function parameters() : array
+    {
+        return $this->parameters;
+    }
+
+    /**
+     * @param $uri
+     */
+    public function setUri(string $uri)
+    {
+        $this->uri = '/' . trim($uri, '/');
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return bool
+     */
+    public function hasParameter(string $name)
+    {
+        return isset($this->parameters[$name]);
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return mixed
+     */
+    public function parameter(string $name)
+    {
+        return $this->parameters[$name];
     }
 }

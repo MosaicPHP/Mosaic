@@ -10,18 +10,17 @@ use Whoops\Run;
 
 class WhoopsFormatter implements ExceptionFormatter
 {
-
     /**
      * @var Run
      */
     private $whoops;
 
     /**
-     * WhoopsFormatter constructor.
+     * @param Run $whoops
      */
-    public function __construct()
+    public function __construct(Run $whoops)
     {
-        $this->whoops = new Run();
+        $this->whoops = $whoops;
         $this->whoops->pushHandler(new PrettyPageHandler);
     }
 

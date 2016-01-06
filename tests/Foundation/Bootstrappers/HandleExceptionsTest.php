@@ -11,7 +11,7 @@ class HandleExceptionsTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->bootstrapper = $bootstrapper = new HandleExceptions(new Application(__DIR__));
+        $this->bootstrapper = $bootstrapper = new HandleExceptions(new Runner(new Application(__DIR__)));
     }
 
     public function test_it_handles_exceptions()
@@ -29,4 +29,8 @@ class HandleExceptionsTest extends \PHPUnit_Framework_TestCase
         });
         $this->assertEquals('handleException', $exceptionHandler[1]);
     }
+}
+
+class Runner extends \Fresco\Exceptions\Runner
+{
 }

@@ -2,10 +2,10 @@
 
 namespace Fresco\Tests\Definitions;
 
+use Fresco\Definitions\Diactoros\DiactorosRequestDefinition;
+use Fresco\Definitions\Diactoros\DiactorosResponseDefinition;
+use Fresco\Definitions\Diactoros\DiactorosResponseFactoryDefinition;
 use Fresco\Definitions\DiactorosDefinition;
-use Fresco\Definitions\DiactorosRequestDefinition;
-use Fresco\Definitions\DiactorosResponseDefinition;
-use Fresco\Definitions\DiactorosResponseFactoryDefinition;
 
 class DiactorosPsr7DefinitionTest extends DefinitionGroupTestCase
 {

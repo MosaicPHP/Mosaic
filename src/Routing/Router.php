@@ -19,13 +19,6 @@ class Router implements RouterContract
     public static $verbs = ['GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'];
 
     /**
-     * The shared attributes for the current route group.
-     *
-     * @var array
-     */
-    protected $groupAttributes = [];
-
-    /**
      * Router constructor.
      */
     public function __construct()
@@ -160,7 +153,7 @@ class Router implements RouterContract
     protected function addRoute($methods, $uri, $action)
     {
         return $this->routes->add(
-            new Route($methods, $uri, $action, $this->groupAttributes)
+            new Route($methods, $uri, $action)
         );
     }
 }

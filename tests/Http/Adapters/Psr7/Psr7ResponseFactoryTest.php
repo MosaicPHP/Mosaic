@@ -4,6 +4,7 @@ namespace Fresco\Tests\Http\Adapters\Psr7;
 
 use Fresco\Contracts\Http\Response as ResponseContract;
 use Fresco\Contracts\Http\ResponseFactory as ResponseFactoryContract;
+use Fresco\Http\Adapters\Psr7\Response;
 use Fresco\Http\Adapters\Psr7\ResponseFactory;
 
 class Psr7ResponseFactoryTest extends \PHPUnit_Framework_TestCase
@@ -50,6 +51,30 @@ class Psr7ResponseFactoryTest extends \PHPUnit_Framework_TestCase
     public function test_can_make_html_response_with_custom_headers()
     {
         $response = $this->factory->html('html body', 200, [
+            'custom' => 'header'
+        ]);
+
+        $this->assertInstanceOf(ResponseContract::class, $response);
+        $this->assertEquals('html body', $response->body());
+        $this->assertEquals(200, $response->status());
+        $this->assertEquals([
+            'content-type' => ['text/html; charset=utf-8'],
+            'custom'       => ['header']
+        ], $response->headers());
+    }
+
+    public function test_making_a_response_from_a_response_will_return_that_same_response_without_modification()
+    {
+        $original = new Response(new \Zend\Diactoros\Response());
+        $response = $this->factory->make($original);
+
+        $this->assertInstanceOf(ResponseContract::class, $response);
+        $this->assertEquals($original, $response);
+    }
+
+    public function test_can_make_response_from_unkown_content()
+    {
+        $response = $this->factory->make('html body', 200, [
             'custom' => 'header'
         ]);
 

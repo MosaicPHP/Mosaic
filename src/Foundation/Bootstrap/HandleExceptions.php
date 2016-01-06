@@ -15,8 +15,6 @@ class HandleExceptions implements Bootstrapper
      * RegisterDefinitions constructor.
      *
      * @param ExceptionRunner $handler
-     *
-     * @internal param Application $app
      */
     public function __construct(ExceptionRunner $handler)
     {

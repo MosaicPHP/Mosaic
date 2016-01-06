@@ -3,7 +3,7 @@
 namespace Fresco\Tests\Definitions;
 
 use Fresco\Contracts\Http\Response;
-use Fresco\Definitions\DiactorosResponseDefinition;
+use Fresco\Definitions\Diactoros\DiactorosResponseDefinition;
 
 class DiactorosResponseDefinitionTest extends DefinitionTestCase
 {

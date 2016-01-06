@@ -45,7 +45,7 @@ class Request implements RequestContract, ServerRequestInterface
     /**
      * {@inheritdoc}
      */
-    public function method()
+    public function method() : string
     {
         return $this->wrapped->getMethod();
     }
@@ -442,5 +442,21 @@ class Request implements RequestContract, ServerRequestInterface
         }
 
         return trim($item) === '';
+    }
+
+    /**
+     * @return string
+     */
+    public function uri() : string
+    {
+        return (string)$this->wrapped->getUri();
+    }
+
+    /**
+     * @return string
+     */
+    public function path() : string
+    {
+        return (string)$this->wrapped->getUri()->getPath();
     }
 }

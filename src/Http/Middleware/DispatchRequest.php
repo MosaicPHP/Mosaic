@@ -7,6 +7,8 @@ use Fresco\Contracts\Http\ResponseFactory;
 use Fresco\Contracts\Routing\RouteDispatcher;
 use Fresco\Contracts\Routing\Router;
 use Fresco\Http\Adapters\Psr7\Response;
+use Fresco\Routing\Dispatchers\DispatchClosure;
+use Fresco\Routing\Dispatchers\DispatchController;
 
 class DispatchRequest
 {
@@ -26,17 +28,36 @@ class DispatchRequest
     private $router;
 
     /**
+     * @var DispatchClosure
+     */
+    private $closure;
+
+    /**
+     * @var DispatchController
+     */
+    private $controller;
+
+    /**
      * DispatchRequest constructor.
      *
-     * @param RouteDispatcher $dispatcher
-     * @param Router          $router
-     * @param ResponseFactory $factory
+     * @param RouteDispatcher    $dispatcher
+     * @param Router             $router
+     * @param DispatchController $controller
+     * @param DispatchClosure    $closure
+     * @param ResponseFactory    $factory
      */
-    public function __construct(RouteDispatcher $dispatcher, Router $router, ResponseFactory $factory)
-    {
+    public function __construct(
+        RouteDispatcher $dispatcher,
+        Router $router,
+        DispatchController $controller,
+        DispatchClosure $closure,
+        ResponseFactory $factory
+    ) {
         $this->router     = $router;
         $this->factory    = $factory;
         $this->dispatcher = $dispatcher;
+        $this->closure    = $closure;
+        $this->controller = $controller;
     }
 
     /**
@@ -48,8 +69,14 @@ class DispatchRequest
      */
     public function __invoke(Request $request)
     {
-        return $this->factory->make(
-            $this->dispatcher->dispatch($request, $this->router->all())
-        );
+        $route = $this->dispatcher->dispatch($request, $this->router->all());
+
+        if ($this->closure->isSatisfiedBy($route)) {
+            $response = $this->closure->dispatch($route);
+        } else {
+            $response = $this->controller->dispatch($route);
+        }
+
+        return $this->factory->make($response);
     }
 }

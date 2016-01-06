@@ -7,7 +7,6 @@ use Throwable;
 
 class HttpException extends Exception
 {
-
     /**
      * @var int
      */

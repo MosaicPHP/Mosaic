@@ -2,9 +2,9 @@
 
 namespace Fresco\Definitions\FastRoute;
 
-use Fresco\Contracts\Routing\RouteDispatcher;
+use Fresco\Contracts\Routing\RouteDispatcher as RouteDispatcherContract;
 use Fresco\Foundation\Components\Definition;
-use Fresco\Routing\Adapters\FastRoute\RouteDispatcher as Adapter;
+use Fresco\Routing\Adapters\FastRoute\RouteDispatcher;
 
 class FastRouteDispatcherDefinition implements Definition
 {
@@ -13,7 +13,7 @@ class FastRouteDispatcherDefinition implements Definition
      */
     public function define()
     {
-        return new Adapter;
+        return new RouteDispatcher;
     }
 
     /**
@@ -21,6 +21,6 @@ class FastRouteDispatcherDefinition implements Definition
      */
     public function defineAs() : string
     {
-        return RouteDispatcher::class;
+        return RouteDispatcherContract::class;
     }
 }

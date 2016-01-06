@@ -7,6 +7,7 @@ use Fresco\Http\Adapters\Psr7\Request;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
+use Zend\Diactoros\Uri;
 
 class Psr7RequestTest extends \PHPUnit_Framework_TestCase
 {
@@ -75,6 +76,20 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
         $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn($method = uniqid());
 
         $this->assertEquals($method, $this->request->method());
+    }
+
+    public function test_can_get_the_request_uri()
+    {
+        $this->wrappedMock->shouldReceive('getUri')->once()->andReturn('uri');
+
+        $this->assertEquals('uri', $this->request->uri());
+    }
+
+    public function test_can_get_the_request_path()
+    {
+        $this->wrappedMock->shouldReceive('getUri')->once()->andReturn(new Uri('path'));
+
+        $this->assertEquals('path', $this->request->path());
     }
 
     public function test_can_get_protocol_version()

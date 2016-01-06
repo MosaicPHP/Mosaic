@@ -6,7 +6,6 @@ use Throwable;
 
 class MethodNotAllowedException extends HttpException
 {
-
     /**
      * @param string[]       $methods
      * @param int            $status

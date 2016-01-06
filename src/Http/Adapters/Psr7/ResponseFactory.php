@@ -26,7 +26,6 @@ class ResponseFactory implements ResponseFactoryContract
 
     /**
      * @param mixed $content
-     *
      * @param int   $status
      * @param array $headers
      *
@@ -34,6 +33,10 @@ class ResponseFactory implements ResponseFactoryContract
      */
     public function make($content = '', int $status = 200, array $headers = [])  : ResponseContract
     {
-        return $this->html($content);
+        if ($content instanceof ResponseContract) {
+            return $content;
+        }
+
+        return $this->html($content, $status, $headers);
     }
 }

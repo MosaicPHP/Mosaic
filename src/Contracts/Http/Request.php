@@ -19,7 +19,17 @@ interface Request
      *
      * @return string
      */
-    public function method();
+    public function method() : string;
+
+    /**
+     * @return string
+     */
+    public function uri() : string;
+
+    /**
+     * @return string
+     */
+    public function path() : string;
 
     /**
      * Gets a "parameter" value.
