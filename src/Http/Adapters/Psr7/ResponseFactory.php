@@ -37,6 +37,6 @@ class ResponseFactory implements ResponseFactoryContract
             return $content;
         }
 
-        return $this->html($content, $status, $headers);
+        return $this->html((string) $content, $status, $headers);
     }
 }

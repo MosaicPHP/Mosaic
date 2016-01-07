@@ -51,11 +51,29 @@ class Application implements ApplicationContract
     }
 
     /**
+     * @param string $path
+     *
+     * @return string
+     */
+    public function storagePath($path = '') : string
+    {
+        return rtrim($this->path . '/storage/' . $path, '/');
+    }
+
+    /**
+     * @return string
+     */
+    public function viewsPath() : string
+    {
+        return $this->path . '/resources/views';
+    }
+
+    /**
      * @param Definition $definition
      */
     public function define(Definition $definition)
     {
-        $this->getRegistry()->define($definition);
+        $this->getRegistry()->define($definition, $this);
     }
 
     /**
