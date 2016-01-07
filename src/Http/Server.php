@@ -3,10 +3,12 @@
 namespace Fresco\Http;
 
 use Fresco\Contracts\Application;
-use Fresco\Contracts\Exceptions\ExceptionRunner;
 use Fresco\Contracts\Http\Emitter;
 use Fresco\Contracts\Http\Request;
 use Fresco\Contracts\Http\Server as ServerContract;
+use Fresco\Exceptions\Formatters\EnvBasedWhoopsFormatter;
+use Fresco\Exceptions\Handlers\LogHandler;
+use Fresco\Exceptions\Runner;
 use Fresco\Http\Middleware\DispatchRequest;
 use Throwable;
 use Whoops\Exception\ErrorException;
@@ -26,6 +28,18 @@ class Server implements ServerContract
     ];
 
     /**
+     * @var
+     */
+    protected $exceptionFormatter = EnvBasedWhoopsFormatter::class;
+
+    /**
+     * @var array
+     */
+    protected $exceptionHandlers = [
+        LogHandler::class
+    ];
+
+    /**
      * Server constructor.
      *
      * @param Application $app
@@ -42,13 +56,20 @@ class Server implements ServerContract
      */
     public function listen(callable $terminate = null)
     {
-        // Bootstrap the application
+        $this->app->setExceptionRunner(
+            new Runner(
+                $this->app,
+                $this->getExceptionHandlers(),
+                $this->getExceptionFormatter()
+            )
+        );
+
         $this->app->bootstrap();
 
         try {
             $this->handle($terminate);
         } catch (Throwable $e) {
-            $this->app->getContainer()->make(ExceptionRunner::class)->handleException($e);
+            $this->app->getExceptionRunner()->handleException($e);
         }
     }
 
@@ -101,5 +122,21 @@ class Server implements ServerContract
     protected function getEmitter() : Emitter
     {
         return new SapiEmitter;
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function getExceptionFormatter()
+    {
+        return $this->exceptionFormatter;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getExceptionHandlers()
+    {
+        return $this->exceptionHandlers;
     }
 }

@@ -4,6 +4,7 @@ namespace Fresco;
 
 use Fresco\Contracts\Application as ApplicationContract;
 use Fresco\Contracts\Container\Container;
+use Fresco\Contracts\Exceptions\ExceptionRunner;
 use Fresco\Definitions\LaravelContainerDefinition;
 use Fresco\Foundation\Bootstrap\HandleExceptions;
 use Fresco\Foundation\Bootstrap\RegisterDefinitions;
@@ -16,22 +17,22 @@ class Application implements ApplicationContract
     /**
      * @var Registry
      */
-    private $registry;
+    protected $registry;
 
     /**
      * @var Container
      */
-    private $container;
+    protected $container;
 
     /**
      * @var null
      */
-    private $path;
+    protected $path;
 
     /**
      * @var array
      */
-    private $bootstrappers = [
+    protected $bootstrappers = [
         RegisterDefinitions::class,
         HandleExceptions::class,
     ];
@@ -142,5 +143,23 @@ class Application implements ApplicationContract
     public function isLocal()
     {
         return true;
+    }
+
+    /**
+     * @param ExceptionRunner $runner
+     */
+    public function setExceptionRunner(ExceptionRunner $runner)
+    {
+        $this->getContainer()->bind(ExceptionRunner::class, function () use ($runner) {
+            return $runner;
+        });
+    }
+
+    /**
+     * @return ExceptionRunner
+     */
+    public function getExceptionRunner() : ExceptionRunner
+    {
+        return $this->getContainer()->make(ExceptionRunner::class);
     }
 }

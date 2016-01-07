@@ -2,6 +2,8 @@
 
 namespace Fresco\Contracts;
 
+use Fresco\Contracts\Exceptions\ExceptionRunner;
+
 interface Application
 {
     public function isLocal();
@@ -19,4 +21,14 @@ interface Application
      * @return string
      */
     public function viewsPath() : string;
+
+    /**
+     * @param ExceptionRunner $runner
+     */
+    public function setExceptionRunner(ExceptionRunner $runner);
+
+    /**
+     * @return ExceptionRunner
+     */
+    public function getExceptionRunner() : ExceptionRunner;
 }

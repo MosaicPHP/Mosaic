@@ -8,7 +8,7 @@ use Fresco\Contracts\Exceptions\ExceptionRunner;
 use Fresco\Exceptions\Formatters\HtmlFormatter;
 use Throwable;
 
-abstract class Runner implements ExceptionRunner
+class Runner implements ExceptionRunner
 {
     /**
      * @var Application
@@ -34,10 +34,14 @@ abstract class Runner implements ExceptionRunner
      * Handler constructor.
      *
      * @param Application $app
+     * @param array       $handlers
+     * @param string      $formatter
      */
-    public function __construct(Application $app)
+    public function __construct(Application $app, array $handlers = [], string $formatter = HtmlFormatter::class)
     {
-        $this->app = $app;
+        $this->app       = $app;
+        $this->formatter = $formatter;
+        $this->handlers  = $handlers;
     }
 
     /**
