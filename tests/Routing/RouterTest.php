@@ -6,16 +6,16 @@ use Fresco\Routing\Router;
 
 class RouterTest extends \PHPUnit_Framework_TestCase
 {
-   public function test_can_add_get_route()
-   {
-       $router = new Router();
+    public function test_can_add_get_route()
+    {
+        $router = new Router();
 
-       $this->assertCount(0, $router->all());
+        $this->assertCount(0, $router->all());
 
-       $router->get('/', 'HomeController@index');
+        $router->get('/', 'HomeController@index');
 
-       $this->assertCount(1, $router->all());
-   }
+        $this->assertCount(1, $router->all());
+    }
 
     public function test_can_add_post_route()
     {
