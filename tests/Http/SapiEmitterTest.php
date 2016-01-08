@@ -1,4 +1,5 @@
 <?php
+
 namespace Fresco\Tests\Http
 {
 
@@ -11,7 +12,7 @@ namespace Fresco\Tests\Http
         public static $sapi;
         public static $headersSent = false;
 
-        function test_it_emits_a_response_object_when_no_headers_were_sent()
+        public function test_it_emits_a_response_object_when_no_headers_were_sent()
         {
             $sapiEmitter = new SapiEmitter();
 
@@ -46,19 +47,23 @@ namespace Fresco\Http {
 
     use Fresco\Tests\Http\SapiEmitterTest;
 
-    function headers_sent() {
+    function headers_sent()
+    {
         return SapiEmitterTest::$headersSent;
     }
 
-    function header($message) {
+    function header($message)
+    {
         return SapiEmitterTest::$sapi ? SapiEmitterTest::$sapi->header($message) : \header($message);
     }
 
-    function ob_get_level() {
+    function ob_get_level()
+    {
         return SapiEmitterTest::$sapi ? SapiEmitterTest::$sapi->ob_get_level() : \ob_get_level();
     }
 
-    function ob_end_flush() {
+    function ob_end_flush()
+    {
         return SapiEmitterTest::$sapi ? SapiEmitterTest::$sapi->ob_end_flush() : \ob_end_flush();
     }
 }

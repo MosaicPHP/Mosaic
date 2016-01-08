@@ -1,4 +1,5 @@
 <?php
+
 namespace Fresco\Tests;
 
 trait ClosesMockeryOnTearDown
