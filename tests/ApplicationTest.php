@@ -9,6 +9,7 @@ use Fresco\Contracts\Http\Request;
 use Fresco\Definitions\DiactorosDefinition;
 use Fresco\Foundation\Bootstrap\Bootstrapper;
 use Fresco\Foundation\Bootstrap\HandleExceptions;
+use Fresco\Foundation\Bootstrap\LoadConfiguration;
 use Fresco\Foundation\Bootstrap\RegisterDefinitions;
 use Fresco\Foundation\Components\Definition;
 use Fresco\Foundation\Components\Registry;
@@ -83,12 +84,14 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $app = new Application(__DIR__, ContainerDefinitionStub::class);
 
         $mockBootstrapper = \Mockery::mock(Bootstrapper::class);
-        $mockBootstrapper->shouldReceive('bootstrap')->twice();
+        $mockBootstrapper->shouldReceive('bootstrap')->times(3);
 
         ContainerDefinitionStub::$mockInstance->shouldReceive('make')->with(RegisterDefinitions::class)
             ->once()->andReturn($mockBootstrapper);
         ContainerDefinitionStub::$mockInstance->shouldReceive('make')->with(HandleExceptions::class)
             ->once()->andReturn($mockBootstrapper);
+        ContainerDefinitionStub::$mockInstance->shouldReceive('make')->with(LoadConfiguration::class)
+                                              ->once()->andReturn($mockBootstrapper);
 
         $app->bootstrap();
     }

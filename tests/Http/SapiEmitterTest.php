@@ -36,7 +36,7 @@ namespace Fresco\Tests\Http
         {
             $this->emitter = new SapiEmitter();
 
-            self::$sapi = \Mockery::mock(['header' => true, 'ob_get_level' => 1, 'ob_end_flush' => true]);
+            self::$sapi     = \Mockery::mock(['header' => true, 'ob_get_level' => 1, 'ob_end_flush' => true]);
             $this->response = \Mockery::mock(Response::class);
         }
 
@@ -73,7 +73,7 @@ namespace Fresco\Tests\Http
 
         protected function tearDown()
         {
-            self::$sapi = null;
+            self::$sapi        = null;
             self::$headersSent = false;
 
             parent::tearDown();

@@ -7,6 +7,7 @@ use Fresco\Contracts\Container\Container;
 use Fresco\Contracts\Exceptions\ExceptionRunner;
 use Fresco\Definitions\LaravelContainerDefinition;
 use Fresco\Foundation\Bootstrap\HandleExceptions;
+use Fresco\Foundation\Bootstrap\LoadConfiguration;
 use Fresco\Foundation\Bootstrap\RegisterDefinitions;
 use Fresco\Foundation\Components\Definition;
 use Fresco\Foundation\Components\DefinitionGroup;
@@ -35,6 +36,7 @@ class Application implements ApplicationContract
     protected $bootstrappers = [
         RegisterDefinitions::class,
         HandleExceptions::class,
+        LoadConfiguration::class
     ];
 
     /**
@@ -49,6 +51,14 @@ class Application implements ApplicationContract
         $this->registry = new Registry();
 
         $this->defineContainer($containerDefinition);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function configPath()
+    {
+        return $this->path . '/config';
     }
 
     /**

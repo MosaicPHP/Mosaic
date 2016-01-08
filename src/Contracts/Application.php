@@ -9,6 +9,11 @@ interface Application
     public function isLocal();
 
     /**
+     * @return mixed
+     */
+    public function configPath();
+
+    /**
      * @param string $path
      *
      * @return string

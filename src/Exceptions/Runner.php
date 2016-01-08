@@ -53,7 +53,7 @@ class Runner implements ExceptionRunner
     }
 
     /**
-     * @param string $formatter
+     * @param string $handler
      */
     public function addHandler(string $handler)
     {
