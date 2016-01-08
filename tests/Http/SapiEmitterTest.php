@@ -5,37 +5,69 @@ namespace Fresco\Tests\Http
 
     use Fresco\Contracts\Http\Response;
     use Fresco\Http\SapiEmitter;
+    use Fresco\Tests\ClosesMockeryOnTearDown;
     use PHPUnit_Framework_TestCase;
 
     class SapiEmitterTest extends PHPUnit_Framework_TestCase
     {
+        use ClosesMockeryOnTearDown;
+
+        /**
+         * @var \Mockery\Mock|null
+         */
         public static $sapi;
+
+        /**
+         * @var bool
+         */
         public static $headersSent = false;
+
+        /**
+         * @var SapiEmitter
+         */
+        private $emitter;
+
+        /**
+         * @var \Mockery\Mock
+         */
+        private $response;
+
+        protected function setUp()
+        {
+            $this->emitter = new SapiEmitter();
+
+            self::$sapi = \Mockery::mock(['header' => true, 'ob_get_level' => 1, 'ob_end_flush' => true]);
+            $this->response = \Mockery::mock(Response::class);
+        }
 
         public function test_it_emits_a_response_object_when_no_headers_were_sent()
         {
-            $sapiEmitter = new SapiEmitter();
-
-            self::$sapi = \Mockery::mock(['header' => true, 'ob_get_level' => 1, 'ob_end_flush' => true]);
             self::$sapi->shouldReceive('header')->once()->with('HTTP/7.0 999 Just Because.');
             self::$sapi->shouldReceive('ob_end_flush')->never();
             self::$sapi->shouldReceive('ob_get_level')->twice();
 
-            $response = \Mockery::mock(Response::class);
-            $response->shouldReceive('hasHeader')->with('Content-Length')->andReturn(true);
-            $response->shouldReceive('reason')->once()->andReturn('Just Because.');
-            $response->shouldReceive('protocol')->once()->andReturn('7.0');
-            $response->shouldReceive('status')->once()->andReturn(999);
-            $response->shouldReceive('headers')->once()->andReturn([]);
-            $response->shouldReceive('body')->once()->andReturn('The Body');
+            $this->response->shouldReceive('hasHeader')->with('Content-Length')->andReturn(true);
+            $this->response->shouldReceive('reason')->once()->andReturn('Just Because.');
+            $this->response->shouldReceive('protocol')->once()->andReturn('7.0');
+            $this->response->shouldReceive('status')->once()->andReturn(999);
+            $this->response->shouldReceive('headers')->once()->andReturn([]);
+            $this->response->shouldReceive('body')->once()->andReturn('The Body');
 
             $this->expectOutputString('The Body');
-            $sapiEmitter->emit($response);
+
+            $this->emitter->emit($this->response);
+        }
+
+        public function test_it_fails_hard_if_headers_were_sent()
+        {
+            $this->setExpectedException(\RuntimeException::class);
+            self::$headersSent = true;
+
+            $this->emitter->emit($this->response);
         }
 
         protected function tearDown()
         {
-            \Mockery::close();
             self::$sapi = null;
 
             parent::tearDown();
