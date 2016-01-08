@@ -47,13 +47,7 @@ namespace Fresco\Tests\Http
             self::$sapi->shouldReceive('ob_get_level')->twice();
 
             $this->response->shouldReceive('hasHeader')->with('Content-Length')->andReturn(true);
-            $this->response->shouldReceive('reason')->once()->andReturn('Just Because.');
-            $this->response->shouldReceive('protocol')->once()->andReturn('7.0');
-            $this->response->shouldReceive('status')->once()->andReturn(999);
-            $this->response->shouldReceive('headers')->once()->andReturn([]);
-            $this->response->shouldReceive('body')->once()->andReturn('The Body');
-
-            $this->expectOutputString('The Body');
+            $this->expectNormalOutputBehavior();
 
             $this->emitter->emit($this->response);
         }
@@ -66,11 +60,34 @@ namespace Fresco\Tests\Http
             $this->emitter->emit($this->response);
         }
 
+        public function test_it_calculates_the_response_size_when_the_content_length_is_not_sent_and_size_is_available()
+        {
+            $this->response->shouldReceive('hasHeader')->with('Content-Length')->andReturn(false);
+            $this->response->shouldReceive('size')->andReturn(1337);
+            $this->response->shouldReceive('addHeader')->with('Content-Length', '1337')->once()->andReturnSelf();
+
+            $this->expectNormalOutputBehavior();
+
+            $this->emitter->emit($this->response);
+        }
+
         protected function tearDown()
         {
             self::$sapi = null;
+            self::$headersSent = false;
 
             parent::tearDown();
+        }
+
+        private function expectNormalOutputBehavior()
+        {
+            $this->response->shouldReceive('reason')->once()->andReturn('Just Because.');
+            $this->response->shouldReceive('protocol')->once()->andReturn('7.0');
+            $this->response->shouldReceive('status')->once()->andReturn(999);
+            $this->response->shouldReceive('headers')->once()->andReturn([]);
+            $this->response->shouldReceive('body')->once()->andReturn('The Body');
+
+            $this->expectOutputString('The Body');
         }
     }
 }
