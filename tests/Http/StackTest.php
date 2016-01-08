@@ -6,9 +6,12 @@ use Fresco\Contracts\Application;
 use Fresco\Contracts\Http\Request;
 use Fresco\Http\Adapters\Psr7\ResponseFactory;
 use Fresco\Http\Stack;
+use Fresco\Tests\ClosesMockeryOnTearDown;
 
 class StackTest extends \PHPUnit_Framework_TestCase
 {
+    use ClosesMockeryOnTearDown;
+
     /**
      * @var Stack
      */

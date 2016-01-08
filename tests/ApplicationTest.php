@@ -17,6 +17,8 @@ use PHPUnit_Framework_TestCase;
 
 class ApplicationTest extends PHPUnit_Framework_TestCase
 {
+    use ClosesMockeryOnTearDown;
+
     public function test_it_inits_a_registry_when_application_is_first_created()
     {
         $app = new Application(__DIR__);
@@ -111,7 +113,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         parent::tearDown();
-        \Mockery::close();
+
         Registry::flush();
     }
 }

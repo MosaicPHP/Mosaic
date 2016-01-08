@@ -6,9 +6,12 @@ use Fresco\Contracts\Application;
 use Fresco\Contracts\Container\Container;
 use Fresco\Foundation\Bootstrap\RegisterDefinitions;
 use Fresco\Foundation\Components\Registry;
+use Fresco\Tests\ClosesMockeryOnTearDown;
 
 class RegisterDefinitionsTest extends \PHPUnit_Framework_TestCase
 {
+    use ClosesMockeryOnTearDown;
+
     public $bootstrapper;
 
     public $app;

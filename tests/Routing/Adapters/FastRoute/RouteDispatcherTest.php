@@ -8,9 +8,12 @@ use Fresco\Exceptions\NotFoundHttpException;
 use Fresco\Routing\Adapters\FastRoute\RouteDispatcher;
 use Fresco\Routing\Route;
 use Fresco\Routing\RouteCollection;
+use Fresco\Tests\ClosesMockeryOnTearDown;
 
 class RouteDispatcherTest extends \PHPUnit_Framework_TestCase
 {
+    use ClosesMockeryOnTearDown;
+
     /**
      * @var RouteDispatcher
      */

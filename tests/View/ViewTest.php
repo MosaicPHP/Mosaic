@@ -3,10 +3,13 @@
 namespace Fresco\Tests\View;
 
 use Fresco\Contracts\View\View;
+use Fresco\Tests\ClosesMockeryOnTearDown;
 use PHPUnit_Framework_TestCase;
 
 abstract class ViewTest extends PHPUnit_Framework_TestCase
 {
+    use ClosesMockeryOnTearDown;
+
     abstract public function test_can_render_a_view();
 
     abstract public function test_can_cast_view_to_string();

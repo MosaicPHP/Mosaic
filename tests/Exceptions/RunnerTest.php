@@ -10,9 +10,12 @@ namespace Fresco\Tests\Exceptions
     use Fresco\Exceptions\Formatters\JsonFormatter;
     use Fresco\Exceptions\Handlers\LogHandler;
     use Fresco\Exceptions\Runner;
+    use Fresco\Tests\ClosesMockeryOnTearDown;
 
     class RunnerTest extends \PHPUnit_Framework_TestCase
     {
+        use ClosesMockeryOnTearDown;
+
         /**
          * @var array|null
          */
@@ -153,7 +156,6 @@ namespace Fresco\Tests\Exceptions
 
         protected function tearDown()
         {
-            \Mockery::close();
             self::$error = null;
         }
     }

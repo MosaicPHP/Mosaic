@@ -5,9 +5,12 @@ namespace Fresco\Tests\Routing\Dispatchers;
 use Fresco\Routing\Dispatchers\DispatchClosure;
 use Fresco\Routing\MethodParameterResolver;
 use Fresco\Routing\Route;
+use Fresco\Tests\ClosesMockeryOnTearDown;
 
 class DispatchClosureTest extends \PHPUnit_Framework_TestCase
 {
+    use ClosesMockeryOnTearDown;
+
     /**
      * @var MethodParameterResolver|\Mockery\Mock
      */

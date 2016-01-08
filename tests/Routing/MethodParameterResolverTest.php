@@ -4,9 +4,12 @@ namespace Fresco\Tests\Routing;
 
 use Fresco\Contracts\Container\Container;
 use Fresco\Routing\MethodParameterResolver;
+use Fresco\Tests\ClosesMockeryOnTearDown;
 
 class MethodParameterResolverTest extends \PHPUnit_Framework_TestCase
 {
+    use ClosesMockeryOnTearDown;
+
     /**
      * @var \Mockery\Mock|Container
      */

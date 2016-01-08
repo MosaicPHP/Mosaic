@@ -4,13 +4,15 @@ namespace Fresco\Tests\Http\Adapters\Psr7;
 
 use Fresco\Contracts\Http\Response as ResponseContract;
 use Fresco\Http\Adapters\Psr7\Response;
-use Mockery\Mock;
+use Fresco\Tests\ClosesMockeryOnTearDown;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
 
 class Psr7ResponseTest extends \PHPUnit_Framework_TestCase
 {
+    use ClosesMockeryOnTearDown;
+
     /**
      * @var Response
      */

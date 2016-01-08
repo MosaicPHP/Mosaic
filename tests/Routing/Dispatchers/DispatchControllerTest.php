@@ -7,9 +7,12 @@ use Fresco\Exceptions\NotFoundHttpException;
 use Fresco\Routing\Dispatchers\DispatchController;
 use Fresco\Routing\MethodParameterResolver;
 use Fresco\Routing\Route;
+use Fresco\Tests\ClosesMockeryOnTearDown;
 
 class DispatchControllerTest extends \PHPUnit_Framework_TestCase
 {
+    use ClosesMockeryOnTearDown;
+
     /**
      * @var Container|\Mockery\Mock
      */

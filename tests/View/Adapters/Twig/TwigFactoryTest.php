@@ -3,11 +3,14 @@
 namespace Fresco\Tests\View\Adapters\Twig;
 
 use Fresco\Contracts\View\View;
+use Fresco\Tests\ClosesMockeryOnTearDown;
 use Fresco\View\Adapters\Twig\Factory;
 use PHPUnit_Framework_TestCase;
 
 class TwigFactoryTest extends PHPUnit_Framework_TestCase
 {
+    use ClosesMockeryOnTearDown;
+
     /**
      * @var \Mockery\Mock
      */

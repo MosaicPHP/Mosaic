@@ -4,6 +4,7 @@ namespace Fresco\Tests\Http\Adapters\Psr7;
 
 use Fresco\Contracts\Http\Request as RequestContract;
 use Fresco\Http\Adapters\Psr7\Request;
+use Fresco\Tests\ClosesMockeryOnTearDown;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
@@ -11,6 +12,8 @@ use Zend\Diactoros\Uri;
 
 class Psr7RequestTest extends \PHPUnit_Framework_TestCase
 {
+    use ClosesMockeryOnTearDown;
+
     /**
      * @var Request
      */
@@ -373,8 +376,8 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
 
     public function test_can_obtain_only_some_parameters_from_the_request()
     {
-        $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn('GET');
-        $this->wrappedMock->shouldReceive('getQueryParams')->once()->andReturn([
+        $this->wrappedMock->shouldReceive('getMethod')->twice()->andReturn('GET');
+        $this->wrappedMock->shouldReceive('getQueryParams')->twice()->andReturn([
             'foo' => 'bar',
             'bar' => 'foo',
             'baz' => 'fo',
@@ -399,8 +402,8 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
 
     public function test_when_obtaining_only_some_parameters_from_the_request_they_are_returned_back_as_null_if_they_dont_exist()
     {
-        $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn('GET');
-        $this->wrappedMock->shouldReceive('getQueryParams')->once()->andReturn([
+        $this->wrappedMock->shouldReceive('getMethod')->times(3)->andReturn('GET');
+        $this->wrappedMock->shouldReceive('getQueryParams')->times(3)->andReturn([
             'foo' => 'bar',
             'bar' => 'foo',
             'baz' => 'fo',
@@ -419,8 +422,8 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
 
     public function test_can_obtain_all_parameters_except_a_given_set()
     {
-        $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn('GET');
-        $this->wrappedMock->shouldReceive('getQueryParams')->once()->andReturn([
+        $this->wrappedMock->shouldReceive('getMethod')->times(3)->andReturn('GET');
+        $this->wrappedMock->shouldReceive('getQueryParams')->times(3)->andReturn([
             'foo' => 'bar',
             'bar' => 'foo',
             'baz' => 'fo',
@@ -432,8 +435,8 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
 
     public function test_can_obtain_all_parameters_except_a_given_one()
     {
-        $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn('GET');
-        $this->wrappedMock->shouldReceive('getQueryParams')->once()->andReturn([
+        $this->wrappedMock->shouldReceive('getMethod')->times(4)->andReturn('GET');
+        $this->wrappedMock->shouldReceive('getQueryParams')->times(4)->andReturn([
             'foo' => 'bar',
             'bar' => 'foo',
             'baz' => 'fo',
@@ -471,8 +474,8 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
 
     public function test_can_check_if_a_set_of_parameters_exist()
     {
-        $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn('GET');
-        $this->wrappedMock->shouldReceive('getQueryParams')->once()->andReturn([
+        $this->wrappedMock->shouldReceive('getMethod')->times(3)->andReturn('GET');
+        $this->wrappedMock->shouldReceive('getQueryParams')->times(3)->andReturn([
             'foo' => 'bar',
             'bar' => 'foo',
             'baz' => 'fo',
@@ -484,8 +487,8 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
 
     public function test_can_check_if_a_set_of_parameters_dont_exist()
     {
-        $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn('GET');
-        $this->wrappedMock->shouldReceive('getQueryParams')->once()->andReturn([
+        $this->wrappedMock->shouldReceive('getMethod')->times(3)->andReturn('GET');
+        $this->wrappedMock->shouldReceive('getQueryParams')->times(3)->andReturn([
             'foo' => 'bar',
             'bar' => 'foo',
             'baz' => 'fo',
@@ -523,8 +526,8 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
 
     public function test_can_check_if_it_has_a_non_empty_set_of_parameters()
     {
-        $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn('GET');
-        $this->wrappedMock->shouldReceive('getQueryParams')->once()->andReturn([
+        $this->wrappedMock->shouldReceive('getMethod')->times(3)->andReturn('GET');
+        $this->wrappedMock->shouldReceive('getQueryParams')->times(3)->andReturn([
             'foo' => 'bar',
             'bar' => 'foo',
             'baz' => 'fo',
@@ -536,8 +539,8 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
 
     public function test_can_check_if_it_doesnt_have_a_non_empty_set_of_parameters()
     {
-        $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn('GET');
-        $this->wrappedMock->shouldReceive('getQueryParams')->once()->andReturn([
+        $this->wrappedMock->shouldReceive('getMethod')->times(3)->andReturn('GET');
+        $this->wrappedMock->shouldReceive('getQueryParams')->times(3)->andReturn([
             'foo' => 'bar',
             'bar' => 'foo',
             'baz' => '',
@@ -549,8 +552,8 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
 
     public function test_can_check_if_it_doesnt_have_a_non_empty_set_of_parameters_including_a_possible_zero_parameter()
     {
-        $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn('GET');
-        $this->wrappedMock->shouldReceive('getQueryParams')->once()->andReturn([
+        $this->wrappedMock->shouldReceive('getMethod')->times(3)->andReturn('GET');
+        $this->wrappedMock->shouldReceive('getQueryParams')->times(3)->andReturn([
             'foo' => 'bar',
             'bar' => 'foo',
             'baz' => '0',
@@ -562,8 +565,8 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
 
     public function test_can_check_if_it_doesnt_have_a_non_empty_set_of_parameters_including_a_possible_array_parameter()
     {
-        $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn('GET');
-        $this->wrappedMock->shouldReceive('getQueryParams')->once()->andReturn([
+        $this->wrappedMock->shouldReceive('getMethod')->times(3)->andReturn('GET');
+        $this->wrappedMock->shouldReceive('getQueryParams')->times(3)->andReturn([
             'foo' => 'bar',
             'bar' => ['foo', 'bar'],
             'baz' => '0',
@@ -575,8 +578,8 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
 
     public function test_can_check_if_it_doesnt_have_a_non_empty_set_of_parameters_including_a_possible_empty_array_parameter()
     {
-        $this->wrappedMock->shouldReceive('getMethod')->once()->andReturn('GET');
-        $this->wrappedMock->shouldReceive('getQueryParams')->once()->andReturn([
+        $this->wrappedMock->shouldReceive('getMethod')->twice()->andReturn('GET');
+        $this->wrappedMock->shouldReceive('getQueryParams')->twice()->andReturn([
             'foo' => 'bar',
             'bar' => [],
             'baz' => '0',
@@ -588,7 +591,7 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
 
     public function test_can_get_server_params()
     {
-        $this->wrappedMock->shouldReceive('getServerParams')->once()->andReturn([
+        $this->wrappedMock->shouldReceive('getServerParams')->twice()->andReturn([
             'DOCUMENT_ROOT' => '/i/am/g/root'
         ]);
 
@@ -699,8 +702,8 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
         /** @var UriInterface|\Mockery\MockInterface $uri */
         $uri = \Mockery::mock(UriInterface::class);
 
-        $this->wrappedMock->shouldReceive('getUri')->once()->andReturn($uri);
-        $uri->shouldReceive('getPath')->once()->andReturn('a/url/0/path');
+        $this->wrappedMock->shouldReceive('getUri')->times(4)->andReturn($uri);
+        $uri->shouldReceive('getPath')->times(4)->andReturn('a/url/0/path');
 
         $this->assertEquals('a', $this->request->segment(0));
         $this->assertEquals('url', $this->request->segment(1));

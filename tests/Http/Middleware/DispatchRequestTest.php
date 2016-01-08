@@ -12,11 +12,14 @@ use Fresco\Routing\Dispatchers\DispatchClosure;
 use Fresco\Routing\Dispatchers\DispatchController;
 use Fresco\Routing\Route;
 use Fresco\Routing\RouteCollection;
+use Fresco\Tests\ClosesMockeryOnTearDown;
 use Mockery\Mock;
 use PHPUnit_Framework_TestCase;
 
 class DispatchRequestTest extends PHPUnit_Framework_TestCase
 {
+    use ClosesMockeryOnTearDown;
+
     /**
      * @var DispatchRequest
      */

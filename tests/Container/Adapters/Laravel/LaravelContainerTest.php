@@ -4,10 +4,13 @@ namespace Fresco\Tests\Container\Adapters\Laravel;
 
 use Fresco\Container\Adapters\Laravel\Container as Adapter;
 use Fresco\Contracts\Container\Container as ContainerContract;
+use Fresco\Tests\ClosesMockeryOnTearDown;
 use Illuminate\Container\Container;
 
 class LaravelContainerTest extends \PHPUnit_Framework_TestCase
 {
+    use ClosesMockeryOnTearDown;
+
     /**
      * @var ContainerContract
      */
