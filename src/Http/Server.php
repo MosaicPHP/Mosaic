@@ -11,10 +11,10 @@ use Fresco\Exceptions\Handlers\LogHandler;
 use Fresco\Exceptions\Runner;
 use Fresco\Http\Middleware\DispatchRequest;
 use Throwable;
-use Whoops\Exception\ErrorException;
 
 class Server implements ServerContract
 {
+
     /**
      * @var Application
      */
@@ -50,6 +50,15 @@ class Server implements ServerContract
     }
 
     /**
+     *
+     * @return string
+     */
+    public function getName() : string
+    {
+        return 'web';
+    }
+
+    /**
      * Listen to a server request
      *
      * @param callable $terminate
@@ -64,6 +73,8 @@ class Server implements ServerContract
             )
         );
 
+        $this->app->setContext($this->getName());
+
         $this->app->bootstrap();
 
         try {
@@ -75,8 +86,6 @@ class Server implements ServerContract
 
     /**
      * @param callable $terminate
-     *
-     * @throws ErrorException
      */
     protected function handle(callable $terminate = null)
     {

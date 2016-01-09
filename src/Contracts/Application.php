@@ -3,6 +3,7 @@
 namespace Fresco\Contracts;
 
 use Fresco\Contracts\Exceptions\ExceptionRunner;
+use Fresco\Contracts\Http\Server;
 
 interface Application
 {
@@ -65,4 +66,14 @@ interface Application
      * @param string $env
      */
     public function setEnvironment(string $env);
+
+    /**
+     * @param string $context
+     */
+    public function setContext(string $context);
+
+    /**
+     * @return string
+     */
+    public function getContext() : string;
 }

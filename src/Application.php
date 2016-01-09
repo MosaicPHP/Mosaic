@@ -5,6 +5,7 @@ namespace Fresco;
 use Fresco\Contracts\Application as ApplicationContract;
 use Fresco\Contracts\Container\Container;
 use Fresco\Contracts\Exceptions\ExceptionRunner;
+use Fresco\Contracts\Http\Server;
 use Fresco\Definitions\LaravelContainerDefinition;
 use Fresco\Foundation\Bootstrap\HandleExceptions;
 use Fresco\Foundation\Bootstrap\LoadConfiguration;
@@ -16,6 +17,7 @@ use Fresco\Foundation\Components\Registry;
 
 class Application implements ApplicationContract
 {
+
     /**
      * @var Registry
      */
@@ -25,6 +27,11 @@ class Application implements ApplicationContract
      * @var Container
      */
     protected $container;
+
+    /**
+     * @var Server
+     */
+    protected $context;
 
     /**
      * @var null
@@ -43,7 +50,7 @@ class Application implements ApplicationContract
         RegisterDefinitions::class,
         LoadEnvironmentVariables::class,
         LoadConfiguration::class,
-        HandleExceptions::class,
+        HandleExceptions::class
     ];
 
     /**
@@ -213,5 +220,21 @@ class Application implements ApplicationContract
     public function getExceptionRunner() : ExceptionRunner
     {
         return $this->getContainer()->make(ExceptionRunner::class);
+    }
+
+    /**
+     * @param string $context
+     */
+    public function setContext(string $context)
+    {
+        $this->context = $context;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContext() : string
+    {
+        return $this->context;
     }
 }
