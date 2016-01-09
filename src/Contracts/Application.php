@@ -2,8 +2,8 @@
 
 namespace Fresco\Contracts;
 
+use Fresco\Contracts\Container\Container;
 use Fresco\Contracts\Exceptions\ExceptionRunner;
-use Fresco\Contracts\Http\Server;
 
 interface Application
 {
@@ -36,6 +36,11 @@ interface Application
      * @return string
      */
     public function viewsPath(string $path = '') : string;
+
+    /**
+     * @param string[] $definitions
+     */
+    public function definitions(array $definitions);
 
     /**
      * Bootstrap the Application
@@ -76,4 +81,9 @@ interface Application
      * @return string
      */
     public function getContext() : string;
+
+    /**
+     * @return Container
+     */
+    public function getContainer() : Container;
 }

@@ -4,22 +4,19 @@ namespace Fresco\Tests\Definitions;
 
 use Fresco\Contracts\EnvironmentVariablesLoader;
 use Fresco\Definitions\DotEnvDefinition;
-use Fresco\Foundation\EnvironmentVariables\Adapters\DotEnvVariableLoader;
+use Interop\Container\Definition\DefinitionProviderInterface;
 
 class DotEnvDefinitionTest extends DefinitionTestCase
 {
-    public function getDefinition()
+    public function getDefinition() : DefinitionProviderInterface
     {
         return new DotEnvDefinition();
     }
 
-    public function getAs()
+    public function shouldDefine() : array
     {
-        return EnvironmentVariablesLoader::class;
-    }
-
-    public function getAdapter()
-    {
-        return DotEnvVariableLoader::class;
+        return [
+            EnvironmentVariablesLoader::class,
+        ];
     }
 }

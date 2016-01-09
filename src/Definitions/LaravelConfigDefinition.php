@@ -4,26 +4,31 @@ namespace Fresco\Definitions;
 
 use Fresco\Config\Adapters\LaravelConfig;
 use Fresco\Contracts\Config\Config;
-use Fresco\Foundation\Components\Definition;
 use Illuminate\Config\Repository;
+use Interop\Container\Definition\DefinitionProviderInterface;
 
-class LaravelConfigDefinition implements Definition
+class LaravelConfigDefinition implements DefinitionProviderInterface
 {
     /**
-     * @return mixed
+     * Returns the definition to register in the container.
+     *
+     * Definitions must be indexed by their entry ID. For example:
+     *
+     *     return [
+     *         'logger' => ...
+     *         'mailer' => ...
+     *     ];
+     *
+     * @return array
      */
-    public function define()
+    public function getDefinitions()
     {
-        return new LaravelConfig(
-            new Repository
-        );
-    }
-
-    /**
-     * @return string
-     */
-    public function defineAs() : string
-    {
-        return Config::class;
+        return [
+            Config::class => function () {
+                return new LaravelConfig(
+                    new Repository
+                );
+            }
+        ];
     }
 }

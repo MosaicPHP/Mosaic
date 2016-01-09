@@ -2,8 +2,7 @@
 
 namespace Fresco\Foundation\Components;
 
-use Fresco\Contracts\Container\Container;
-use LogicException;
+use Interop\Container\Definition\DefinitionProviderInterface;
 
 class Registry
 {
@@ -13,11 +12,13 @@ class Registry
     protected static $definitions = [];
 
     /**
-     * @param Definition $definition
+     * @param DefinitionProviderInterface $definition
      */
-    public function define(Definition $definition)
+    public function define(DefinitionProviderInterface $definition)
     {
-        $this->registerDefinition($definition->defineAs(), $definition->define());
+        foreach ($definition->getDefinitions() as $abstract => $concrete) {
+            $this->registerDefinition($abstract, $concrete);
+        }
     }
 
     /**
@@ -35,20 +36,6 @@ class Registry
     public function getDefinitions()
     {
         return self::$definitions;
-    }
-
-    /**
-     * @throws LogicException
-     *
-     * @return Container
-     */
-    public function getContainer()
-    {
-        if (!isset(self::$definitions[Container::class])) {
-            throw new LogicException('Container was not defined');
-        }
-
-        return self::$definitions[Container::class];
     }
 
     /**

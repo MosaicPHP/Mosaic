@@ -4,7 +4,6 @@ namespace Fresco\Contracts\Http;
 
 interface Server
 {
-
     /**
      * Listen to a server request
      *
@@ -13,7 +12,6 @@ interface Server
     public function listen(callable $terminate = null);
 
     /**
-     *
      * @return string
      */
     public function getName() : string;

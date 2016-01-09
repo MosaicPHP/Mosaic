@@ -3,10 +3,12 @@
 namespace Fresco\Tests\Http;
 
 use Fresco\Contracts\Application;
+use Fresco\Contracts\Container\Container;
 use Fresco\Contracts\Http\Request;
 use Fresco\Http\Adapters\Psr7\ResponseFactory;
 use Fresco\Http\Stack;
 use Fresco\Tests\ClosesMockeryOnTearDown;
+use Mockery\Mock;
 
 class StackTest extends \PHPUnit_Framework_TestCase
 {
@@ -27,9 +29,16 @@ class StackTest extends \PHPUnit_Framework_TestCase
      */
     public $request;
 
+    /**
+     * @var Mock
+     */
+    public $container;
+
     public function setUp()
     {
         $this->request = \Mockery::mock(Request::class);
+
+        $this->container = \Mockery::mock(Container::class);
 
         $this->stack = new Stack(
             $this->app = \Mockery::mock(Application::class)
@@ -38,9 +47,9 @@ class StackTest extends \PHPUnit_Framework_TestCase
 
     public function test_run_a_request_through_the_stack()
     {
-        $this->app->shouldReceive('getContainer')->andReturn($this->app);
-        $this->app->shouldReceive('make')->with(ReturnNext::class)->once()->andReturn(new ReturnNext);
-        $this->app->shouldReceive('make')->with(ReturnSomeResponse::class)->once()->andReturn(new ReturnSomeResponse);
+        $this->app->shouldReceive('getContainer')->andReturn($this->container);
+        $this->container->shouldReceive('make')->with(ReturnNext::class)->once()->andReturn(new ReturnNext);
+        $this->container->shouldReceive('make')->with(ReturnSomeResponse::class)->once()->andReturn(new ReturnSomeResponse);
 
         $response = $this->stack->run($this->request)->through([
             ReturnNext::class,

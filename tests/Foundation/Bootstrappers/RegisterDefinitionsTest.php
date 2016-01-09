@@ -16,11 +16,14 @@ class RegisterDefinitionsTest extends \PHPUnit_Framework_TestCase
 
     public $app;
 
+    public $container;
+
     public function setUp()
     {
-        $this->app = \Mockery::mock(Application::class);
+        $this->app       = \Mockery::mock(Application::class);
+        $this->container = \Mockery::mock(Container::class);
 
-        $this->bootstrapper = new RegisterDefinitions();
+        $this->bootstrapper = new RegisterDefinitions($this->container);
     }
 
     public function test_it_registers_definitions()
@@ -30,8 +33,7 @@ class RegisterDefinitionsTest extends \PHPUnit_Framework_TestCase
             'abstract' => 'concrete'
         ]);
 
-        $this->app->shouldReceive('getContainer')->once()->andReturn($container = \Mockery::mock(Container::class));
-        $container->shouldReceive('instance')->once()->with('abstract', 'concrete');
+        $this->container->shouldReceive('bind')->once()->with('abstract', 'concrete');
 
         $this->bootstrapper->bootstrap($this->app);
     }

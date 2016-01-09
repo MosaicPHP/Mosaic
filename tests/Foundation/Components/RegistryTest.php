@@ -3,10 +3,8 @@
 namespace Fresco\Tests\Foundation\Components;
 
 use Fresco\Contracts\Container\Container;
-use Fresco\Definitions\LaravelContainerDefinition;
-use Fresco\Foundation\Components\Definition;
 use Fresco\Foundation\Components\Registry;
-use LogicException;
+use Interop\Container\Definition\DefinitionProviderInterface;
 
 class RegistryTest extends \PHPUnit_Framework_TestCase
 {
@@ -27,23 +25,6 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('concrete', $this->registry->getDefinitions()['abstract']);
     }
 
-    public function test_can_get_container_when_container_is_defined()
-    {
-        $definition = new LaravelContainerDefinition();
-        $this->registry->define(
-            $definition
-        );
-
-        $this->assertInstanceOf(Container::class, $this->registry->getContainer());
-    }
-
-    public function test_cannot_get_container_when_container_is_not_defined()
-    {
-        $this->setExpectedException(LogicException::class, 'Container was not defined');
-
-        $this->registry->getContainer();
-    }
-
     public function tearDown()
     {
         parent::tearDown();
@@ -51,21 +32,24 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-class DefinitionStub implements Definition
+class DefinitionStub implements DefinitionProviderInterface
 {
     /**
-     * @return mixed
+     * Returns the definition to register in the container.
+     *
+     * Definitions must be indexed by their entry ID. For example:
+     *
+     *     return [
+     *         'logger' => ...
+     *         'mailer' => ...
+     *     ];
+     *
+     * @return array
      */
-    public function define()
+    public function getDefinitions()
     {
-        return 'concrete';
-    }
-
-    /**
-     * @return string
-     */
-    public function defineAs() : string
-    {
-        return 'abstract';
+        return [
+            'abstract' => 'concrete'
+        ];
     }
 }

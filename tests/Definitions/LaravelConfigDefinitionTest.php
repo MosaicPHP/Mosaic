@@ -2,24 +2,21 @@
 
 namespace Fresco\Tests\Definitions;
 
-use Fresco\Config\Adapters\LaravelConfig;
 use Fresco\Contracts\Config\Config;
 use Fresco\Definitions\LaravelConfigDefinition;
+use Interop\Container\Definition\DefinitionProviderInterface;
 
 class LaravelConfigDefinitionTest extends DefinitionTestCase
 {
-    public function getDefinition()
+    public function getDefinition() : DefinitionProviderInterface
     {
         return new LaravelConfigDefinition();
     }
 
-    public function getAs()
+    public function shouldDefine() : array
     {
-        return Config::class;
-    }
-
-    public function getAdapter()
-    {
-        return LaravelConfig::class;
+        return [
+            Config::class
+        ];
     }
 }

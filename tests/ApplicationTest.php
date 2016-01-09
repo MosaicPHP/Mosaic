@@ -4,9 +4,8 @@ namespace Fresco\Tests;
 
 use Fresco\Application;
 use Fresco\Contracts\Container\Container;
+use Fresco\Contracts\Container\ContainerDefinition;
 use Fresco\Contracts\Exceptions\ExceptionRunner;
-use Fresco\Contracts\Http\Request;
-use Fresco\Definitions\DiactorosDefinition;
 use Fresco\Foundation\Bootstrap\Bootstrapper;
 use Fresco\Foundation\Bootstrap\HandleExceptions;
 use Fresco\Foundation\Bootstrap\LoadConfiguration;
@@ -14,6 +13,7 @@ use Fresco\Foundation\Bootstrap\LoadEnvironmentVariables;
 use Fresco\Foundation\Bootstrap\RegisterDefinitions;
 use Fresco\Foundation\Components\Definition;
 use Fresco\Foundation\Components\Registry;
+use Interop\Container\Definition\DefinitionProviderInterface;
 use Mockery\MockInterface;
 use PHPUnit_Framework_TestCase;
 
@@ -82,7 +82,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
     public function test_can_define_a_custom_container_definition()
     {
         $app = new Application(__DIR__);
-        $app->defineContainer(ContainerDefinitionStub::class);
+        $app->defineContainer(new ContainerDefinitionStub);
 
         $this->assertInstanceOf(Container::class, $app->getContainer());
         $this->assertEquals(ContainerDefinitionStub::$mockInstance, $app->getContainer());
@@ -91,32 +91,19 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
     public function test_application_can_define_some_component()
     {
         $app = new Application(__DIR__);
-        $app->define(new ContainerDefinitionStub);
+        $app->define(new SomeDefinitionStub);
 
-        $this->assertEquals(ContainerDefinitionStub::$mockInstance,
-            $app->getRegistry()->getDefinitions()[Container::class]);
+        $this->assertEquals('concrete', $app->getRegistry()->getDefinitions()['abstract']);
     }
 
     public function test_can_define_multiple_definitions_at_onces()
     {
         $app = new Application(__DIR__);
         $app->definitions([
-            ContainerDefinitionStub::class
+            SomeDefinitionStub::class
         ]);
 
-        $this->assertEquals(ContainerDefinitionStub::$mockInstance,
-            $app->getRegistry()->getDefinitions()[Container::class]);
-    }
-
-    public function test_can_define_definition_groups()
-    {
-        $app = new Application(__DIR__);
-        $app->definitions([
-            DiactorosDefinition::class
-        ]);
-
-        $this->assertInstanceOf(\Fresco\Http\Adapters\Psr7\Request::class,
-            $app->getRegistry()->getDefinitions()[Request::class]);
+        $this->assertEquals('concrete', $app->getRegistry()->getDefinitions()['abstract']);
     }
 
     public function test_will_delegate_on_all_configured_bootstrappers_to_bootstrap()
@@ -169,6 +156,14 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($runner, $app->getExceptionRunner());
     }
 
+    public function test_can_set_context()
+    {
+        $app = new Application(__DIR__);
+        $app->setContext('web');
+
+        $this->assertEquals('web', $app->getContext());
+    }
+
     public function tearDown()
     {
         parent::tearDown();
@@ -177,7 +172,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
     }
 }
 
-class ContainerDefinitionStub implements Definition
+class ContainerDefinitionStub implements ContainerDefinition
 {
     /**
      * @var MockInterface
@@ -187,20 +182,34 @@ class ContainerDefinitionStub implements Definition
     /**
      * @return Container
      */
-    public function define()
+    public function getDefinition() : Container
     {
         self::$mockInstance = \Mockery::mock(Container::class);
         self::$mockInstance->shouldReceive('instance');
 
         return self::$mockInstance;
     }
+}
 
+class SomeDefinitionStub implements DefinitionProviderInterface
+{
     /**
-     * @return string
+     * Returns the definition to register in the container.
+     *
+     * Definitions must be indexed by their entry ID. For example:
+     *
+     *     return [
+     *         'logger' => ...
+     *         'mailer' => ...
+     *     ];
+     *
+     * @return array
      */
-    public function defineAs() : string
+    public function getDefinitions()
     {
-        return Container::class;
+        return [
+            'abstract' => 'concrete'
+        ];
     }
 }
 

@@ -14,7 +14,6 @@ use Throwable;
 
 class Server implements ServerContract
 {
-
     /**
      * @var Application
      */
@@ -50,7 +49,6 @@ class Server implements ServerContract
     }
 
     /**
-     *
      * @return string
      */
     public function getName() : string

@@ -2,22 +2,23 @@
 
 namespace Fresco\Tests\Definitions;
 
-use Fresco\Definitions\FastRoute\FastRouteDispatcherDefinition;
+use Fresco\Contracts\Routing\RouteDispatcher;
+use Fresco\Contracts\Routing\Router;
 use Fresco\Definitions\FastRouteDefinition;
-use Fresco\Definitions\Fresco\FrescoRouterDefinition;
+use Interop\Container\Definition\DefinitionProviderInterface;
 
-class FastRouteDefinitionTest extends DefinitionGroupTestCase
+class FastRouteDefinitionTest extends DefinitionTestCase
 {
-    public function getDefinitions()
-    {
-        return [
-            FrescoRouterDefinition::class,
-            FastRouteDispatcherDefinition::class
-        ];
-    }
-
-    public function getGroup()
+    public function getDefinition() : DefinitionProviderInterface
     {
         return new FastRouteDefinition();
+    }
+
+    public function shouldDefine() : array
+    {
+        return [
+            RouteDispatcher::class,
+            Router::class
+        ];
     }
 }

@@ -3,24 +3,17 @@
 namespace Fresco\Definitions;
 
 use Fresco\Container\Adapters\Laravel\Container as Adapter;
-use Fresco\Foundation\Components\Definition;
+use Fresco\Contracts\Container\Container as ContainerContract;
+use Fresco\Contracts\Container\ContainerDefinition;
 use Illuminate\Container\Container;
 
-class LaravelContainerDefinition implements Definition
+class LaravelContainerDefinition implements ContainerDefinition
 {
     /**
-     * @return ContainerAdapter
+     * @return ContainerContract
      */
-    public function define()
+    public function getDefinition() : ContainerContract
     {
         return new Adapter(new Container);
-    }
-
-    /**
-     * @return string
-     */
-    public function defineAs() : string
-    {
-        return \Fresco\Contracts\Container\Container::class;
     }
 }

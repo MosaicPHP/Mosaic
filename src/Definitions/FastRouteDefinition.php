@@ -2,12 +2,13 @@
 
 namespace Fresco\Definitions;
 
-use Fresco\Definitions\FastRoute\FastRouteDispatcherDefinition;
-use Fresco\Definitions\Fresco\FrescoRouterDefinition;
-use Fresco\Foundation\Components\Definition;
-use Fresco\Foundation\Components\DefinitionGroup;
+use Fresco\Contracts\Routing\RouteDispatcher as RouteDispatcherContract;
+use Fresco\Contracts\Routing\Router as RouterContract;
+use Fresco\Routing\Adapters\FastRoute\RouteDispatcher;
+use Fresco\Routing\Router;
+use Interop\Container\Definition\DefinitionProviderInterface;
 
-class FastRouteDefinition implements DefinitionGroup
+class FastRouteDefinition implements DefinitionProviderInterface
 {
     /**
      * @return array|Definition[]
@@ -15,8 +16,12 @@ class FastRouteDefinition implements DefinitionGroup
     public function getDefinitions() : array
     {
         return [
-            FrescoRouterDefinition::class,
-            FastRouteDispatcherDefinition::class
+            RouteDispatcherContract::class => function () {
+                return new RouteDispatcher;
+            },
+            RouterContract::class => function () {
+                return new Router;
+            }
         ];
     }
 }

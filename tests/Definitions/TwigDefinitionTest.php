@@ -2,26 +2,21 @@
 
 namespace Fresco\Tests\Definitions;
 
-use Fresco\Application;
+use Fresco\Contracts\View\Factory;
 use Fresco\Definitions\TwigDefinition;
-use Fresco\View\Adapters\Twig\Factory;
+use Interop\Container\Definition\DefinitionProviderInterface;
 
 class TwigDefinitionTest extends DefinitionTestCase
 {
-    public function getDefinition()
+    public function getDefinition() : DefinitionProviderInterface
     {
-        return new TwigDefinition(
-            new Application(__DIR__ . '/../fixtures')
-        );
+        return new TwigDefinition();
     }
 
-    public function getAs()
+    public function shouldDefine() : array
     {
-        return \Fresco\Contracts\View\Factory::class;
-    }
-
-    public function getAdapter()
-    {
-        return Factory::class;
+        return [
+            Factory::class
+        ];
     }
 }

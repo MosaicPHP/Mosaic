@@ -4,6 +4,7 @@ namespace Fresco;
 
 use Fresco\Contracts\Application as ApplicationContract;
 use Fresco\Contracts\Container\Container;
+use Fresco\Contracts\Container\ContainerDefinition;
 use Fresco\Contracts\Exceptions\ExceptionRunner;
 use Fresco\Contracts\Http\Server;
 use Fresco\Definitions\LaravelContainerDefinition;
@@ -11,13 +12,11 @@ use Fresco\Foundation\Bootstrap\HandleExceptions;
 use Fresco\Foundation\Bootstrap\LoadConfiguration;
 use Fresco\Foundation\Bootstrap\LoadEnvironmentVariables;
 use Fresco\Foundation\Bootstrap\RegisterDefinitions;
-use Fresco\Foundation\Components\Definition;
-use Fresco\Foundation\Components\DefinitionGroup;
 use Fresco\Foundation\Components\Registry;
+use Interop\Container\Definition\DefinitionProviderInterface;
 
 class Application implements ApplicationContract
 {
-
     /**
      * @var Registry
      */
@@ -64,7 +63,7 @@ class Application implements ApplicationContract
         $this->path     = $path;
         $this->registry = new Registry();
 
-        $this->defineContainer($containerDefinition);
+        $this->defineContainer(new $containerDefinition);
     }
 
     /**
@@ -110,9 +109,9 @@ class Application implements ApplicationContract
     }
 
     /**
-     * @param Definition $definition
+     * @param DefinitionProviderInterface $definition
      */
-    public function define(Definition $definition)
+    public function define(DefinitionProviderInterface $definition)
     {
         $this->getRegistry()->define($definition, $this);
     }
@@ -123,13 +122,9 @@ class Application implements ApplicationContract
     public function definitions(array $definitions)
     {
         foreach ($definitions as $definition) {
-            $definition = new $definition($this);
-
-            if ($definition instanceof DefinitionGroup) {
-                $this->definitions($definition->getDefinitions());
-            } else {
-                $this->define($definition);
-            }
+            $this->define(
+                new $definition($this)
+            );
         }
     }
 
@@ -152,19 +147,14 @@ class Application implements ApplicationContract
     /**
      * Define a container implementation
      *
-     * @param string $definition
+     * @param ContainerDefinition $definition
      *
-     * @throws \Exception
      * @return Container
      */
-    public function defineContainer(string $definition) : Container
+    public function defineContainer(ContainerDefinition $definition) : Container
     {
-        $this->definitions([
-            $definition
-        ]);
-
-        $this->container = $this->registry->getContainer();
-
+        $this->container = $definition->getDefinition();
+        $this->container->instance(Container::class, $this->container);
         $this->container->instance(ApplicationContract::class, $this);
 
         return $this->container;
