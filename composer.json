@@ -16,7 +16,7 @@
     }
   ],
   "require": {
-    "php": ">=5.5.0",
+    "php": ">=7.0.1",
     "psr/http-message": "^1.0",
     "illuminate/container": "5.2.*",
     "illuminate/config": "5.2.*",
