@@ -2,11 +2,12 @@
 
 namespace Fresco\Foundation\Bootstrap;
 
+use Fresco\Contracts\Application;
+
 interface Bootstrapper
 {
     /**
-     * Bootstrap
-     * @return mixed
+     * @param Application $app
      */
-    public function bootstrap();
+    public function bootstrap(Application $app);
 }

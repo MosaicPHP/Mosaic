@@ -2,6 +2,7 @@
 
 namespace Fresco\Foundation\Bootstrap;
 
+use Fresco\Contracts\Application;
 use Fresco\Contracts\Exceptions\ExceptionRunner;
 
 class HandleExceptions implements Bootstrapper
@@ -22,10 +23,9 @@ class HandleExceptions implements Bootstrapper
     }
 
     /**
-     * Bootstrap
-     * @return mixed
+     * @param Application $app
      */
-    public function bootstrap()
+    public function bootstrap(Application $app)
     {
         error_reporting(-1);
 

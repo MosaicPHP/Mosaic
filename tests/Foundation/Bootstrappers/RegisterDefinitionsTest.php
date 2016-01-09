@@ -18,9 +18,9 @@ class RegisterDefinitionsTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->bootstrapper = $bootstrapper = new RegisterDefinitions(
-            $this->app = \Mockery::mock(Application::class)
-        );
+        $this->app = \Mockery::mock(Application::class);
+
+        $this->bootstrapper = new RegisterDefinitions();
     }
 
     public function test_it_registers_definitions()
@@ -33,6 +33,6 @@ class RegisterDefinitionsTest extends \PHPUnit_Framework_TestCase
         $this->app->shouldReceive('getContainer')->once()->andReturn($container = \Mockery::mock(Container::class));
         $container->shouldReceive('instance')->once()->with('abstract', 'concrete');
 
-        $this->bootstrapper->bootstrap();
+        $this->bootstrapper->bootstrap($this->app);
     }
 }

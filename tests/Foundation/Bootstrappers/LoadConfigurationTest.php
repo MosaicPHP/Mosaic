@@ -29,8 +29,9 @@ class LoadConfigurationTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        $this->app = \Mockery::mock(Application::class);
+
         $this->bootstrapper = new LoadConfiguration(
-            $this->app = \Mockery::mock(Application::class),
             $this->config = \Mockery::mock(Config::class)
         );
     }
@@ -38,9 +39,12 @@ class LoadConfigurationTest extends \PHPUnit_Framework_TestCase
     public function test_it_loads_configuration()
     {
         $this->app->shouldReceive('configPath')->once()->andReturn(__DIR__ . '/../../fixtures/config');
+        $this->app->shouldReceive('setEnvironment')->once()->with('production');
 
         $this->config->shouldReceive('set')->with('stub', ['some' => 'value'])->once();
+        $this->config->shouldReceive('get')->with('app.env', 'production')->once()->andReturn('production');
+        $this->config->shouldReceive('get')->with('app.timezone', 'UTC')->once()->andReturn('UTC');
 
-        $this->bootstrapper->bootstrap();
+        $this->bootstrapper->bootstrap($this->app);
     }
 }

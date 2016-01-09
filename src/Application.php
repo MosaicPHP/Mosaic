@@ -8,6 +8,7 @@ use Fresco\Contracts\Exceptions\ExceptionRunner;
 use Fresco\Definitions\LaravelContainerDefinition;
 use Fresco\Foundation\Bootstrap\HandleExceptions;
 use Fresco\Foundation\Bootstrap\LoadConfiguration;
+use Fresco\Foundation\Bootstrap\LoadEnvironmentVariables;
 use Fresco\Foundation\Bootstrap\RegisterDefinitions;
 use Fresco\Foundation\Components\Definition;
 use Fresco\Foundation\Components\DefinitionGroup;
@@ -31,12 +32,18 @@ class Application implements ApplicationContract
     protected $path;
 
     /**
+     * @var string
+     */
+    protected $env = 'production';
+
+    /**
      * @var array
      */
     protected $bootstrappers = [
         RegisterDefinitions::class,
+        LoadEnvironmentVariables::class,
+        LoadConfiguration::class,
         HandleExceptions::class,
-        LoadConfiguration::class
     ];
 
     /**
@@ -54,11 +61,15 @@ class Application implements ApplicationContract
     }
 
     /**
-     * @return mixed
+     * Application root path
+     *
+     * @param string $path
+     *
+     * @return string
      */
-    public function configPath()
+    public function path(string $path = '') : string
     {
-        return $this->path . '/config';
+        return rtrim($this->path . '/' . $path, '/');
     }
 
     /**
@@ -66,17 +77,29 @@ class Application implements ApplicationContract
      *
      * @return string
      */
-    public function storagePath($path = '') : string
+    public function configPath(string $path = '') : string
     {
-        return rtrim($this->path . '/storage/' . $path, '/');
+        return $this->path('config/' . $path);
     }
 
     /**
+     * @param string $path
+     *
      * @return string
      */
-    public function viewsPath() : string
+    public function storagePath(string $path = '') : string
     {
-        return $this->path . '/resources/views';
+        return $this->path('storage/' . $path);
+    }
+
+    /**
+     * @param string $path
+     *
+     * @return string
+     */
+    public function viewsPath(string $path = '') : string
+    {
+        return $this->path('resources/views/' . $path);
     }
 
     /**
@@ -146,13 +169,32 @@ class Application implements ApplicationContract
     public function bootstrap()
     {
         foreach ($this->bootstrappers as $bootstrapper) {
-            $this->getContainer()->make($bootstrapper)->bootstrap();
+            $this->getContainer()->make($bootstrapper)->bootstrap($this);
         }
     }
 
-    public function isLocal()
+    /**
+     * @return string
+     */
+    public function env() : string
     {
-        return true;
+        return $this->env;
+    }
+
+    /**
+     * @param string $env
+     */
+    public function setEnvironment(string $env)
+    {
+        $this->env = $env;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isLocal() : bool
+    {
+        return $this->env() === 'local';
     }
 
     /**

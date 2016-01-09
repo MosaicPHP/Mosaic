@@ -6,26 +6,40 @@ use Fresco\Contracts\Exceptions\ExceptionRunner;
 
 interface Application
 {
-    public function isLocal();
-
     /**
-     * @return mixed
+     * Application root path
+     *
+     * @param string $path
+     *
+     * @return string
      */
-    public function configPath();
+    public function path(string $path = '') : string;
 
     /**
      * @param string $path
      *
      * @return string
      */
-    public function storagePath($path = '') : string;
+    public function configPath(string $path = '') : string;
 
     /**
      * @param string $path
      *
      * @return string
      */
-    public function viewsPath() : string;
+    public function storagePath(string $path = '') : string;
+
+    /**
+     * @param string $path
+     *
+     * @return string
+     */
+    public function viewsPath(string $path = '') : string;
+
+    /**
+     * Bootstrap the Application
+     */
+    public function bootstrap();
 
     /**
      * @param ExceptionRunner $runner
@@ -36,4 +50,19 @@ interface Application
      * @return ExceptionRunner
      */
     public function getExceptionRunner() : ExceptionRunner;
+
+    /**
+     * @return string
+     */
+    public function env() : string;
+
+    /**
+     * @return bool
+     */
+    public function isLocal() : bool;
+
+    /**
+     * @param string $env
+     */
+    public function setEnvironment(string $env);
 }

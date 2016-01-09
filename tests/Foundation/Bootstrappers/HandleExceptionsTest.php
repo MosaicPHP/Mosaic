@@ -16,7 +16,7 @@ class HandleExceptionsTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_handles_exceptions()
     {
-        $this->bootstrapper->bootstrap();
+        $this->bootstrapper->bootstrap(new Application(__DIR__));
 
         $this->assertEquals('Off', ini_get('display_errors'));
         $this->assertEquals(-1, ini_get('error_reporting'));
