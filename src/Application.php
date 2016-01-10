@@ -11,6 +11,7 @@ use Fresco\Definitions\LaravelContainerDefinition;
 use Fresco\Foundation\Bootstrap\HandleExceptions;
 use Fresco\Foundation\Bootstrap\LoadConfiguration;
 use Fresco\Foundation\Bootstrap\LoadEnvironmentVariables;
+use Fresco\Foundation\Bootstrap\LoadRoutes;
 use Fresco\Foundation\Bootstrap\RegisterDefinitions;
 use Fresco\Foundation\Components\Registry;
 use Interop\Container\Definition\DefinitionProviderInterface;
@@ -49,7 +50,8 @@ class Application implements ApplicationContract
         RegisterDefinitions::class,
         LoadEnvironmentVariables::class,
         LoadConfiguration::class,
-        HandleExceptions::class
+        HandleExceptions::class,
+        LoadRoutes::class,
     ];
 
     /**

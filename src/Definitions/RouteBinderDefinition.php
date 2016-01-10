@@ -23,9 +23,7 @@ class RouteBinderDefinition implements DefinitionProviderInterface
     public function getDefinitions()
     {
         return [
-            RouteLoader::class => function () {
-                return new LoadRoutesFromBinders;
-            }
+            RouteLoader::class => LoadRoutesFromBinders::class
         ];
     }
 }
