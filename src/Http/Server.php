@@ -27,7 +27,7 @@ class Server implements ServerContract
     ];
 
     /**
-     * @var
+     * @var string
      */
     protected $exceptionFormatter = EnvBasedWhoopsFormatter::class;
 
@@ -39,13 +39,20 @@ class Server implements ServerContract
     ];
 
     /**
+     * @var Emitter
+     */
+    protected $emitter;
+
+    /**
      * Server constructor.
      *
      * @param Application $app
+     * @param Emitter     $emitter
      */
-    public function __construct(Application $app)
+    public function __construct(Application $app, Emitter $emitter = null)
     {
-        $this->app = $app;
+        $this->app     = $app;
+        $this->emitter = $emitter ?: new SapiEmitter;
     }
 
     /**
@@ -128,7 +135,7 @@ class Server implements ServerContract
      */
     protected function getEmitter() : Emitter
     {
-        return new SapiEmitter;
+        return $this->emitter;
     }
 
     /**

@@ -10,6 +10,7 @@ use Fresco\Foundation\Bootstrap\Bootstrapper;
 use Fresco\Foundation\Bootstrap\HandleExceptions;
 use Fresco\Foundation\Bootstrap\LoadConfiguration;
 use Fresco\Foundation\Bootstrap\LoadEnvironmentVariables;
+use Fresco\Foundation\Bootstrap\LoadRoutes;
 use Fresco\Foundation\Bootstrap\RegisterDefinitions;
 use Fresco\Foundation\Components\Definition;
 use Fresco\Foundation\Components\Registry;
@@ -111,7 +112,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $app = new Application(__DIR__, ContainerDefinitionStub::class);
 
         $mockBootstrapper = \Mockery::mock(Bootstrapper::class);
-        $mockBootstrapper->shouldReceive('bootstrap')->times(4);
+        $mockBootstrapper->shouldReceive('bootstrap')->times(5);
 
         ContainerDefinitionStub::$mockInstance->shouldReceive('make')->with(RegisterDefinitions::class)
                                               ->once()->andReturn($mockBootstrapper);
@@ -120,6 +121,8 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         ContainerDefinitionStub::$mockInstance->shouldReceive('make')->with(LoadConfiguration::class)
                                               ->once()->andReturn($mockBootstrapper);
         ContainerDefinitionStub::$mockInstance->shouldReceive('make')->with(LoadEnvironmentVariables::class)
+                                              ->once()->andReturn($mockBootstrapper);
+        ContainerDefinitionStub::$mockInstance->shouldReceive('make')->with(LoadRoutes::class)
                                               ->once()->andReturn($mockBootstrapper);
 
         $app->bootstrap();

@@ -9,7 +9,6 @@ use Fresco\Contracts\Routing\Router;
 
 class LoadRoutesFromBinders implements RouteLoader
 {
-
     /**
      * @var Application
      */
@@ -28,7 +27,7 @@ class LoadRoutesFromBinders implements RouteLoader
      */
     public function __construct(Application $app, Config $config)
     {
-        $this->app = $app;
+        $this->app    = $app;
         $this->config = $config;
     }
 
