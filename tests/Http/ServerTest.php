@@ -51,6 +51,39 @@ class ServerTest extends PHPUnit_Framework_TestCase
 
     public function test_it_listens()
     {
+        $this->setUpDependencies();
+
+        $this->server->listen();
+    }
+
+    public function test_it_has_a_default_emitter()
+    {
+        $this->assertNotNull(new Server($this->app));
+    }
+
+    public function test_it_can_call_a_custom_terminate_callable()
+    {
+        $callMe = \Mockery::mock(['invoke' => true]);
+        $callMe->shouldReceive('invoke')->once();
+
+        $this->setUpDependencies();
+
+        $this->server->listen([$callMe, 'invoke']);
+    }
+
+    public function test_it_may_fail_and_delegate_to_the_exception_runner()
+    {
+        $this->setUpDependencies(true);
+
+        $runner = \Mockery::mock(ExceptionRunner::class);
+        $runner->shouldReceive('handleException')->once()->with(\Mockery::type(\InvalidArgumentException::class));
+        $this->app->shouldReceive('getExceptionRunner')->once()->andReturn($runner);
+
+        $this->server->listen();
+    }
+
+    private function setUpDependencies(bool $fail = false)
+    {
         $dispatcher = \Mockery::mock(DispatchRequest::class);
         $dispatcher->shouldReceive('__invoke')->once()->andReturn(
             $response = new Response(new ZendResponse("The Response"))
@@ -65,13 +98,13 @@ class ServerTest extends PHPUnit_Framework_TestCase
         $this->app->shouldReceive('setContext')->once()->with('web');
         $this->app->shouldReceive('bootstrap')->once();
 
-        $this->emitter->shouldReceive('emit')->with($response, 1)->once();
-
-        $this->server->listen();
-    }
-
-    public function test_it_has_a_default_emitter()
-    {
-        $this->assertNotNull(new Server($this->app));
+        if ($fail)
+        {
+            $this->emitter->shouldReceive('emit')->andThrow(\InvalidArgumentException::class);
+        }
+        else
+        {
+            $this->emitter->shouldReceive('emit')->with($response, 1)->once();
+        }
     }
 }
