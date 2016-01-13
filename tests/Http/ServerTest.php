@@ -98,12 +98,9 @@ class ServerTest extends PHPUnit_Framework_TestCase
         $this->app->shouldReceive('setContext')->once()->with('web');
         $this->app->shouldReceive('bootstrap')->once();
 
-        if ($fail)
-        {
+        if ($fail) {
             $this->emitter->shouldReceive('emit')->andThrow(\InvalidArgumentException::class);
-        }
-        else
-        {
+        } else {
             $this->emitter->shouldReceive('emit')->with($response, 1)->once();
         }
     }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Fresco\Tests\Definitions;
 
 use Fresco\Contracts\Routing\RouteLoader;
