@@ -146,9 +146,9 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
 
     public function test_can_get_cookie_params()
     {
-        $this->wrappedMock->shouldReceive('getCookieParams')->andReturn('params');
+        $this->wrappedMock->shouldReceive('getCookieParams')->andReturn(['name' => 'params']);
 
-        $this->assertEquals('params', $this->request->getCookieParams());
+        $this->assertEquals(['name' => 'params'], $this->request->getCookieParams());
     }
 
     public function test_can_get_attributes()
@@ -782,5 +782,26 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
         ]);
 
         $this->assertTrue($this->request->hasFile('avatar'));
+    }
+
+    public function test_can_get_cookies()
+    {
+        $this->wrappedMock->shouldReceive('getCookieParams')->andReturn(['name' => 'params']);
+
+        $this->assertEquals(['name' => 'params'], $this->request->cookies());
+    }
+
+    public function test_can_get_a_single_cookie_by_key()
+    {
+        $this->wrappedMock->shouldReceive('getCookieParams')->andReturn(['name' => 'params']);
+
+        $this->assertEquals('params', $this->request->cookie('name'));
+    }
+
+    public function test_can_get_a_default_value_when_no_cookie_is_found_by_key()
+    {
+        $this->wrappedMock->shouldReceive('getCookieParams')->andReturn(['name' => 'params']);
+
+        $this->assertEquals('default', $this->request->cookie('missing', 'default'));
     }
 }

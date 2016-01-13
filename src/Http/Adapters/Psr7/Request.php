@@ -167,7 +167,7 @@ class Request implements RequestContract, ServerRequestInterface
      */
     public function cookies()
     {
-        // TODO: Implement cookies() method.
+        return $this->wrapped->getCookieParams();
     }
 
     /**
@@ -175,7 +175,7 @@ class Request implements RequestContract, ServerRequestInterface
      */
     public function cookie(string $key = null, $default = null)
     {
-        // TODO: Implement cookie() method.
+        return Arr::get($this->getCookieParams(), $key, $default);
     }
 
     /**

@@ -133,7 +133,7 @@ interface Request
     /**
      * Retrieve cookies from request
      *
-     * @return
+     * @return string[]
      */
     public function cookies();
 
