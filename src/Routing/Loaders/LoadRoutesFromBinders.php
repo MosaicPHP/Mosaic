@@ -4,8 +4,10 @@ namespace Fresco\Routing\Loaders;
 
 use Fresco\Contracts\Application;
 use Fresco\Contracts\Config\Config;
+use Fresco\Contracts\Container\Container;
 use Fresco\Contracts\Routing\RouteLoader;
 use Fresco\Contracts\Routing\Router;
+use InvalidArgumentException;
 
 class LoadRoutesFromBinders implements RouteLoader
 {
@@ -20,15 +22,22 @@ class LoadRoutesFromBinders implements RouteLoader
     private $config;
 
     /**
+     * @var Container
+     */
+    private $container;
+
+    /**
      * LoadRoutesFromBinders constructor.
      *
      * @param Application $app
+     * @param Container   $container
      * @param Config      $config
      */
-    public function __construct(Application $app, Config $config)
+    public function __construct(Application $app, Container $container, Config $config)
     {
-        $this->app    = $app;
-        $this->config = $config;
+        $this->app       = $app;
+        $this->config    = $config;
+        $this->container = $container;
     }
 
     /**
@@ -39,5 +48,13 @@ class LoadRoutesFromBinders implements RouteLoader
     public function loadRoutes(Router $router)
     {
         $binders = $this->config->get($this->app->getContext() . '.routes', []);
+
+        foreach ($binders as $binder) {
+            if (!class_exists($binder)) {
+                throw new InvalidArgumentException('RouteBinder [' . $binder . '] does not exist');
+            }
+
+            $this->container->make($binder)->bind($router);
+        }
     }
 }

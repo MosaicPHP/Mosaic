@@ -24,11 +24,9 @@ class LaravelConfigDefinition implements DefinitionProviderInterface
     public function getDefinitions()
     {
         return [
-            Config::class => function () {
-                return new LaravelConfig(
-                    new Repository
-                );
-            }
+            Config::class => new LaravelConfig(
+                new Repository
+            )
         ];
     }
 }

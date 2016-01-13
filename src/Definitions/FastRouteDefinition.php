@@ -16,12 +16,8 @@ class FastRouteDefinition implements DefinitionProviderInterface
     public function getDefinitions() : array
     {
         return [
-            RouteDispatcherContract::class => function () {
-                return new RouteDispatcher;
-            },
-            RouterContract::class => function () {
-                return new Router;
-            }
+            RouteDispatcherContract::class => new RouteDispatcher,
+            RouterContract::class          => new Router
         ];
     }
 }
