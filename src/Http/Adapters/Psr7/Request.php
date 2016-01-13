@@ -159,7 +159,7 @@ class Request implements RequestContract, ServerRequestInterface
      */
     public function hasFile(string $key)
     {
-        // TODO: Implement hasFile() method.
+        return array_key_exists($key, $this->wrapped->getUploadedFiles());
     }
 
     /**

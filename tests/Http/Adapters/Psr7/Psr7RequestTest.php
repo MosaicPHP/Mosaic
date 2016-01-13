@@ -109,6 +109,13 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['test'], $this->request->getHeaders());
     }
 
+    public function test_can_get_header()
+    {
+        $this->wrappedMock->shouldReceive('getHeader')->once()->with('foo')->andReturn(['test']);
+
+        $this->assertEquals(['test'], $this->request->getHeader('foo'));
+    }
+
     public function test_can_get_request_target()
     {
         $this->wrappedMock->shouldReceive('getRequestTarget')->andReturn($this->request);
@@ -764,5 +771,16 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
         ]);
 
         $this->assertEquals('Default stuff', $this->request->file('noop', 'Default stuff'));
+    }
+
+    public function test_can_check_if_it_has_a_given_file_by_name()
+    {
+        $avatar = ['file' => 'avatar.jpg', 'path' => '/some/path'];
+
+        $this->wrappedMock->shouldReceive('getUploadedFiles')->once()->andReturn([
+            'avatar' => $avatar
+        ]);
+
+        $this->assertTrue($this->request->hasFile('avatar'));
     }
 }
