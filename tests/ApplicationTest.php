@@ -12,7 +12,6 @@ use Fresco\Foundation\Bootstrap\LoadConfiguration;
 use Fresco\Foundation\Bootstrap\LoadEnvironmentVariables;
 use Fresco\Foundation\Bootstrap\LoadRoutes;
 use Fresco\Foundation\Bootstrap\RegisterDefinitions;
-use Fresco\Foundation\Components\Definition;
 use Fresco\Foundation\Components\Registry;
 use Interop\Container\Definition\DefinitionProviderInterface;
 use Mockery\MockInterface;
