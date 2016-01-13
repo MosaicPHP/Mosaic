@@ -86,7 +86,7 @@ class ServerTest extends PHPUnit_Framework_TestCase
     {
         $dispatcher = \Mockery::mock(DispatchRequest::class);
         $dispatcher->shouldReceive('__invoke')->once()->andReturn(
-            $response = new Response(new ZendResponse("The Response"))
+            $response = new Response(new ZendResponse())
         );
 
         $container = \Mockery::mock(Container::class);
