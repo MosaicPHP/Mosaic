@@ -30,16 +30,7 @@ class Request implements RequestContract, ServerRequestInterface
      */
     public function header(string $key = null, $default = null)
     {
-        $header = $this->wrapped->getHeader($key);
-
-        switch (count($header)) {
-            case 1:
-                return current($header);
-            case 0:
-                return $default;
-        }
-
-        return $header;
+        return Arr::unwrap($this->wrapped->getHeader($key), $default);
     }
 
     /**

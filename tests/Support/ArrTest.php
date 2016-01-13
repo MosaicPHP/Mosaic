@@ -16,4 +16,21 @@ class ArrTest extends PHPUnit_Framework_TestCase
     {
         $this->assertEquals('barbaz', Arr::get(['foo' => 'bar'], 'baz', 'barbaz'));
     }
+
+    public function test_it_unwraps_a_single_item_array_to_the_item()
+    {
+        $this->assertEquals('foo', Arr::unwrap(['foo']));
+    }
+
+    public function test_it_returns_the_array_as_is_when_more_than_a_single_items_exist()
+    {
+        $input = ['foo', 'bar'];
+
+        $this->assertEquals($input, Arr::unwrap($input));
+    }
+
+    public function test_it_returns_a_default_value_for_empty_arrays()
+    {
+        $this->assertEquals('bar', Arr::unwrap([], 'bar'));
+    }
 }
