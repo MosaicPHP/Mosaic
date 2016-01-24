@@ -4,10 +4,12 @@ namespace Fresco\Exceptions\Formatters;
 
 use Fresco\Contracts\Exceptions\ExceptionFormatter;
 use Fresco\Exceptions\ErrorResponse;
+use Fresco\Exceptions\HttpException;
 use Throwable;
 
 class HtmlFormatter implements ExceptionFormatter
 {
+
     /**
      * @param Throwable $e
      *
@@ -25,7 +27,9 @@ class HtmlFormatter implements ExceptionFormatter
      */
     private function content(Throwable $e)
     {
-        $content = $e->getMessage();
+        $css = $this->getCss();
+        $title = $this->getTitle($e);
+        $content = $this->getContent($title, $e);
 
         return <<<EOF
 <!DOCTYPE html>
@@ -33,16 +37,98 @@ class HtmlFormatter implements ExceptionFormatter
     <head>
         <meta name="robots" content="noindex,nofollow" />
         <style>
-            /* Copyright (c) 2010, Yahoo! Inc. All rights reserved. Code licensed under the BSD License: http://developer.yahoo.com/yui/license.html */
-            html{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym{border:0;font-variant:normal;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}input,textarea,select{*font-size:100%;}legend{color:#000;}
-            html { background: #eee; padding: 10px }
-            img { border: 0; }
+            $css
         </style>
+        <title>$title</title>
     </head>
     <body>
         $content
     </body>
 </html>
 EOF;
+    }
+
+    /**
+     * @param string    $title
+     * @param Throwable $e
+     *
+     * @return string
+     */
+    private function getContent(string $title, Throwable $e) : string
+    {
+        return <<<EOF
+            <div class="container">
+                <h2>Whoops!</h2>
+                <h1>$title</h1>
+            </div>
+EOF;
+    }
+
+    /**
+     * @param Throwable $e
+     *
+     * @return string
+     */
+    private function getTitle(Throwable $e) : string
+    {
+        switch ($this->getStatus($e)) {
+            case 404:
+                return 'We couldn\'t find the page you were looking for.';
+                break;
+            default:
+                return 'Looks like something went wrong.';
+        }
+    }
+
+    /**
+     * @return string
+     */
+    private function getCss() : string
+    {
+        return <<<'EOF'
+            html, body {
+                height: 100%;
+            }
+            body {
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                display: table;
+                font-family: sans-serif;
+                color: #969696;
+                background-color: #f7f7f7;
+            }
+            .container {
+                text-align: center;
+                display: table-cell;
+                vertical-align: middle;
+            }
+            .content {
+                text-align: center;
+                display: inline-block;
+            }
+            h2 {
+                font-weight: 100;
+                font-size: 96px;
+                margin-bottom: 13px;
+            }
+            h1 {
+                font-weight: 100;
+                font-size: 26px;
+                max-width: 396px;
+                margin: 0 auto;
+                line-height: 33px;
+            }
+EOF;
+    }
+
+    /**
+     * @param Throwable $e
+     *
+     * @return int
+     */
+    private function getStatus(Throwable $e)
+    {
+        return $e instanceof HttpException ? $e->getStatusCode() : 500;
     }
 }
