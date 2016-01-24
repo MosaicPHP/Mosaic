@@ -6,7 +6,7 @@ use Fresco\Contracts\Application;
 use Fresco\Contracts\Http\Emitter;
 use Fresco\Contracts\Http\Request;
 use Fresco\Contracts\Http\Server as ServerContract;
-use Fresco\Exceptions\Formatters\EnvBasedWhoopsFormatter;
+use Fresco\Exceptions\Formatters\SmartFormatter;
 use Fresco\Exceptions\Handlers\LogHandler;
 use Fresco\Exceptions\Runner;
 use Fresco\Http\Middleware\DispatchRequest;
@@ -29,7 +29,7 @@ class Server implements ServerContract
     /**
      * @var string
      */
-    protected $exceptionFormatter = EnvBasedWhoopsFormatter::class;
+    protected $exceptionFormatter = SmartFormatter::class;
 
     /**
      * @var array
@@ -73,6 +73,7 @@ class Server implements ServerContract
         $this->app->setExceptionRunner(
             new Runner(
                 $this->app,
+                $this->getEmitter(),
                 $this->getExceptionHandlers(),
                 $this->getExceptionFormatter()
             )

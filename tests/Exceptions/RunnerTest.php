@@ -1,16 +1,22 @@
 <?php
 
 // Will use two namespaces here to monkey patch the `error_get_last` function
-namespace Fresco\Tests\Exceptions
-{
+namespace Fresco\Tests\Exceptions {
+
     use ErrorException;
     use Fresco\Application;
     use Fresco\Contracts\Container\Container;
+    use Fresco\Contracts\Http\Emitter;
+    use Fresco\Contracts\Http\ResponseFactory;
+    use Fresco\Exceptions\ErrorResponse;
     use Fresco\Exceptions\Formatters\HtmlFormatter;
     use Fresco\Exceptions\Formatters\JsonFormatter;
     use Fresco\Exceptions\Handlers\LogHandler;
     use Fresco\Exceptions\Runner;
     use Fresco\Tests\ClosesMockeryOnTearDown;
+    use Mockery\Mock;
+    use Zend\Diactoros\Response\HtmlResponse;
+    use Zend\Diactoros\Response\JsonResponse;
 
     class RunnerTest extends \PHPUnit_Framework_TestCase
     {
@@ -20,6 +26,11 @@ namespace Fresco\Tests\Exceptions
          * @var array|null
          */
         public static $error;
+
+        /**
+         * @var Mock
+         */
+        private $emitter;
 
         /**
          * @var \Mockery\Mock
@@ -40,10 +51,11 @@ namespace Fresco\Tests\Exceptions
         {
             $this->app       = \Mockery::mock(Application::class);
             $this->container = \Mockery::mock(Container::class);
+            $this->emitter   = \Mockery::mock(Emitter::class);
 
             $this->app->shouldReceive('getContainer')->andReturn($this->container);
 
-            $this->runner = new AppExceptionRunner($this->app);
+            $this->runner = new AppExceptionRunner($this->app, $this->emitter);
         }
 
         public function test_can_handle_error_when_error_reporting_is_enabled()
@@ -62,6 +74,8 @@ namespace Fresco\Tests\Exceptions
 
         public function test_can_handle_exceptions()
         {
+            $e = new \Exception('Some message');
+
             $this->runner->addHandler(LogHandler::class);
 
             $handler = \Mockery::mock(LogHandler::class);
@@ -69,31 +83,49 @@ namespace Fresco\Tests\Exceptions
             $this->container->shouldReceive('make')->with(LogHandler::class)->once()->andReturn($handler);
 
             $formatter = \Mockery::mock(HtmlFormatter::class);
-            $formatter->shouldReceive('render')->once()->andReturn('Some message');
+            $formatter->shouldReceive('render')->once()->andReturn(ErrorResponse::fromException($e));
             $this->container->shouldReceive('make')->with(HtmlFormatter::class)->once()->andReturn($formatter);
 
-            $response = $this->runner->handleException(new \Exception('Some message'));
+            $this->container->shouldReceive('make')->with(ResponseFactory::class)->once()->andReturn(
+                $factory = \Mockery::mock(ResponseFactory::class)
+            );
 
-            $this->assertEquals('Some message', $response);
+            $htmlResponse = new \Fresco\Http\Adapters\Psr7\Response(new HtmlResponse('Some message'));
+            $factory->shouldReceive('make')->once()->andReturn($htmlResponse);
+
+            $this->emitter->shouldReceive('emit')->with($htmlResponse)->once();
+
+            $this->runner->handleException($e);
         }
 
         public function test_exception_handling_can_be_ignored()
         {
+            $e = new \InvalidArgumentException('Some message');
+
             $this->runner->addHandler(LogHandler::class);
 
             $this->container->shouldReceive('make')->with(LogHandler::class)->never();
 
             $formatter = \Mockery::mock(HtmlFormatter::class);
-            $formatter->shouldReceive('render')->once()->andReturn('Some message');
+            $formatter->shouldReceive('render')->once()->andReturn(ErrorResponse::fromException($e));
             $this->container->shouldReceive('make')->with(HtmlFormatter::class)->once()->andReturn($formatter);
 
-            $response = $this->runner->handleException(new \InvalidArgumentException('Some message'));
+            $this->container->shouldReceive('make')->with(ResponseFactory::class)->once()->andReturn(
+                $factory = \Mockery::mock(ResponseFactory::class)
+            );
 
-            $this->assertEquals('Some message', $response);
+            $htmlResponse = new \Fresco\Http\Adapters\Psr7\Response(new HtmlResponse('Some message'));
+            $factory->shouldReceive('make')->once()->andReturn($htmlResponse);
+
+            $this->emitter->shouldReceive('emit')->with($htmlResponse)->once();
+
+            $this->runner->handleException($e);
         }
 
         public function test_can_handle_exceptions_with_custom_formatter()
         {
+            $e = new \Exception('Some message');
+
             $this->runner->addHandler(LogHandler::class);
             $this->runner->setFormatter(JsonFormatter::class);
 
@@ -102,12 +134,19 @@ namespace Fresco\Tests\Exceptions
             $this->container->shouldReceive('make')->with(LogHandler::class)->once()->andReturn($handler);
 
             $formatter = \Mockery::mock(JsonFormatter::class);
-            $formatter->shouldReceive('render')->once()->andReturn(json_encode(['Some message']));
+            $formatter->shouldReceive('render')->once()->andReturn(ErrorResponse::fromException($e));
             $this->container->shouldReceive('make')->with(JsonFormatter::class)->once()->andReturn($formatter);
 
-            $response = $this->runner->handleException(new \Exception('Some message'));
+            $this->container->shouldReceive('make')->with(ResponseFactory::class)->once()->andReturn(
+                $factory = \Mockery::mock(ResponseFactory::class)
+            );
 
-            $this->assertEquals(json_encode(['Some message']), $response);
+            $jsonResponse = new \Fresco\Http\Adapters\Psr7\Response(new JsonResponse('Some message'));
+            $factory->shouldReceive('make')->once()->andReturn($jsonResponse);
+
+            $this->emitter->shouldReceive('emit')->with($jsonResponse)->once();
+
+            $this->runner->handleException($e);
         }
 
         public function test_can_handle_shutdown_when_no_errors_happened()
@@ -123,6 +162,8 @@ namespace Fresco\Tests\Exceptions
 
         public function test_can_handle_a_fatal_php_error_in_shutdown()
         {
+            $e = new ErrorException('Some message');
+
             $handler   = \Mockery::mock(LogHandler::class);
             $formatter = \Mockery::mock(JsonFormatter::class);
 
@@ -139,10 +180,19 @@ namespace Fresco\Tests\Exceptions
                     $e->getLine() == self::$error['line'];
             }));
 
-            $formatter->shouldReceive('render')->once()->andReturn('foo');
+            $formatter->shouldReceive('render')->once()->andReturn(ErrorResponse::fromException($e));
 
             $this->container->shouldReceive('make')->with(LogHandler::class)->once()->andReturn($handler);
             $this->container->shouldReceive('make')->with(JsonFormatter::class)->once()->andReturn($formatter);
+
+            $this->container->shouldReceive('make')->with(ResponseFactory::class)->once()->andReturn(
+                $factory = \Mockery::mock(ResponseFactory::class)
+            );
+
+            $htmlResponse = new \Fresco\Http\Adapters\Psr7\Response(new HtmlResponse('Some message'));
+            $factory->shouldReceive('make')->once()->andReturn($htmlResponse);
+
+            $this->emitter->shouldReceive('emit')->with($htmlResponse)->once();
 
             self::$error = [
                 'message' => 'foo',
@@ -171,8 +221,8 @@ namespace Fresco\Tests\Exceptions
     }
 }
 
-namespace Fresco\Exceptions
-{
+namespace Fresco\Exceptions {
+
     use Fresco\Tests\Exceptions\RunnerTest;
 
     function error_get_last()

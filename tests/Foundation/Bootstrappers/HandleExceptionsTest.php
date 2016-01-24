@@ -4,6 +4,7 @@ namespace Fresco\Tests\Foundation\Bootstrappers;
 
 use Fresco\Application;
 use Fresco\Foundation\Bootstrap\HandleExceptions;
+use Fresco\Http\SapiEmitter;
 
 class HandleExceptionsTest extends \PHPUnit_Framework_TestCase
 {
@@ -11,7 +12,7 @@ class HandleExceptionsTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->bootstrapper = $bootstrapper = new HandleExceptions(new Runner(new Application(__DIR__)));
+        $this->bootstrapper = $bootstrapper = new HandleExceptions(new Runner(new Application(__DIR__), new SapiEmitter));
     }
 
     public function test_it_handles_exceptions()

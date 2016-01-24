@@ -8,6 +8,8 @@ interface ExceptionHandler
 {
     /**
      * @param Throwable $e
+     *
+     * @return void
      */
     public function handle(Throwable $e);
 }

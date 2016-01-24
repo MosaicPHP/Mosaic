@@ -3,8 +3,8 @@
 namespace Fresco\Tests\Exceptions\Formatters;
 
 use Fresco\Contracts\Application;
-use Fresco\Exceptions\Formatters\EnvBasedWhoopsFormatter;
 use Fresco\Exceptions\Formatters\HtmlFormatter;
+use Fresco\Exceptions\Formatters\SmartFormatter;
 use Fresco\Exceptions\Formatters\WhoopsFormatter;
 use PHPUnit_Framework_TestCase;
 
@@ -20,7 +20,7 @@ class EnvBasedWhoopsFormatterTest extends PHPUnit_Framework_TestCase
         $whoops->shouldReceive('render')->once()->with($e = new \InvalidArgumentException());
         $htmlFormatter->shouldReceive('render')->never();
 
-        $formatter = new EnvBasedWhoopsFormatter($app, $whoops, $htmlFormatter);
+        $formatter = new SmartFormatter($app, $whoops, $htmlFormatter);
         $formatter->render($e);
     }
 
@@ -34,7 +34,7 @@ class EnvBasedWhoopsFormatterTest extends PHPUnit_Framework_TestCase
         $whoops->shouldReceive('render')->never();
         $htmlFormatter->shouldReceive('render')->once()->with($e = new \InvalidArgumentException());
 
-        $formatter = new EnvBasedWhoopsFormatter($app, $whoops, $htmlFormatter);
+        $formatter = new SmartFormatter($app, $whoops, $htmlFormatter);
         $formatter->render($e);
     }
 }

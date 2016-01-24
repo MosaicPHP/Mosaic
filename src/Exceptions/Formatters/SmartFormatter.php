@@ -4,9 +4,10 @@ namespace Fresco\Exceptions\Formatters;
 
 use Fresco\Contracts\Application;
 use Fresco\Contracts\Exceptions\ExceptionFormatter;
+use Fresco\Exceptions\ErrorResponse;
 use Throwable;
 
-class EnvBasedWhoopsFormatter implements ExceptionFormatter
+class SmartFormatter implements ExceptionFormatter
 {
     /**
      * @var HtmlFormatter
@@ -39,13 +40,15 @@ class EnvBasedWhoopsFormatter implements ExceptionFormatter
 
     /**
      * @param Throwable $e
+     *
+     * @return ErrorResponse
      */
-    public function render(Throwable $e)
+    public function render(Throwable $e) : ErrorResponse
     {
         if ($this->app->isLocal()) {
-            $this->whoops->render($e);
+            return $this->whoops->render($e);
         } else {
-            $this->formatter->render($e);
+            return $this->formatter->render($e);
         }
     }
 }

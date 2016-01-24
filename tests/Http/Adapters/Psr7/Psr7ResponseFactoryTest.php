@@ -6,6 +6,8 @@ use Fresco\Contracts\Http\Response as ResponseContract;
 use Fresco\Contracts\Http\ResponseFactory as ResponseFactoryContract;
 use Fresco\Http\Adapters\Psr7\Response;
 use Fresco\Http\Adapters\Psr7\ResponseFactory;
+use Fresco\Support\ArrayObject;
+use Fresco\Support\HtmlString;
 
 class Psr7ResponseFactoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -72,7 +74,7 @@ class Psr7ResponseFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($original, $response);
     }
 
-    public function test_can_make_response_from_unkown_content()
+    public function test_can_make_response_from_unknown_content()
     {
         $response = $this->factory->make('html body', 200, [
             'custom' => 'header'
@@ -83,6 +85,92 @@ class Psr7ResponseFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(200, $response->status());
         $this->assertEquals([
             'content-type' => ['text/html; charset=utf-8'],
+            'custom'       => ['header']
+        ], $response->headers());
+    }
+
+    public function test_can_make_respose_from_stringable_content()
+    {
+        $response = $this->factory->make(new HtmlString('html body'), 200, [
+            'custom' => 'header'
+        ]);
+
+        $this->assertInstanceOf(ResponseContract::class, $response);
+        $this->assertEquals('html body', $response->body());
+        $this->assertEquals(200, $response->status());
+        $this->assertEquals([
+            'content-type' => ['text/html; charset=utf-8'],
+            'custom'       => ['header']
+        ], $response->headers());
+    }
+
+    public function test_can_make_response_of_empty_content()
+    {
+        $response = $this->factory->make('', 200, [
+            'custom' => 'header'
+        ]);
+
+        $this->assertInstanceOf(ResponseContract::class, $response);
+        $this->assertEquals('', $response->body());
+        $this->assertEquals(200, $response->status());
+        $this->assertEquals([
+            'custom'       => ['header']
+        ], $response->headers());
+    }
+
+    public function test_can_make_json_response_from_arrayable_object()
+    {
+        $response = new ArrayObject([
+            'message' => 'value'
+        ]);
+
+        $response = $this->factory->make($response, 200, [
+            'custom' => 'header'
+        ]);
+
+        $this->assertInstanceOf(ResponseContract::class, $response);
+        $this->assertEquals('{"message":"value"}', $response->body());
+        $this->assertEquals(200, $response->status());
+        $this->assertEquals([
+            'content-type' => ['application/json'],
+            'custom'       => ['header']
+        ], $response->headers());
+    }
+
+    public function test_can_make_json_response_from_array()
+    {
+        $response = [
+            'message' => 'value'
+        ];
+
+        $response = $this->factory->make($response, 200, [
+            'custom' => 'header'
+        ]);
+
+        $this->assertInstanceOf(ResponseContract::class, $response);
+        $this->assertEquals('{"message":"value"}', $response->body());
+        $this->assertEquals(200, $response->status());
+        $this->assertEquals([
+            'content-type' => ['application/json'],
+            'custom'       => ['header']
+        ], $response->headers());
+    }
+
+    public function test_can_make_json_response()
+    {
+        $response = [
+            'message' => 'value'
+        ];
+
+        $response = $this->factory->json($response, 200, [
+            'custom' => 'header'
+        ]);
+
+        $this->assertInstanceOf(ResponseContract::class, $response);
+        $this->assertEquals('{"message":"value"}', $response->body());
+        $this->assertEquals(200, $response->status());
+        $this->assertEquals([
+            'content-type' => ['application/json'],
             'custom'       => ['header']
         ], $response->headers());
     }

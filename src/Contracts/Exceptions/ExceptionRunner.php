@@ -12,7 +12,7 @@ interface ExceptionRunner
     public function setFormatter(string $formatter);
 
     /**
-     * @param string $formatter
+     * @param string $handler
      */
     public function addHandler(string $handler);
 

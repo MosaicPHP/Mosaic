@@ -2,6 +2,8 @@
 
 namespace Fresco\Contracts\Http;
 
+use Fresco\Contracts\Support\Arrayable;
+
 interface ResponseFactory
 {
     /**
@@ -22,4 +24,14 @@ interface ResponseFactory
      * @return Response
      */
     public function make($content = '', int $status = 200, array $headers = [])  : Response;
+
+    /**
+     * @param array|Arrayable $content
+     * @param int             $status
+     * @param array           $headers
+     * @param int             $option
+     *
+     * @return Response
+     */
+    public function json($content = [], int $status = 200, array $headers = [], int $option = 79) : Response;
 }

@@ -3,7 +3,8 @@
 namespace Fresco\Exceptions\Formatters;
 
 use Fresco\Contracts\Exceptions\ExceptionFormatter;
-use Fresco\Exceptions\HttpException;
+use Fresco\Exceptions\ErrorResponse;
+use Fresco\Support\HtmlString;
 use Throwable;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run;
@@ -21,18 +22,22 @@ class WhoopsFormatter implements ExceptionFormatter
     public function __construct(Run $whoops)
     {
         $this->whoops = $whoops;
+        $this->whoops->allowQuit(false);
+        $this->whoops->writeToOutput(false);
         $this->whoops->pushHandler(new PrettyPageHandler);
     }
 
     /**
      * @param Throwable $e
+     *
+     * @return ErrorResponse
      */
-    public function render(Throwable $e)
+    public function render(Throwable $e) : ErrorResponse
     {
-        $this->whoops->sendHttpCode(
-            $e instanceof HttpException ? $e->getStatusCode() : 500
+        $output = new HtmlString(
+            $this->whoops->handleException($e)
         );
 
-        $this->whoops->handleException($e);
+        return ErrorResponse::fromException($e, $output);
     }
 }
