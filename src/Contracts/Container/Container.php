@@ -2,6 +2,8 @@
 
 namespace Fresco\Contracts\Container;
 
+use Interop\Container\Exception\NotFoundException;
+
 interface Container
 {
     /**
@@ -10,9 +12,10 @@ interface Container
      * @param string $abstract
      * @param array  $parameters
      *
+     * @throws NotFoundException when abstract is not bound to the container.
      * @return mixed
      */
-    public function make($abstract, array $parameters = []);
+    public function get($abstract, array $parameters = []);
 
     /**
      * Call the given Closure / class@method and inject its dependencies.

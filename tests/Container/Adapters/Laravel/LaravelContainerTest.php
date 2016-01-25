@@ -6,6 +6,7 @@ use Fresco\Container\Adapters\Laravel\Container as Adapter;
 use Fresco\Contracts\Container\Container as ContainerContract;
 use Fresco\Tests\ClosesMockeryOnTearDown;
 use Illuminate\Container\Container;
+use Interop\Container\Exception\ContainerException;
 
 class LaravelContainerTest extends \PHPUnit_Framework_TestCase
 {
@@ -101,5 +102,27 @@ class LaravelContainerTest extends \PHPUnit_Framework_TestCase
         $this->wrappedMock->shouldReceive('bound')->with($abstract)->once()->andReturn(true);
 
         $this->assertTrue($this->container->has($abstract));
+    }
+
+    public function test_can_get_a_previously_bound_service()
+    {
+        $abstract = 'abstract';
+
+        $this->wrappedMock->shouldReceive('bound')->with($abstract)->once()->andReturn(true);
+        $this->wrappedMock->shouldReceive('make')->with($abstract, [])->once()->andReturn($aClass = new \stdClass());
+
+        $this->assertSame($aClass, $this->container->get($abstract));
+    }
+
+    public function test_cannot_get_a_service_that_was_not_bound()
+    {
+        $abstract = 'abstract';
+
+        $this->wrappedMock->shouldReceive('bound')->with($abstract)->once()->andReturn(false);
+        $this->setExpectedException(ContainerException::class);
+
+        $this->wrappedMock->shouldReceive('make')->with($abstract, [])->never();
+
+        $this->container->get($abstract);
     }
 }

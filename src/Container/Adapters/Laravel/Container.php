@@ -2,10 +2,11 @@
 
 namespace Fresco\Container\Adapters\Laravel;
 
-use Fresco\Contracts\Container\Container as ContainerContract;
+use Fresco\Container\NotFoundException;
+use Fresco\Contracts\Container\AutomaticResolutionContainer;
 use Illuminate\Container\Container as LaravelContainer;
 
-class Container implements ContainerContract
+class Container implements AutomaticResolutionContainer
 {
     /**
      * @var LaravelContainer
@@ -103,5 +104,23 @@ class Container implements ContainerContract
     public function instance($abstract, $instance)
     {
         $this->delegate->instance($abstract, $instance);
+    }
+
+    /**
+     * Resolve the given type from the container.
+     *
+     * @param string $abstract
+     * @param array  $parameters
+     *
+     * @throws NotFoundException
+     * @return mixed
+     */
+    public function get($abstract, array $parameters = [])
+    {
+        if (! $this->delegate->bound($abstract)) {
+            throw NotFoundException::notBound($abstract);
+        }
+
+        return $this->delegate->make($abstract, $parameters);
     }
 }
