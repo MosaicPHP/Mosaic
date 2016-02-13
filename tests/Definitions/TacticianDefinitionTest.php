@@ -3,21 +3,21 @@
 namespace Fresco\Tests\Definitions;
 
 use Fresco\Application;
-use Fresco\Contracts\View\Factory;
-use Fresco\Definitions\TwigDefinition;
+use Fresco\Contracts\CommandBus\CommandBus;
+use Fresco\Definitions\TacticianDefinition;
 use Interop\Container\Definition\DefinitionProviderInterface;
 
-class TwigDefinitionTest extends DefinitionTestCase
+class TacticianDefinitionTest extends DefinitionTestCase
 {
     public function getDefinition() : DefinitionProviderInterface
     {
-        return new TwigDefinition(new Application(__DIR__));
+        return new TacticianDefinition(new Application(__DIR__));
     }
 
     public function shouldDefine() : array
     {
         return [
-            Factory::class
+            CommandBus::class
         ];
     }
 }

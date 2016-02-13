@@ -9,7 +9,6 @@ use Throwable;
 
 class HtmlFormatter implements ExceptionFormatter
 {
-
     /**
      * @param Throwable $e
      *
@@ -27,8 +26,8 @@ class HtmlFormatter implements ExceptionFormatter
      */
     private function content(Throwable $e)
     {
-        $css = $this->getCss();
-        $title = $this->getTitle($e);
+        $css     = $this->getCss();
+        $title   = $this->getTitle($e);
         $content = $this->getContent($title, $e);
 
         return <<<EOF
