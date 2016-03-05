@@ -1,6 +1,6 @@
 <?php
 
-namespace Fresco\Contracts\Support;
+namespace Mosaic\Contracts\Support;
 
 interface Stringable
 {

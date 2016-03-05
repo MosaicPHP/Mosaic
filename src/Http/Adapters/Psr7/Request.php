@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Http\Adapters\Psr7;
+namespace Mosaic\Http\Adapters\Psr7;
 
-use Fresco\Contracts\Http\Request as RequestContract;
-use Fresco\Support\Arr;
+use Mosaic\Contracts\Http\Request as RequestContract;
+use Mosaic\Support\Arr;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;

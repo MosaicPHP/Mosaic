@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Tests\View;
+namespace Mosaic\Tests\View;
 
-use Fresco\Contracts\View\View;
-use Fresco\Tests\ClosesMockeryOnTearDown;
+use Mosaic\Contracts\View\View;
+use Mosaic\Tests\ClosesMockeryOnTearDown;
 use PHPUnit_Framework_TestCase;
 
 abstract class ViewTest extends PHPUnit_Framework_TestCase

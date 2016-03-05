@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Contracts\Routing;
+namespace Mosaic\Contracts\Routing;
 
-use Fresco\Contracts\Http\Request;
-use Fresco\Routing\RouteCollection;
+use Mosaic\Contracts\Http\Request;
+use Mosaic\Routing\RouteCollection;
 
 interface RouteDispatcher
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Fresco\Tests\Routing\Dispatchers;
+namespace Mosaic\Tests\Routing\Dispatchers;
 
-use Fresco\Routing\Dispatchers\DispatchClosure;
-use Fresco\Routing\MethodParameterResolver;
-use Fresco\Routing\Route;
-use Fresco\Tests\ClosesMockeryOnTearDown;
+use Mosaic\Routing\Dispatchers\DispatchClosure;
+use Mosaic\Routing\MethodParameterResolver;
+use Mosaic\Routing\Route;
+use Mosaic\Tests\ClosesMockeryOnTearDown;
 
 class DispatchClosureTest extends \PHPUnit_Framework_TestCase
 {

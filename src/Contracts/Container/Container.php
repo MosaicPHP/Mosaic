@@ -1,6 +1,6 @@
 <?php
 
-namespace Fresco\Contracts\Container;
+namespace Mosaic\Contracts\Container;
 
 use Interop\Container\Exception\NotFoundException;
 

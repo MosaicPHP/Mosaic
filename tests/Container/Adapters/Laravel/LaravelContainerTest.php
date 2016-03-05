@@ -1,10 +1,10 @@
 <?php
 
-namespace Fresco\Tests\Container\Adapters\Laravel;
+namespace Mosaic\Tests\Container\Adapters\Laravel;
 
-use Fresco\Container\Adapters\Laravel\Container as Adapter;
-use Fresco\Contracts\Container\Container as ContainerContract;
-use Fresco\Tests\ClosesMockeryOnTearDown;
+use Mosaic\Container\Adapters\Laravel\Container as Adapter;
+use Mosaic\Contracts\Container\Container as ContainerContract;
+use Mosaic\Tests\ClosesMockeryOnTearDown;
 use Illuminate\Container\Container;
 use Interop\Container\Exception\ContainerException;
 
@@ -29,7 +29,7 @@ class LaravelContainerTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function test_it_implements_the_fresco_container_interface()
+    public function test_it_implements_the_Mosaic_container_interface()
     {
         $this->assertInstanceOf(ContainerContract::class, $this->container);
     }

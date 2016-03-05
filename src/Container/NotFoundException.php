@@ -1,6 +1,6 @@
 <?php
 
-namespace Fresco\Container;
+namespace Mosaic\Container;
 
 use Interop\Container\Exception\NotFoundException as InteropNotFoundException;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Tests\View\Adapters\Twig;
+namespace Mosaic\Tests\View\Adapters\Twig;
 
-use Fresco\Tests\View\ViewTest;
-use Fresco\View\Adapters\Twig\View;
+use Mosaic\Tests\View\ViewTest;
+use Mosaic\View\Adapters\Twig\View;
 use Mockery\Mock;
 
 class TwigViewTest extends ViewTest

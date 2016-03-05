@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Tests\Routing;
+namespace Mosaic\Tests\Routing;
 
-use Fresco\Routing\Route;
-use Fresco\Routing\RouteCollection;
+use Mosaic\Routing\Route;
+use Mosaic\Routing\RouteCollection;
 
 class RouteCollectionTest extends \PHPUnit_Framework_TestCase
 {

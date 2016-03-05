@@ -1,8 +1,8 @@
 <?php
 
-namespace Fresco\Tests\Exceptions;
+namespace Mosaic\Tests\Exceptions;
 
-use Fresco\Exceptions\HttpException;
+use Mosaic\Exceptions\HttpException;
 use PHPUnit_Framework_TestCase;
 
 class HttpExceptionTest extends PHPUnit_Framework_TestCase

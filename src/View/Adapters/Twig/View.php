@@ -1,10 +1,10 @@
 <?php
 
-namespace Fresco\View\Adapters\Twig;
+namespace Mosaic\View\Adapters\Twig;
 
 use ArrayAccess;
-use Fresco\Contracts\View\View as ViewContract;
-use Fresco\View\View as AbstractView;
+use Mosaic\Contracts\View\View as ViewContract;
+use Mosaic\View\View as AbstractView;
 use Twig_TemplateInterface;
 
 class View extends AbstractView implements ViewContract, ArrayAccess

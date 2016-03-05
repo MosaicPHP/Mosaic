@@ -1,10 +1,10 @@
 <?php
 
-namespace Fresco\Exceptions\Formatters;
+namespace Mosaic\Exceptions\Formatters;
 
-use Fresco\Contracts\Exceptions\ExceptionFormatter;
-use Fresco\Exceptions\ErrorResponse;
-use Fresco\Support\ArrayObject;
+use Mosaic\Contracts\Exceptions\ExceptionFormatter;
+use Mosaic\Exceptions\ErrorResponse;
+use Mosaic\Support\ArrayObject;
 use Throwable;
 
 class JsonFormatter implements ExceptionFormatter

@@ -1,8 +1,8 @@
 <?php
 
-namespace Fresco\Tests\Config\Adapters;
+namespace Mosaic\Tests\Config\Adapters;
 
-use Fresco\Config\Adapters\LaravelConfig;
+use Mosaic\Config\Adapters\LaravelConfig;
 use Illuminate\Config\Repository;
 use Mockery\Mock;
 

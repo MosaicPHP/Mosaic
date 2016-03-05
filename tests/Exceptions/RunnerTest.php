@@ -1,19 +1,19 @@
 <?php
 
 // Will use two namespaces here to monkey patch the `error_get_last` function
-namespace Fresco\Tests\Exceptions {
+namespace Mosaic\Tests\Exceptions {
 
     use ErrorException;
-    use Fresco\Application;
-    use Fresco\Contracts\Container\Container;
-    use Fresco\Contracts\Http\Emitter;
-    use Fresco\Contracts\Http\ResponseFactory;
-    use Fresco\Exceptions\ErrorResponse;
-    use Fresco\Exceptions\Formatters\HtmlFormatter;
-    use Fresco\Exceptions\Formatters\JsonFormatter;
-    use Fresco\Exceptions\Handlers\LogHandler;
-    use Fresco\Exceptions\Runner;
-    use Fresco\Tests\ClosesMockeryOnTearDown;
+    use Mosaic\Application;
+    use Mosaic\Contracts\Container\Container;
+    use Mosaic\Contracts\Http\Emitter;
+    use Mosaic\Contracts\Http\ResponseFactory;
+    use Mosaic\Exceptions\ErrorResponse;
+    use Mosaic\Exceptions\Formatters\HtmlFormatter;
+    use Mosaic\Exceptions\Formatters\JsonFormatter;
+    use Mosaic\Exceptions\Handlers\LogHandler;
+    use Mosaic\Exceptions\Runner;
+    use Mosaic\Tests\ClosesMockeryOnTearDown;
     use Mockery\Mock;
     use Zend\Diactoros\Response\HtmlResponse;
     use Zend\Diactoros\Response\JsonResponse;
@@ -90,7 +90,7 @@ namespace Fresco\Tests\Exceptions {
                 $factory = \Mockery::mock(ResponseFactory::class)
             );
 
-            $htmlResponse = new \Fresco\Http\Adapters\Psr7\Response(new HtmlResponse('Some message'));
+            $htmlResponse = new \Mosaic\Http\Adapters\Psr7\Response(new HtmlResponse('Some message'));
             $factory->shouldReceive('make')->once()->andReturn($htmlResponse);
 
             $this->emitter->shouldReceive('emit')->with($htmlResponse)->once();
@@ -114,7 +114,7 @@ namespace Fresco\Tests\Exceptions {
                 $factory = \Mockery::mock(ResponseFactory::class)
             );
 
-            $htmlResponse = new \Fresco\Http\Adapters\Psr7\Response(new HtmlResponse('Some message'));
+            $htmlResponse = new \Mosaic\Http\Adapters\Psr7\Response(new HtmlResponse('Some message'));
             $factory->shouldReceive('make')->once()->andReturn($htmlResponse);
 
             $this->emitter->shouldReceive('emit')->with($htmlResponse)->once();
@@ -141,7 +141,7 @@ namespace Fresco\Tests\Exceptions {
                 $factory = \Mockery::mock(ResponseFactory::class)
             );
 
-            $jsonResponse = new \Fresco\Http\Adapters\Psr7\Response(new JsonResponse('Some message'));
+            $jsonResponse = new \Mosaic\Http\Adapters\Psr7\Response(new JsonResponse('Some message'));
             $factory->shouldReceive('make')->once()->andReturn($jsonResponse);
 
             $this->emitter->shouldReceive('emit')->with($jsonResponse)->once();
@@ -189,7 +189,7 @@ namespace Fresco\Tests\Exceptions {
                 $factory = \Mockery::mock(ResponseFactory::class)
             );
 
-            $htmlResponse = new \Fresco\Http\Adapters\Psr7\Response(new HtmlResponse('Some message'));
+            $htmlResponse = new \Mosaic\Http\Adapters\Psr7\Response(new HtmlResponse('Some message'));
             $factory->shouldReceive('make')->once()->andReturn($htmlResponse);
 
             $this->emitter->shouldReceive('emit')->with($htmlResponse)->once();
@@ -221,9 +221,9 @@ namespace Fresco\Tests\Exceptions {
     }
 }
 
-namespace Fresco\Exceptions {
+namespace Mosaic\Exceptions {
 
-    use Fresco\Tests\Exceptions\RunnerTest;
+    use Mosaic\Tests\Exceptions\RunnerTest;
 
     function error_get_last()
     {

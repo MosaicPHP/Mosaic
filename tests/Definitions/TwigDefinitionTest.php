@@ -1,10 +1,10 @@
 <?php
 
-namespace Fresco\Tests\Definitions;
+namespace Mosaic\Tests\Definitions;
 
-use Fresco\Application;
-use Fresco\Contracts\View\Factory;
-use Fresco\Definitions\TwigDefinition;
+use Mosaic\Application;
+use Mosaic\Contracts\View\Factory;
+use Mosaic\Definitions\TwigDefinition;
 use Interop\Container\Definition\DefinitionProviderInterface;
 
 class TwigDefinitionTest extends DefinitionTestCase

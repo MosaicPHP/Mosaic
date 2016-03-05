@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Definitions;
+namespace Mosaic\Definitions;
 
-use Fresco\Contracts\EnvironmentVariablesLoader;
-use Fresco\Foundation\EnvironmentVariables\Adapters\DotEnvVariableLoader;
+use Mosaic\Contracts\EnvironmentVariablesLoader;
+use Mosaic\Foundation\EnvironmentVariables\Adapters\DotEnvVariableLoader;
 use Interop\Container\Definition\DefinitionProviderInterface;
 
 class DotEnvDefinition implements DefinitionProviderInterface

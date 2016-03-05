@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Definitions;
+namespace Mosaic\Definitions;
 
-use Fresco\Config\Adapters\LaravelConfig;
-use Fresco\Contracts\Config\Config;
+use Mosaic\Config\Adapters\LaravelConfig;
+use Mosaic\Contracts\Config\Config;
 use Illuminate\Config\Repository;
 use Interop\Container\Definition\DefinitionProviderInterface;
 

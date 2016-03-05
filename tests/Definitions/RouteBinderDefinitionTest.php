@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Tests\Definitions;
+namespace Mosaic\Tests\Definitions;
 
-use Fresco\Contracts\Routing\RouteLoader;
-use Fresco\Definitions\RouteBinderDefinition;
+use Mosaic\Contracts\Routing\RouteLoader;
+use Mosaic\Definitions\RouteBinderDefinition;
 use Interop\Container\Definition\DefinitionProviderInterface;
 
 class RouteBinderDefinitionTest extends DefinitionTestCase

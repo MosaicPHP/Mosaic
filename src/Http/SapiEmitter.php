@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Http;
+namespace Mosaic\Http;
 
-use Fresco\Contracts\Http\Emitter;
-use Fresco\Contracts\Http\Response;
+use Mosaic\Contracts\Http\Emitter;
+use Mosaic\Contracts\Http\Response;
 use RuntimeException;
 
 class SapiEmitter implements Emitter

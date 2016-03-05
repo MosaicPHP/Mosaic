@@ -1,8 +1,8 @@
 <?php
 
-namespace Fresco\CommandBus\Tactician;
+namespace Mosaic\CommandBus\Tactician;
 
-use Fresco\Contracts\Container\Container;
+use Mosaic\Contracts\Container\Container;
 use League\Tactician\Exception\MissingHandlerException;
 use League\Tactician\Handler\Locator\HandlerLocator as HandlerLocatorInterface;
 

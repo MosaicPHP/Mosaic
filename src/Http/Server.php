@@ -1,15 +1,15 @@
 <?php
 
-namespace Fresco\Http;
+namespace Mosaic\Http;
 
-use Fresco\Contracts\Application;
-use Fresco\Contracts\Http\Emitter;
-use Fresco\Contracts\Http\Request;
-use Fresco\Contracts\Http\Server as ServerContract;
-use Fresco\Exceptions\Formatters\SmartFormatter;
-use Fresco\Exceptions\Handlers\LogHandler;
-use Fresco\Exceptions\Runner;
-use Fresco\Http\Middleware\DispatchRequest;
+use Mosaic\Contracts\Application;
+use Mosaic\Contracts\Http\Emitter;
+use Mosaic\Contracts\Http\Request;
+use Mosaic\Contracts\Http\Server as ServerContract;
+use Mosaic\Exceptions\Formatters\SmartFormatter;
+use Mosaic\Exceptions\Handlers\LogHandler;
+use Mosaic\Exceptions\Runner;
+use Mosaic\Http\Middleware\DispatchRequest;
 use Throwable;
 
 class Server implements ServerContract

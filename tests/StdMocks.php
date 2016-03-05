@@ -1,6 +1,6 @@
 <?php
 
-namespace Fresco\Tests
+namespace Mosaic\Tests
 {
     final class StdMocks
     {
@@ -33,9 +33,9 @@ namespace Fresco\Tests
     }
 }
 
-namespace Fresco\Http {
+namespace Mosaic\Http {
 
-    use Fresco\Tests\StdMocks;
+    use Mosaic\Tests\StdMocks;
 
     function headers_sent()
     {

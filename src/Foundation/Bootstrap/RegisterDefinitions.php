@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Foundation\Bootstrap;
+namespace Mosaic\Foundation\Bootstrap;
 
-use Fresco\Contracts\Application;
-use Fresco\Contracts\Container\Container;
+use Mosaic\Contracts\Application;
+use Mosaic\Contracts\Container\Container;
 
 class RegisterDefinitions implements Bootstrapper
 {

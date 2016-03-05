@@ -1,17 +1,17 @@
 <?php
 
-namespace Fresco\Tests\Http;
+namespace Mosaic\Tests\Http;
 
-use Fresco\Contracts\Application;
-use Fresco\Contracts\Container\Container;
-use Fresco\Contracts\Exceptions\ExceptionRunner;
-use Fresco\Contracts\Http\Emitter;
-use Fresco\Contracts\Http\Request;
-use Fresco\Http\Adapters\Psr7\Response;
-use Fresco\Http\Middleware\DispatchRequest;
-use Fresco\Http\Server;
-use Fresco\Tests\ClosesMockeryOnTearDown;
-use Fresco\Tests\MocksTheStandardLibrary;
+use Mosaic\Contracts\Application;
+use Mosaic\Contracts\Container\Container;
+use Mosaic\Contracts\Exceptions\ExceptionRunner;
+use Mosaic\Contracts\Http\Emitter;
+use Mosaic\Contracts\Http\Request;
+use Mosaic\Http\Adapters\Psr7\Response;
+use Mosaic\Http\Middleware\DispatchRequest;
+use Mosaic\Http\Server;
+use Mosaic\Tests\ClosesMockeryOnTearDown;
+use Mosaic\Tests\MocksTheStandardLibrary;
 use PHPUnit_Framework_TestCase;
 use Zend\Diactoros\Response as ZendResponse;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Fresco\Contracts;
+namespace Mosaic\Contracts;
 
 interface EnvironmentVariablesLoader
 {

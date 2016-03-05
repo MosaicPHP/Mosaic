@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Tests\Definitions;
+namespace Mosaic\Tests\Definitions;
 
-use Fresco\Contracts\EnvironmentVariablesLoader;
-use Fresco\Definitions\DotEnvDefinition;
+use Mosaic\Contracts\EnvironmentVariablesLoader;
+use Mosaic\Definitions\DotEnvDefinition;
 use Interop\Container\Definition\DefinitionProviderInterface;
 
 class DotEnvDefinitionTest extends DefinitionTestCase

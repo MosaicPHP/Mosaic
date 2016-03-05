@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\View\Adapters\Twig;
+namespace Mosaic\View\Adapters\Twig;
 
-use Fresco\Contracts\View\Factory as ViewFactory;
-use Fresco\Contracts\View\View as ViewContract;
+use Mosaic\Contracts\View\Factory as ViewFactory;
+use Mosaic\Contracts\View\View as ViewContract;
 use Twig_Environment;
 
 class Factory implements ViewFactory

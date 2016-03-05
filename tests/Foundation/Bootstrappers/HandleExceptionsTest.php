@@ -1,10 +1,10 @@
 <?php
 
-namespace Fresco\Tests\Foundation\Bootstrappers;
+namespace Mosaic\Tests\Foundation\Bootstrappers;
 
-use Fresco\Application;
-use Fresco\Foundation\Bootstrap\HandleExceptions;
-use Fresco\Http\SapiEmitter;
+use Mosaic\Application;
+use Mosaic\Foundation\Bootstrap\HandleExceptions;
+use Mosaic\Http\SapiEmitter;
 
 class HandleExceptionsTest extends \PHPUnit_Framework_TestCase
 {
@@ -32,6 +32,6 @@ class HandleExceptionsTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-class Runner extends \Fresco\Exceptions\Runner
+class Runner extends \Mosaic\Exceptions\Runner
 {
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace Fresco\Tests\Definitions;
+namespace Mosaic\Tests\Definitions;
 
-use Fresco\Contracts\Routing\RouteDispatcher;
-use Fresco\Contracts\Routing\Router;
-use Fresco\Definitions\FastRouteDefinition;
+use Mosaic\Contracts\Routing\RouteDispatcher;
+use Mosaic\Contracts\Routing\Router;
+use Mosaic\Definitions\FastRouteDefinition;
 use Interop\Container\Definition\DefinitionProviderInterface;
 
 class FastRouteDefinitionTest extends DefinitionTestCase

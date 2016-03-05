@@ -1,11 +1,11 @@
 <?php
 
-namespace Fresco\Routing\Dispatchers;
+namespace Mosaic\Routing\Dispatchers;
 
-use Fresco\Contracts\Container\Container;
-use Fresco\Exceptions\NotFoundHttpException;
-use Fresco\Routing\MethodParameterResolver;
-use Fresco\Routing\Route;
+use Mosaic\Contracts\Container\Container;
+use Mosaic\Exceptions\NotFoundHttpException;
+use Mosaic\Routing\MethodParameterResolver;
+use Mosaic\Routing\Route;
 use ReflectionMethod;
 
 class DispatchController

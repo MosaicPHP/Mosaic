@@ -1,8 +1,8 @@
 <?php
 
-namespace Fresco\Config\Adapters;
+namespace Mosaic\Config\Adapters;
 
-use Fresco\Contracts\Config\Config;
+use Mosaic\Contracts\Config\Config;
 use Illuminate\Config\Repository;
 
 class LaravelConfig implements Config

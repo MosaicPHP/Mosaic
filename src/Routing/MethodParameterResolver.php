@@ -1,8 +1,8 @@
 <?php
 
-namespace Fresco\Routing;
+namespace Mosaic\Routing;
 
-use Fresco\Contracts\Container\Container;
+use Mosaic\Contracts\Container\Container;
 use ReflectionFunctionAbstract;
 
 class MethodParameterResolver

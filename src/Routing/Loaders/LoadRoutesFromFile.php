@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Routing\Loaders;
+namespace Mosaic\Routing\Loaders;
 
-use Fresco\Contracts\Routing\RouteLoader;
-use Fresco\Contracts\Routing\Router;
+use Mosaic\Contracts\Routing\RouteLoader;
+use Mosaic\Contracts\Routing\Router;
 
 class LoadRoutesFromFile implements RouteLoader
 {

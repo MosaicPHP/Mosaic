@@ -1,18 +1,18 @@
 <?php
 
-namespace Fresco\Tests;
+namespace Mosaic\Tests;
 
-use Fresco\Application;
-use Fresco\Contracts\Container\Container;
-use Fresco\Contracts\Container\ContainerDefinition;
-use Fresco\Contracts\Exceptions\ExceptionRunner;
-use Fresco\Foundation\Bootstrap\Bootstrapper;
-use Fresco\Foundation\Bootstrap\HandleExceptions;
-use Fresco\Foundation\Bootstrap\LoadConfiguration;
-use Fresco\Foundation\Bootstrap\LoadEnvironmentVariables;
-use Fresco\Foundation\Bootstrap\LoadRoutes;
-use Fresco\Foundation\Bootstrap\RegisterDefinitions;
-use Fresco\Foundation\Components\Registry;
+use Mosaic\Application;
+use Mosaic\Contracts\Container\Container;
+use Mosaic\Contracts\Container\ContainerDefinition;
+use Mosaic\Contracts\Exceptions\ExceptionRunner;
+use Mosaic\Foundation\Bootstrap\Bootstrapper;
+use Mosaic\Foundation\Bootstrap\HandleExceptions;
+use Mosaic\Foundation\Bootstrap\LoadConfiguration;
+use Mosaic\Foundation\Bootstrap\LoadEnvironmentVariables;
+use Mosaic\Foundation\Bootstrap\LoadRoutes;
+use Mosaic\Foundation\Bootstrap\RegisterDefinitions;
+use Mosaic\Foundation\Components\Registry;
 use Interop\Container\Definition\DefinitionProviderInterface;
 use Mockery\MockInterface;
 use PHPUnit_Framework_TestCase;
@@ -215,6 +215,6 @@ class SomeDefinitionStub implements DefinitionProviderInterface
     }
 }
 
-class ERunner extends \Fresco\Exceptions\Runner
+class ERunner extends \Mosaic\Exceptions\Runner
 {
 }

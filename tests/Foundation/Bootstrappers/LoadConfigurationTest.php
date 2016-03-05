@@ -1,11 +1,11 @@
 <?php
 
-namespace Fresco\Tests\Foundation\Bootstrappers;
+namespace Mosaic\Tests\Foundation\Bootstrappers;
 
-use Fresco\Contracts\Application;
-use Fresco\Contracts\Config\Config;
-use Fresco\Foundation\Bootstrap\LoadConfiguration;
-use Fresco\Tests\ClosesMockeryOnTearDown;
+use Mosaic\Contracts\Application;
+use Mosaic\Contracts\Config\Config;
+use Mosaic\Foundation\Bootstrap\LoadConfiguration;
+use Mosaic\Tests\ClosesMockeryOnTearDown;
 use Mockery\Mock;
 
 class LoadConfigurationTest extends \PHPUnit_Framework_TestCase

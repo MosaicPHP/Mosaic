@@ -1,12 +1,12 @@
 <?php
 
-namespace Fresco\Tests\Http;
+namespace Mosaic\Tests\Http;
 
-use Fresco\Contracts\Http\Response;
-use Fresco\Http\SapiEmitter;
-use Fresco\Tests\ClosesMockeryOnTearDown;
-use Fresco\Tests\MocksTheStandardLibrary;
-use Fresco\Tests\StdMocks;
+use Mosaic\Contracts\Http\Response;
+use Mosaic\Http\SapiEmitter;
+use Mosaic\Tests\ClosesMockeryOnTearDown;
+use Mosaic\Tests\MocksTheStandardLibrary;
+use Mosaic\Tests\StdMocks;
 use PHPUnit_Framework_TestCase;
 
 class SapiEmitterTest extends PHPUnit_Framework_TestCase

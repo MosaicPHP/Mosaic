@@ -1,12 +1,12 @@
 <?php
 
-namespace Fresco\Routing\Loaders;
+namespace Mosaic\Routing\Loaders;
 
-use Fresco\Contracts\Application;
-use Fresco\Contracts\Config\Config;
-use Fresco\Contracts\Container\Container;
-use Fresco\Contracts\Routing\RouteLoader;
-use Fresco\Contracts\Routing\Router;
+use Mosaic\Contracts\Application;
+use Mosaic\Contracts\Config\Config;
+use Mosaic\Contracts\Container\Container;
+use Mosaic\Contracts\Routing\RouteLoader;
+use Mosaic\Contracts\Routing\Router;
 use InvalidArgumentException;
 
 class LoadRoutesFromBinders implements RouteLoader

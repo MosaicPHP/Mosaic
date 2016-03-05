@@ -1,10 +1,10 @@
 <?php
 
-namespace Fresco\Tests\Definitions;
+namespace Mosaic\Tests\Definitions;
 
-use Fresco\Application;
-use Fresco\Contracts\CommandBus\CommandBus;
-use Fresco\Definitions\TacticianDefinition;
+use Mosaic\Application;
+use Mosaic\Contracts\CommandBus\CommandBus;
+use Mosaic\Definitions\TacticianDefinition;
 use Interop\Container\Definition\DefinitionProviderInterface;
 
 class TacticianDefinitionTest extends DefinitionTestCase

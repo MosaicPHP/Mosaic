@@ -1,6 +1,6 @@
 <?php
 
-namespace Fresco\Contracts\View;
+namespace Mosaic\Contracts\View;
 
 interface View
 {

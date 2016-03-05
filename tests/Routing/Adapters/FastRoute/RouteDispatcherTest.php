@@ -1,14 +1,14 @@
 <?php
 
-namespace Fresco\Tests\Routing\Adapters\FastRoute;
+namespace Mosaic\Tests\Routing\Adapters\FastRoute;
 
-use Fresco\Contracts\Http\Request;
-use Fresco\Exceptions\MethodNotAllowedException;
-use Fresco\Exceptions\NotFoundHttpException;
-use Fresco\Routing\Adapters\FastRoute\RouteDispatcher;
-use Fresco\Routing\Route;
-use Fresco\Routing\RouteCollection;
-use Fresco\Tests\ClosesMockeryOnTearDown;
+use Mosaic\Contracts\Http\Request;
+use Mosaic\Exceptions\MethodNotAllowedException;
+use Mosaic\Exceptions\NotFoundHttpException;
+use Mosaic\Routing\Adapters\FastRoute\RouteDispatcher;
+use Mosaic\Routing\Route;
+use Mosaic\Routing\RouteCollection;
+use Mosaic\Tests\ClosesMockeryOnTearDown;
 
 class RouteDispatcherTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Fresco\Tests\Exceptions\Formatters;
+namespace Mosaic\Tests\Exceptions\Formatters;
 
-use Fresco\Contracts\Application;
-use Fresco\Exceptions\Formatters\HtmlFormatter;
-use Fresco\Exceptions\Formatters\SmartFormatter;
-use Fresco\Exceptions\Formatters\WhoopsFormatter;
+use Mosaic\Contracts\Application;
+use Mosaic\Exceptions\Formatters\HtmlFormatter;
+use Mosaic\Exceptions\Formatters\SmartFormatter;
+use Mosaic\Exceptions\Formatters\WhoopsFormatter;
 use PHPUnit_Framework_TestCase;
 
 class EnvBasedWhoopsFormatterTest extends PHPUnit_Framework_TestCase

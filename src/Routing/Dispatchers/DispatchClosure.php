@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Routing\Dispatchers;
+namespace Mosaic\Routing\Dispatchers;
 
-use Fresco\Routing\MethodParameterResolver;
-use Fresco\Routing\Route;
+use Mosaic\Routing\MethodParameterResolver;
+use Mosaic\Routing\Route;
 use ReflectionFunction;
 
 class DispatchClosure

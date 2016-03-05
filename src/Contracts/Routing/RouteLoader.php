@@ -1,6 +1,6 @@
 <?php
 
-namespace Fresco\Contracts\Routing;
+namespace Mosaic\Contracts\Routing;
 
 interface RouteLoader
 {

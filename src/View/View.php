@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\View;
+namespace Mosaic\View;
 
 use ArrayAccess;
-use Fresco\Contracts\View\View as ViewContract;
+use Mosaic\Contracts\View\View as ViewContract;
 
 abstract class View implements ViewContract, ArrayAccess
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Fresco\Exceptions\Formatters;
+namespace Mosaic\Exceptions\Formatters;
 
-use Fresco\Contracts\Exceptions\ExceptionFormatter;
-use Fresco\Exceptions\ErrorResponse;
-use Fresco\Support\HtmlString;
+use Mosaic\Contracts\Exceptions\ExceptionFormatter;
+use Mosaic\Exceptions\ErrorResponse;
+use Mosaic\Support\HtmlString;
 use Throwable;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run;

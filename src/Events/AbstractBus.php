@@ -1,6 +1,6 @@
 <?php
 
-namespace Fresco\Events;
+namespace Mosaic\Events;
 
 abstract class AbstractBus
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Contracts;
+namespace Mosaic\Contracts;
 
-use Fresco\Contracts\Container\Container;
-use Fresco\Contracts\Exceptions\ExceptionRunner;
+use Mosaic\Contracts\Container\Container;
+use Mosaic\Contracts\Exceptions\ExceptionRunner;
 
 interface Application
 {

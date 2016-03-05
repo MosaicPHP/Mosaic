@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Container\Adapters\Laravel;
+namespace Mosaic\Container\Adapters\Laravel;
 
-use Fresco\Container\NotFoundException;
-use Fresco\Contracts\Container\AutomaticResolutionContainer;
+use Mosaic\Container\NotFoundException;
+use Mosaic\Contracts\Container\AutomaticResolutionContainer;
 use Illuminate\Container\Container as LaravelContainer;
 
 class Container implements AutomaticResolutionContainer

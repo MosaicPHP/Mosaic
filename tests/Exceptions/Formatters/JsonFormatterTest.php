@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Tests\Exceptions\Formatters;
+namespace Mosaic\Tests\Exceptions\Formatters;
 
 use Exception;
-use Fresco\Exceptions\Formatters\JsonFormatter;
+use Mosaic\Exceptions\Formatters\JsonFormatter;
 
 class JsonFormatterTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,18 +1,18 @@
 <?php
 
-namespace Fresco\Tests\Http\Middleware;
+namespace Mosaic\Tests\Http\Middleware;
 
-use Fresco\Contracts\Http\Request;
-use Fresco\Contracts\Http\Response;
-use Fresco\Contracts\Http\ResponseFactory;
-use Fresco\Contracts\Routing\RouteDispatcher;
-use Fresco\Contracts\Routing\Router;
-use Fresco\Http\Middleware\DispatchRequest;
-use Fresco\Routing\Dispatchers\DispatchClosure;
-use Fresco\Routing\Dispatchers\DispatchController;
-use Fresco\Routing\Route;
-use Fresco\Routing\RouteCollection;
-use Fresco\Tests\ClosesMockeryOnTearDown;
+use Mosaic\Contracts\Http\Request;
+use Mosaic\Contracts\Http\Response;
+use Mosaic\Contracts\Http\ResponseFactory;
+use Mosaic\Contracts\Routing\RouteDispatcher;
+use Mosaic\Contracts\Routing\Router;
+use Mosaic\Http\Middleware\DispatchRequest;
+use Mosaic\Routing\Dispatchers\DispatchClosure;
+use Mosaic\Routing\Dispatchers\DispatchController;
+use Mosaic\Routing\Route;
+use Mosaic\Routing\RouteCollection;
+use Mosaic\Tests\ClosesMockeryOnTearDown;
 use Mockery\Mock;
 use PHPUnit_Framework_TestCase;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Fresco\CommandBus;
+namespace Mosaic\CommandBus;
 
 use ArrayAccess;
 use InvalidArgumentException;

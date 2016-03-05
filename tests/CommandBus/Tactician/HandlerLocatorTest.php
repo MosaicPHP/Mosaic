@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Tests\CommandBus\Tactician;
+namespace Mosaic\Tests\CommandBus\Tactician;
 
-use Fresco\CommandBus\Tactician\HandlerLocator;
-use Fresco\Tests\ClosesMockeryOnTearDown;
+use Mosaic\CommandBus\Tactician\HandlerLocator;
+use Mosaic\Tests\ClosesMockeryOnTearDown;
 use League\Tactician\Exception\MissingHandlerException;
 use Mockery\Mock;
 use PHPUnit_Framework_TestCase;
@@ -25,7 +25,7 @@ class HandlerLocatorTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->locator = new HandlerLocator(
-            $this->container = \Mockery::mock(\Fresco\Contracts\Container\Container::class)
+            $this->container = \Mockery::mock(\Mosaic\Contracts\Container\Container::class)
         );
     }
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Fresco\Http\Adapters\Psr7;
+namespace Mosaic\Http\Adapters\Psr7;
 
-use Fresco\Contracts\Http\Response as ResponseContract;
+use Mosaic\Contracts\Http\Response as ResponseContract;
 use Psr\Http\Message\ResponseInterface;
 
 class Response implements ResponseContract

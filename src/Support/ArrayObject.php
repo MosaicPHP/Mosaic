@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Support;
+namespace Mosaic\Support;
 
 use ArrayAccess;
-use Fresco\Contracts\Support\Arrayable;
+use Mosaic\Contracts\Support\Arrayable;
 
 class ArrayObject implements Arrayable, ArrayAccess
 {

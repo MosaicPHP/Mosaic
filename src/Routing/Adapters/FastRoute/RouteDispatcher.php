@@ -1,15 +1,15 @@
 <?php
 
-namespace Fresco\Routing\Adapters\FastRoute;
+namespace Mosaic\Routing\Adapters\FastRoute;
 
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
-use Fresco\Contracts\Http\Request;
-use Fresco\Contracts\Routing\RouteDispatcher as RouteDispatcherContract;
-use Fresco\Exceptions\MethodNotAllowedException;
-use Fresco\Exceptions\NotFoundHttpException;
-use Fresco\Routing\Route;
-use Fresco\Routing\RouteCollection;
+use Mosaic\Contracts\Http\Request;
+use Mosaic\Contracts\Routing\RouteDispatcher as RouteDispatcherContract;
+use Mosaic\Exceptions\MethodNotAllowedException;
+use Mosaic\Exceptions\NotFoundHttpException;
+use Mosaic\Routing\Route;
+use Mosaic\Routing\RouteCollection;
 
 class RouteDispatcher implements RouteDispatcherContract
 {

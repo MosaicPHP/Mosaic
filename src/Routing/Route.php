@@ -1,6 +1,6 @@
 <?php
 
-namespace Fresco\Routing;
+namespace Mosaic\Routing;
 
 use UnexpectedValueException;
 

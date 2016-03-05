@@ -1,8 +1,8 @@
 <?php
 
-namespace Fresco\Foundation\Bootstrap;
+namespace Mosaic\Foundation\Bootstrap;
 
-use Fresco\Contracts\Application;
+use Mosaic\Contracts\Application;
 
 interface Bootstrapper
 {

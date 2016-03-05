@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Events\Adapters;
+namespace Mosaic\Events\Adapters;
 
-use Fresco\Contracts\Events\Bus;
-use Fresco\Events\AbstractBus;
+use Mosaic\Contracts\Events\Bus;
+use Mosaic\Events\AbstractBus;
 
 class LeagueEventBus extends AbstractBus implements Bus
 {

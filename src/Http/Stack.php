@@ -1,10 +1,10 @@
 <?php
 
-namespace Fresco\Http;
+namespace Mosaic\Http;
 
-use Fresco\Contracts\Application;
-use Fresco\Contracts\Http\Request;
-use Fresco\Contracts\Http\Response;
+use Mosaic\Contracts\Application;
+use Mosaic\Contracts\Http\Request;
+use Mosaic\Contracts\Http\Response;
 
 class Stack
 {

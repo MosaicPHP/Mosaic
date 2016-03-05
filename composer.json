@@ -1,5 +1,5 @@
 {
-  "name": "fresco/fresco",
+  "name": "mosaic/mosaic",
   "description": "",
   "keywords": [
     "framework"
@@ -35,12 +35,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Fresco\\": "src/"
+      "Mosaic\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Fresco\\Tests\\": "tests/"
+      "Mosaic\\Tests\\": "tests/"
     }
   },
   "minimum-stability": "dev",

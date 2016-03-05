@@ -1,13 +1,13 @@
 <?php
 
-namespace Fresco\Tests\Http;
+namespace Mosaic\Tests\Http;
 
-use Fresco\Contracts\Application;
-use Fresco\Contracts\Container\Container;
-use Fresco\Contracts\Http\Request;
-use Fresco\Http\Adapters\Psr7\ResponseFactory;
-use Fresco\Http\Stack;
-use Fresco\Tests\ClosesMockeryOnTearDown;
+use Mosaic\Contracts\Application;
+use Mosaic\Contracts\Container\Container;
+use Mosaic\Contracts\Http\Request;
+use Mosaic\Http\Adapters\Psr7\ResponseFactory;
+use Mosaic\Http\Stack;
+use Mosaic\Tests\ClosesMockeryOnTearDown;
 use Mockery\Mock;
 
 class StackTest extends \PHPUnit_Framework_TestCase

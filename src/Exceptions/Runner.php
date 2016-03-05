@@ -1,13 +1,13 @@
 <?php
 
-namespace Fresco\Exceptions;
+namespace Mosaic\Exceptions;
 
 use ErrorException;
-use Fresco\Contracts\Application;
-use Fresco\Contracts\Exceptions\ExceptionRunner;
-use Fresco\Contracts\Http\Emitter;
-use Fresco\Contracts\Http\ResponseFactory;
-use Fresco\Exceptions\Formatters\HtmlFormatter;
+use Mosaic\Contracts\Application;
+use Mosaic\Contracts\Exceptions\ExceptionRunner;
+use Mosaic\Contracts\Http\Emitter;
+use Mosaic\Contracts\Http\ResponseFactory;
+use Mosaic\Exceptions\Formatters\HtmlFormatter;
 use Throwable;
 
 class Runner implements ExceptionRunner

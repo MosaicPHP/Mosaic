@@ -1,19 +1,19 @@
 <?php
 
-namespace Fresco;
+namespace Mosaic;
 
-use Fresco\Contracts\Application as ApplicationContract;
-use Fresco\Contracts\Container\Container;
-use Fresco\Contracts\Container\ContainerDefinition;
-use Fresco\Contracts\Exceptions\ExceptionRunner;
-use Fresco\Contracts\Http\Server;
-use Fresco\Definitions\LaravelContainerDefinition;
-use Fresco\Foundation\Bootstrap\HandleExceptions;
-use Fresco\Foundation\Bootstrap\LoadConfiguration;
-use Fresco\Foundation\Bootstrap\LoadEnvironmentVariables;
-use Fresco\Foundation\Bootstrap\LoadRoutes;
-use Fresco\Foundation\Bootstrap\RegisterDefinitions;
-use Fresco\Foundation\Components\Registry;
+use Mosaic\Contracts\Application as ApplicationContract;
+use Mosaic\Contracts\Container\Container;
+use Mosaic\Contracts\Container\ContainerDefinition;
+use Mosaic\Contracts\Exceptions\ExceptionRunner;
+use Mosaic\Contracts\Http\Server;
+use Mosaic\Definitions\LaravelContainerDefinition;
+use Mosaic\Foundation\Bootstrap\HandleExceptions;
+use Mosaic\Foundation\Bootstrap\LoadConfiguration;
+use Mosaic\Foundation\Bootstrap\LoadEnvironmentVariables;
+use Mosaic\Foundation\Bootstrap\LoadRoutes;
+use Mosaic\Foundation\Bootstrap\RegisterDefinitions;
+use Mosaic\Foundation\Components\Registry;
 use Interop\Container\Definition\DefinitionProviderInterface;
 
 class Application implements ApplicationContract

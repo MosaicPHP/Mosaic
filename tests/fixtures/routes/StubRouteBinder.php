@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Tests\fixtures\routes;
+namespace Mosaic\Tests\fixtures\routes;
 
-use Fresco\Contracts\Routing\RouteBinder;
-use Fresco\Contracts\Routing\Router;
+use Mosaic\Contracts\Routing\RouteBinder;
+use Mosaic\Contracts\Routing\Router;
 
 class StubRouteBinder implements RouteBinder
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Tests\Definitions;
+namespace Mosaic\Tests\Definitions;
 
-use Fresco\Contracts\Routing\RouteLoader;
-use Fresco\Definitions\RouteFileDefinition;
+use Mosaic\Contracts\Routing\RouteLoader;
+use Mosaic\Definitions\RouteFileDefinition;
 use Interop\Container\Definition\DefinitionProviderInterface;
 
 class RouteFileDefinitionTest extends DefinitionTestCase

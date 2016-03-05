@@ -1,10 +1,10 @@
 <?php
 
-namespace Fresco\Definitions;
+namespace Mosaic\Definitions;
 
-use Fresco\Contracts\Application;
-use Fresco\Contracts\View\Factory as FactoryContract;
-use Fresco\View\Adapters\Twig\Factory as TwigFactory;
+use Mosaic\Contracts\Application;
+use Mosaic\Contracts\View\Factory as FactoryContract;
+use Mosaic\View\Adapters\Twig\Factory as TwigFactory;
 use Illuminate\Contracts\Container\Container;
 use Interop\Container\Definition\DefinitionProviderInterface;
 use Twig_Environment;

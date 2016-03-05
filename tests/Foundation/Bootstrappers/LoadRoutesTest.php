@@ -1,11 +1,11 @@
 <?php
 
-namespace Fresco\Tests\Foundation\Bootstrappers;
+namespace Mosaic\Tests\Foundation\Bootstrappers;
 
-use Fresco\Contracts\Application;
-use Fresco\Contracts\Routing\RouteLoader;
-use Fresco\Contracts\Routing\Router;
-use Fresco\Foundation\Bootstrap\LoadRoutes;
+use Mosaic\Contracts\Application;
+use Mosaic\Contracts\Routing\RouteLoader;
+use Mosaic\Contracts\Routing\Router;
+use Mosaic\Foundation\Bootstrap\LoadRoutes;
 use PHPUnit_Framework_TestCase;
 
 class LoadRoutesTest extends PHPUnit_Framework_TestCase

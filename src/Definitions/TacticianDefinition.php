@@ -1,12 +1,12 @@
 <?php
 
-namespace Fresco\Definitions;
+namespace Mosaic\Definitions;
 
-use Fresco\CommandBus\Tactician\HandlerLocator;
-use Fresco\CommandBus\Tactician\TacticianBus;
-use Fresco\Contracts\Application;
-use Fresco\Contracts\CommandBus\CommandBus;
-use Fresco\Contracts\Container\Container;
+use Mosaic\CommandBus\Tactician\HandlerLocator;
+use Mosaic\CommandBus\Tactician\TacticianBus;
+use Mosaic\Contracts\Application;
+use Mosaic\Contracts\CommandBus\CommandBus;
+use Mosaic\Contracts\Container\Container;
 use Interop\Container\Definition\DefinitionProviderInterface;
 use League\Tactician\Handler\CommandHandlerMiddleware;
 use League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor;

@@ -1,8 +1,8 @@
 <?php
 
-namespace Fresco\Routing;
+namespace Mosaic\Routing;
 
-use Fresco\Contracts\Routing\Router as RouterContract;
+use Mosaic\Contracts\Routing\Router as RouterContract;
 
 class Router implements RouterContract
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Fresco\CommandBus\Tactician;
+namespace Mosaic\CommandBus\Tactician;
 
 use ArrayAccess;
-use Fresco\CommandBus\AbstractBus;
-use Fresco\Contracts\CommandBus\CommandBus;
-use Fresco\Contracts\Container\Container;
-use Fresco\Support\ArrayObject;
+use Mosaic\CommandBus\AbstractBus;
+use Mosaic\Contracts\CommandBus\CommandBus;
+use Mosaic\Contracts\Container\Container;
+use Mosaic\Support\ArrayObject;
 use League\Tactician\CommandBus as TacticianCommandBus;
 
 class TacticianBus extends AbstractBus implements CommandBus

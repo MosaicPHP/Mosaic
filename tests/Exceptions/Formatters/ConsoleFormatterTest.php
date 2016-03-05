@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Tests\Exceptions\Formatters;
+namespace Mosaic\Tests\Exceptions\Formatters;
 
 use Exception;
-use Fresco\Exceptions\Formatters\ConsoleFormatter;
+use Mosaic\Exceptions\Formatters\ConsoleFormatter;
 
 class ConsoleFormatterTest extends \PHPUnit_Framework_TestCase
 {

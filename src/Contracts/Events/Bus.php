@@ -1,6 +1,6 @@
 <?php
 
-namespace Fresco\Contracts\Events;
+namespace Mosaic\Contracts\Events;
 
 interface Bus
 {

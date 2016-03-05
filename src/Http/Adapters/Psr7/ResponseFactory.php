@@ -1,10 +1,10 @@
 <?php
 
-namespace Fresco\Http\Adapters\Psr7;
+namespace Mosaic\Http\Adapters\Psr7;
 
-use Fresco\Contracts\Http\Response as ResponseContract;
-use Fresco\Contracts\Http\ResponseFactory as ResponseFactoryContract;
-use Fresco\Contracts\Support\Arrayable;
+use Mosaic\Contracts\Http\Response as ResponseContract;
+use Mosaic\Contracts\Http\ResponseFactory as ResponseFactoryContract;
+use Mosaic\Contracts\Support\Arrayable;
 use Zend\Diactoros\Response\EmptyResponse;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\JsonResponse;

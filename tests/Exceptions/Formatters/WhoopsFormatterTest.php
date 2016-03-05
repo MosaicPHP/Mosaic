@@ -1,10 +1,10 @@
 <?php
 
-namespace Fresco\Tests\Exceptions\Formatters;
+namespace Mosaic\Tests\Exceptions\Formatters;
 
 use Exception;
-use Fresco\Exceptions\Formatters\ConsoleFormatter;
-use Fresco\Exceptions\Formatters\WhoopsFormatter;
+use Mosaic\Exceptions\Formatters\ConsoleFormatter;
+use Mosaic\Exceptions\Formatters\WhoopsFormatter;
 use Mockery\Mock;
 use Whoops\Run;
 use Whoops\Util\SystemFacade;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Fresco\Contracts\Exceptions;
+namespace Mosaic\Contracts\Exceptions;
 
 use Throwable;
 

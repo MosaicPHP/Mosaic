@@ -1,8 +1,8 @@
 <?php
 
-namespace Fresco\Tests\Routing;
+namespace Mosaic\Tests\Routing;
 
-use Fresco\Routing\Route;
+use Mosaic\Routing\Route;
 
 class RouteTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Tests\CommandBus;
+namespace Mosaic\Tests\CommandBus;
 
-use Fresco\CommandBus\Marshal;
-use Fresco\Support\ArrayObject;
+use Mosaic\CommandBus\Marshal;
+use Mosaic\Support\ArrayObject;
 use InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
 

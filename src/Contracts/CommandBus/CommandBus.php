@@ -1,6 +1,6 @@
 <?php
 
-namespace Fresco\Contracts\CommandBus;
+namespace Mosaic\Contracts\CommandBus;
 
 use ArrayAccess;
 

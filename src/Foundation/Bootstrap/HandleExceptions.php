@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Foundation\Bootstrap;
+namespace Mosaic\Foundation\Bootstrap;
 
-use Fresco\Contracts\Application;
-use Fresco\Contracts\Exceptions\ExceptionRunner;
+use Mosaic\Contracts\Application;
+use Mosaic\Contracts\Exceptions\ExceptionRunner;
 
 class HandleExceptions implements Bootstrapper
 {

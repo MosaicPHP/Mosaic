@@ -1,8 +1,8 @@
 <?php
 
-namespace Fresco\Exceptions\Handlers;
+namespace Mosaic\Exceptions\Handlers;
 
-use Fresco\Contracts\Exceptions\ExceptionHandler;
+use Mosaic\Contracts\Exceptions\ExceptionHandler;
 use Throwable;
 
 class LogHandler implements ExceptionHandler

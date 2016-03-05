@@ -1,8 +1,8 @@
 <?php
 
-namespace Fresco\Tests\Support;
+namespace Mosaic\Tests\Support;
 
-use Fresco\Support\Arr;
+use Mosaic\Support\Arr;
 use PHPUnit_Framework_TestCase;
 
 class ArrTest extends PHPUnit_Framework_TestCase

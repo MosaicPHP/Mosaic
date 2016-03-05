@@ -1,10 +1,10 @@
 <?php
 
-namespace Fresco\Foundation\EnvironmentVariables\Adapters;
+namespace Mosaic\Foundation\EnvironmentVariables\Adapters;
 
 use Dotenv\Dotenv;
 use Dotenv\Exception\InvalidPathException;
-use Fresco\Contracts\EnvironmentVariablesLoader;
+use Mosaic\Contracts\EnvironmentVariablesLoader;
 
 class DotEnvVariableLoader implements EnvironmentVariablesLoader
 {

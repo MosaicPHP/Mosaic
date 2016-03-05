@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Tests\Definitions;
+namespace Mosaic\Tests\Definitions;
 
-use Fresco\Contracts\Config\Config;
-use Fresco\Definitions\LaravelConfigDefinition;
+use Mosaic\Contracts\Config\Config;
+use Mosaic\Definitions\LaravelConfigDefinition;
 use Interop\Container\Definition\DefinitionProviderInterface;
 
 class LaravelConfigDefinitionTest extends DefinitionTestCase

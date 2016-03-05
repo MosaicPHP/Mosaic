@@ -1,8 +1,8 @@
 <?php
 
-namespace Fresco\Contracts\Http;
+namespace Mosaic\Contracts\Http;
 
-use Fresco\Contracts\Support\Arrayable;
+use Mosaic\Contracts\Support\Arrayable;
 
 interface ResponseFactory
 {

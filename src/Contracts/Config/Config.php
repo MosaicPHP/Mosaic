@@ -1,6 +1,6 @@
 <?php
 
-namespace Fresco\Contracts\Config;
+namespace Mosaic\Contracts\Config;
 
 interface Config
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Fresco\Tests\Foundation\Bootstrappers;
+namespace Mosaic\Tests\Foundation\Bootstrappers;
 
-use Fresco\Contracts\Application;
-use Fresco\Contracts\Container\Container;
-use Fresco\Foundation\Bootstrap\RegisterDefinitions;
-use Fresco\Foundation\Components\Registry;
-use Fresco\Tests\ClosesMockeryOnTearDown;
+use Mosaic\Contracts\Application;
+use Mosaic\Contracts\Container\Container;
+use Mosaic\Foundation\Bootstrap\RegisterDefinitions;
+use Mosaic\Foundation\Components\Registry;
+use Mosaic\Tests\ClosesMockeryOnTearDown;
 
 class RegisterDefinitionsTest extends \PHPUnit_Framework_TestCase
 {

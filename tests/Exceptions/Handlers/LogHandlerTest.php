@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Tests\Exceptions\Handlers;
+namespace Mosaic\Tests\Exceptions\Handlers;
 
 use Exception;
-use Fresco\Exceptions\Handlers\LogHandler;
+use Mosaic\Exceptions\Handlers\LogHandler;
 
 class LogHandlerTest extends \PHPUnit_Framework_TestCase
 {

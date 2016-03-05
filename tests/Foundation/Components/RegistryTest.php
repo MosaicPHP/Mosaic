@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Tests\Foundation\Components;
+namespace Mosaic\Tests\Foundation\Components;
 
-use Fresco\Contracts\Container\Container;
-use Fresco\Foundation\Components\Registry;
+use Mosaic\Contracts\Container\Container;
+use Mosaic\Foundation\Components\Registry;
 use Interop\Container\Definition\DefinitionProviderInterface;
 
 class RegistryTest extends \PHPUnit_Framework_TestCase

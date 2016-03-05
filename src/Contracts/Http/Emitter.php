@@ -1,6 +1,6 @@
 <?php
 
-namespace Fresco\Contracts\Http;
+namespace Mosaic\Contracts\Http;
 
 interface Emitter
 {

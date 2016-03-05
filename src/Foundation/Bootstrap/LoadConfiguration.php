@@ -1,10 +1,10 @@
 <?php
 
-namespace Fresco\Foundation\Bootstrap;
+namespace Mosaic\Foundation\Bootstrap;
 
 use DirectoryIterator;
-use Fresco\Contracts\Application;
-use Fresco\Contracts\Config\Config;
+use Mosaic\Contracts\Application;
+use Mosaic\Contracts\Config\Config;
 use RegexIterator;
 
 class LoadConfiguration implements Bootstrapper

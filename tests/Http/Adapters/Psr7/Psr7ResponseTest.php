@@ -1,10 +1,10 @@
 <?php
 
-namespace Fresco\Tests\Http\Adapters\Psr7;
+namespace Mosaic\Tests\Http\Adapters\Psr7;
 
-use Fresco\Contracts\Http\Response as ResponseContract;
-use Fresco\Http\Adapters\Psr7\Response;
-use Fresco\Tests\ClosesMockeryOnTearDown;
+use Mosaic\Contracts\Http\Response as ResponseContract;
+use Mosaic\Http\Adapters\Psr7\Response;
+use Mosaic\Tests\ClosesMockeryOnTearDown;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
@@ -28,7 +28,7 @@ class Psr7ResponseTest extends \PHPUnit_Framework_TestCase
         $this->response = new Response($this->wrappedMock = \Mockery::mock(ResponseInterface::class));
     }
 
-    public function test_it_implements_the_fresco_response_interface()
+    public function test_it_implements_the_Mosaic_response_interface()
     {
         $this->assertInstanceOf(ResponseContract::class, $this->response);
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Fresco\Support;
+namespace Mosaic\Support;
 
 class Arr
 {

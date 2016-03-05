@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Definitions;
+namespace Mosaic\Definitions;
 
-use Fresco\Contracts\Routing\RouteLoader;
-use Fresco\Routing\Loaders\LoadRoutesFromBinders;
+use Mosaic\Contracts\Routing\RouteLoader;
+use Mosaic\Routing\Loaders\LoadRoutesFromBinders;
 use Interop\Container\Definition\DefinitionProviderInterface;
 
 class RouteBinderDefinition implements DefinitionProviderInterface

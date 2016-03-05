@@ -1,11 +1,11 @@
 <?php
 
-namespace Fresco\Tests\Definitions;
+namespace Mosaic\Tests\Definitions;
 
-use Fresco\Contracts\Http\Request;
-use Fresco\Contracts\Http\Response;
-use Fresco\Contracts\Http\ResponseFactory;
-use Fresco\Definitions\DiactorosDefinition;
+use Mosaic\Contracts\Http\Request;
+use Mosaic\Contracts\Http\Response;
+use Mosaic\Contracts\Http\ResponseFactory;
+use Mosaic\Definitions\DiactorosDefinition;
 use Interop\Container\Definition\DefinitionProviderInterface;
 
 class DiactorosDefinitionTest extends DefinitionTestCase

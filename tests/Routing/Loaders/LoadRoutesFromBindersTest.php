@@ -1,13 +1,13 @@
 <?php
 
-namespace Fresco\Tests\Routing\Loaders;
+namespace Mosaic\Tests\Routing\Loaders;
 
-use Fresco\Contracts\Application;
-use Fresco\Contracts\Config\Config;
-use Fresco\Contracts\Container\Container;
-use Fresco\Contracts\Routing\Router;
-use Fresco\Routing\Loaders\LoadRoutesFromBinders;
-use Fresco\Tests\fixtures\routes\StubRouteBinder;
+use Mosaic\Contracts\Application;
+use Mosaic\Contracts\Config\Config;
+use Mosaic\Contracts\Container\Container;
+use Mosaic\Contracts\Routing\Router;
+use Mosaic\Routing\Loaders\LoadRoutesFromBinders;
+use Mosaic\Tests\fixtures\routes\StubRouteBinder;
 use InvalidArgumentException;
 use Mockery\Mock;
 use PHPUnit_Framework_TestCase;

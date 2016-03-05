@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Foundation\Bootstrap;
+namespace Mosaic\Foundation\Bootstrap;
 
-use Fresco\Contracts\Application;
-use Fresco\Contracts\EnvironmentVariablesLoader;
+use Mosaic\Contracts\Application;
+use Mosaic\Contracts\EnvironmentVariablesLoader;
 
 class LoadEnvironmentVariables implements Bootstrapper
 {

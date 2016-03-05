@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Contracts\Routing;
+namespace Mosaic\Contracts\Routing;
 
-use Fresco\Routing\Route;
-use Fresco\Routing\RouteCollection;
+use Mosaic\Routing\Route;
+use Mosaic\Routing\RouteCollection;
 
 interface Router
 {

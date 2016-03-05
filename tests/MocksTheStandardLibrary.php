@@ -1,6 +1,6 @@
 <?php
 
-namespace Fresco\Tests;
+namespace Mosaic\Tests;
 
 trait MocksTheStandardLibrary
 {

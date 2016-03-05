@@ -1,8 +1,8 @@
 <?php
 
-namespace Fresco\Support;
+namespace Mosaic\Support;
 
-use Fresco\Contracts\Support\Stringable;
+use Mosaic\Contracts\Support\Stringable;
 
 class HtmlString implements Stringable
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Fresco\Tests\CommandBus\Tactician;
+namespace Mosaic\Tests\CommandBus\Tactician;
 
-use Fresco\CommandBus\Tactician\HandlerLocator;
-use Fresco\CommandBus\Tactician\TacticianBus;
-use Fresco\Support\ArrayObject;
-use Fresco\Tests\ClosesMockeryOnTearDown;
+use Mosaic\CommandBus\Tactician\HandlerLocator;
+use Mosaic\CommandBus\Tactician\TacticianBus;
+use Mosaic\Support\ArrayObject;
+use Mosaic\Tests\ClosesMockeryOnTearDown;
 use League\Tactician\Handler\CommandHandlerMiddleware;
 use League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor;
 use League\Tactician\Handler\MethodNameInflector\HandleInflector;
@@ -29,7 +29,7 @@ class TacticianBusTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->container = \Mockery::mock(\Fresco\Contracts\Container\Container::class);
+        $this->container = \Mockery::mock(\Mosaic\Contracts\Container\Container::class);
 
         $this->bus = new TacticianBus(
             $this->container,

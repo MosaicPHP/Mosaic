@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Definitions;
+namespace Mosaic\Definitions;
 
-use Fresco\Contracts\Routing\RouteLoader;
-use Fresco\Routing\Loaders\LoadRoutesFromFile;
+use Mosaic\Contracts\Routing\RouteLoader;
+use Mosaic\Routing\Loaders\LoadRoutesFromFile;
 use Interop\Container\Definition\DefinitionProviderInterface;
 
 class RouteFileDefinition implements DefinitionProviderInterface

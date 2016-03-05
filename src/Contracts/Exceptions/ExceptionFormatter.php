@@ -1,8 +1,8 @@
 <?php
 
-namespace Fresco\Contracts\Exceptions;
+namespace Mosaic\Contracts\Exceptions;
 
-use Fresco\Exceptions\ErrorResponse;
+use Mosaic\Exceptions\ErrorResponse;
 use Throwable;
 
 interface ExceptionFormatter

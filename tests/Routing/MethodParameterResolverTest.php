@@ -1,10 +1,10 @@
 <?php
 
-namespace Fresco\Tests\Routing;
+namespace Mosaic\Tests\Routing;
 
-use Fresco\Contracts\Container\Container;
-use Fresco\Routing\MethodParameterResolver;
-use Fresco\Tests\ClosesMockeryOnTearDown;
+use Mosaic\Contracts\Container\Container;
+use Mosaic\Routing\MethodParameterResolver;
+use Mosaic\Tests\ClosesMockeryOnTearDown;
 
 class MethodParameterResolverTest extends \PHPUnit_Framework_TestCase
 {

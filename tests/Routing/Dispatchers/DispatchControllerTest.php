@@ -1,13 +1,13 @@
 <?php
 
-namespace Fresco\Tests\Routing\Dispatchers;
+namespace Mosaic\Tests\Routing\Dispatchers;
 
-use Fresco\Contracts\Container\Container;
-use Fresco\Exceptions\NotFoundHttpException;
-use Fresco\Routing\Dispatchers\DispatchController;
-use Fresco\Routing\MethodParameterResolver;
-use Fresco\Routing\Route;
-use Fresco\Tests\ClosesMockeryOnTearDown;
+use Mosaic\Contracts\Container\Container;
+use Mosaic\Exceptions\NotFoundHttpException;
+use Mosaic\Routing\Dispatchers\DispatchController;
+use Mosaic\Routing\MethodParameterResolver;
+use Mosaic\Routing\Route;
+use Mosaic\Tests\ClosesMockeryOnTearDown;
 
 class DispatchControllerTest extends \PHPUnit_Framework_TestCase
 {
@@ -43,10 +43,10 @@ class DispatchControllerTest extends \PHPUnit_Framework_TestCase
     public function test_can_dispatch_controller()
     {
         $controller = new ControllerStub;
-        $this->container->shouldReceive('make')->with('Fresco\Tests\Routing\Dispatchers\ControllerStub')->once()->andReturn($controller);
+        $this->container->shouldReceive('make')->with('Mosaic\Tests\Routing\Dispatchers\ControllerStub')->once()->andReturn($controller);
         $this->container->shouldReceive('call')->with([$controller, 'index'], [])->once()->andReturn($controller->index());
 
-        $route = new Route(['GET'], '/', ['uses' => 'Fresco\Tests\Routing\Dispatchers\ControllerStub@index']);
+        $route = new Route(['GET'], '/', ['uses' => 'Mosaic\Tests\Routing\Dispatchers\ControllerStub@index']);
 
         $response = $this->dispatcher->dispatch($route);
 
@@ -69,9 +69,9 @@ class DispatchControllerTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException(NotFoundHttpException::class);
 
         $controller = new ControllerStub;
-        $this->container->shouldReceive('make')->with('Fresco\Tests\Routing\Dispatchers\ControllerStub')->once()->andReturn($controller);
+        $this->container->shouldReceive('make')->with('Mosaic\Tests\Routing\Dispatchers\ControllerStub')->once()->andReturn($controller);
 
-        $route = new Route(['GET'], '/', ['uses' => 'Fresco\Tests\Routing\Dispatchers\ControllerStub@nonExisting']);
+        $route = new Route(['GET'], '/', ['uses' => 'Mosaic\Tests\Routing\Dispatchers\ControllerStub@nonExisting']);
 
         $this->dispatcher->dispatch($route);
     }

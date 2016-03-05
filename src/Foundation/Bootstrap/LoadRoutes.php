@@ -1,10 +1,10 @@
 <?php
 
-namespace Fresco\Foundation\Bootstrap;
+namespace Mosaic\Foundation\Bootstrap;
 
-use Fresco\Contracts\Application;
-use Fresco\Contracts\Routing\RouteLoader;
-use Fresco\Contracts\Routing\Router;
+use Mosaic\Contracts\Application;
+use Mosaic\Contracts\Routing\RouteLoader;
+use Mosaic\Contracts\Routing\Router;
 
 class LoadRoutes implements Bootstrapper
 {

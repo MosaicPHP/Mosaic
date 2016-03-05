@@ -1,11 +1,11 @@
 <?php
 
-namespace Fresco\Tests\Foundation\Bootstrappers;
+namespace Mosaic\Tests\Foundation\Bootstrappers;
 
-use Fresco\Contracts\Application;
-use Fresco\Contracts\EnvironmentVariablesLoader;
-use Fresco\Foundation\Bootstrap\LoadEnvironmentVariables;
-use Fresco\Tests\ClosesMockeryOnTearDown;
+use Mosaic\Contracts\Application;
+use Mosaic\Contracts\EnvironmentVariablesLoader;
+use Mosaic\Foundation\Bootstrap\LoadEnvironmentVariables;
+use Mosaic\Tests\ClosesMockeryOnTearDown;
 use Mockery\Mock;
 
 class LoadEnvironmentVariablesTest extends \PHPUnit_Framework_TestCase

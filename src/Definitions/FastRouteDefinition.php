@@ -1,11 +1,11 @@
 <?php
 
-namespace Fresco\Definitions;
+namespace Mosaic\Definitions;
 
-use Fresco\Contracts\Routing\RouteDispatcher as RouteDispatcherContract;
-use Fresco\Contracts\Routing\Router as RouterContract;
-use Fresco\Routing\Adapters\FastRoute\RouteDispatcher;
-use Fresco\Routing\Router;
+use Mosaic\Contracts\Routing\RouteDispatcher as RouteDispatcherContract;
+use Mosaic\Contracts\Routing\Router as RouterContract;
+use Mosaic\Routing\Adapters\FastRoute\RouteDispatcher;
+use Mosaic\Routing\Router;
 use Interop\Container\Definition\DefinitionProviderInterface;
 
 class FastRouteDefinition implements DefinitionProviderInterface

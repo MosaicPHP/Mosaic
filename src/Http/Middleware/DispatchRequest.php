@@ -1,15 +1,15 @@
 <?php
 
-namespace Fresco\Http\Middleware;
+namespace Mosaic\Http\Middleware;
 
-use Fresco\Contracts\Http\Request;
-use Fresco\Contracts\Http\ResponseFactory;
-use Fresco\Contracts\Routing\RouteDispatcher;
-use Fresco\Contracts\Routing\Router;
-use Fresco\Contracts\View\Factory;
-use Fresco\Http\Adapters\Psr7\Response;
-use Fresco\Routing\Dispatchers\DispatchClosure;
-use Fresco\Routing\Dispatchers\DispatchController;
+use Mosaic\Contracts\Http\Request;
+use Mosaic\Contracts\Http\ResponseFactory;
+use Mosaic\Contracts\Routing\RouteDispatcher;
+use Mosaic\Contracts\Routing\Router;
+use Mosaic\Contracts\View\Factory;
+use Mosaic\Http\Adapters\Psr7\Response;
+use Mosaic\Routing\Dispatchers\DispatchClosure;
+use Mosaic\Routing\Dispatchers\DispatchController;
 
 class DispatchRequest
 {

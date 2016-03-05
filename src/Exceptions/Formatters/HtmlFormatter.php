@@ -1,10 +1,10 @@
 <?php
 
-namespace Fresco\Exceptions\Formatters;
+namespace Mosaic\Exceptions\Formatters;
 
-use Fresco\Contracts\Exceptions\ExceptionFormatter;
-use Fresco\Exceptions\ErrorResponse;
-use Fresco\Exceptions\HttpException;
+use Mosaic\Contracts\Exceptions\ExceptionFormatter;
+use Mosaic\Exceptions\ErrorResponse;
+use Mosaic\Exceptions\HttpException;
 use Throwable;
 
 class HtmlFormatter implements ExceptionFormatter

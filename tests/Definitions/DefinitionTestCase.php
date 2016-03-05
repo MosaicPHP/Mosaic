@@ -1,6 +1,6 @@
 <?php
 
-namespace Fresco\Tests\Definitions;
+namespace Mosaic\Tests\Definitions;
 
 use Interop\Container\Definition\DefinitionProviderInterface;
 

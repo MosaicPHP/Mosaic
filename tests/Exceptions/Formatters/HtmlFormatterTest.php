@@ -1,9 +1,9 @@
 <?php
 
-namespace Fresco\Tests\Exceptions\Formatters;
+namespace Mosaic\Tests\Exceptions\Formatters;
 
 use Exception;
-use Fresco\Exceptions\Formatters\HtmlFormatter;
+use Mosaic\Exceptions\Formatters\HtmlFormatter;
 
 class HtmlFormatterTest extends \PHPUnit_Framework_TestCase
 {

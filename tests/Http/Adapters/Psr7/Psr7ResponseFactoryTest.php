@@ -1,13 +1,13 @@
 <?php
 
-namespace Fresco\Tests\Http\Adapters\Psr7;
+namespace Mosaic\Tests\Http\Adapters\Psr7;
 
-use Fresco\Contracts\Http\Response as ResponseContract;
-use Fresco\Contracts\Http\ResponseFactory as ResponseFactoryContract;
-use Fresco\Http\Adapters\Psr7\Response;
-use Fresco\Http\Adapters\Psr7\ResponseFactory;
-use Fresco\Support\ArrayObject;
-use Fresco\Support\HtmlString;
+use Mosaic\Contracts\Http\Response as ResponseContract;
+use Mosaic\Contracts\Http\ResponseFactory as ResponseFactoryContract;
+use Mosaic\Http\Adapters\Psr7\Response;
+use Mosaic\Http\Adapters\Psr7\ResponseFactory;
+use Mosaic\Support\ArrayObject;
+use Mosaic\Support\HtmlString;
 
 class Psr7ResponseFactoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -21,7 +21,7 @@ class Psr7ResponseFactoryTest extends \PHPUnit_Framework_TestCase
         $this->factory = new ResponseFactory();
     }
 
-    public function test_it_implements_the_fresco_response_factory_interface()
+    public function test_it_implements_the_Mosaic_response_factory_interface()
     {
         $this->assertInstanceOf(ResponseFactoryContract::class, $this->factory);
     }

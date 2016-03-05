@@ -1,8 +1,8 @@
 <?php
 
-namespace Fresco\Tests\Foundation\EnvironmentVariables\Adapters;
+namespace Mosaic\Tests\Foundation\EnvironmentVariables\Adapters;
 
-use Fresco\Foundation\EnvironmentVariables\Adapters\DotEnvVariableLoader;
+use Mosaic\Foundation\EnvironmentVariables\Adapters\DotEnvVariableLoader;
 use PHPUnit_Framework_TestCase;
 
 class DotEnvVariableLoaderTest extends PHPUnit_Framework_TestCase

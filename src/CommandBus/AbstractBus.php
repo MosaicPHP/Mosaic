@@ -1,10 +1,10 @@
 <?php
 
-namespace Fresco\CommandBus;
+namespace Mosaic\CommandBus;
 
 use ArrayAccess;
-use Fresco\Contracts\CommandBus\CommandBus;
-use Fresco\Contracts\Container\Container;
+use Mosaic\Contracts\CommandBus\CommandBus;
+use Mosaic\Contracts\Container\Container;
 
 abstract class AbstractBus implements CommandBus
 {

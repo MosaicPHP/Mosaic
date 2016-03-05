@@ -1,10 +1,10 @@
 <?php
 
-namespace Fresco\Tests\Http\Adapters\Psr7;
+namespace Mosaic\Tests\Http\Adapters\Psr7;
 
-use Fresco\Contracts\Http\Request as RequestContract;
-use Fresco\Http\Adapters\Psr7\Request;
-use Fresco\Tests\ClosesMockeryOnTearDown;
+use Mosaic\Contracts\Http\Request as RequestContract;
+use Mosaic\Http\Adapters\Psr7\Request;
+use Mosaic\Tests\ClosesMockeryOnTearDown;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
@@ -29,7 +29,7 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
         $this->request = new Request($this->wrappedMock = \Mockery::mock(ServerRequestInterface::class));
     }
 
-    public function test_it_implements_the_fresco_request_interface()
+    public function test_it_implements_the_Mosaic_request_interface()
     {
         $this->assertInstanceOf(RequestContract::class, $this->request);
     }
@@ -232,14 +232,14 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
     {
         $this->wrappedMock->shouldReceive('withQueryParams')->andReturn(\Mockery::mock(ServerRequestInterface::class));
 
-        $this->assertNotEquals($this->request, $this->request->withQueryParams(['q' => 'Fresco is awesome!']));
+        $this->assertNotEquals($this->request, $this->request->withQueryParams(['q' => 'Mosaic is awesome!']));
     }
 
     public function test_immutability_on_uploaded_files()
     {
         $this->wrappedMock->shouldReceive('withUploadedFiles')->andReturn(\Mockery::mock(ServerRequestInterface::class));
 
-        $this->assertNotEquals($this->request, $this->request->withUploadedFiles(['logo.png' => 'FrescoLogo']));
+        $this->assertNotEquals($this->request, $this->request->withUploadedFiles(['logo.png' => 'MosaicLogo']));
     }
 
     public function test_immutability_on_parsed_body()
@@ -635,7 +635,7 @@ class Psr7RequestTest extends \PHPUnit_Framework_TestCase
             'DOCUMENT_ROOT' => '/i/am/g/root'
         ]);
 
-        $this->assertEquals('Awesome!', $this->request->server('WHAT_IS_FRESCO', 'Awesome!'));
+        $this->assertEquals('Awesome!', $this->request->server('WHAT_IS_Mosaic', 'Awesome!'));
     }
 
     public function test_can_get_the_segments_of_the_current_request_path()

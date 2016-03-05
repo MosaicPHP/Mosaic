@@ -1,6 +1,6 @@
 <?php
 
-namespace Fresco\Foundation\Components;
+namespace Mosaic\Foundation\Components;
 
 use Interop\Container\Definition\DefinitionProviderInterface;
 
